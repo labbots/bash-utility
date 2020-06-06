@@ -59,7 +59,7 @@ function reset() {
 
 /^[[:space:]]*# @file/ {
     sub(/^[[:space:]]*# @file /, "")
-    filedoc = render("h1", $0) "\n"
+    filedoc = render("h2", $0) "\n"
 }
 
 /^[[:space:]]*# @brief/ {
@@ -106,7 +106,7 @@ in_example {
 /^[[:space:]]*# @example/ {
     in_example = 1
 
-    docblock = docblock "\n" render("h3", "Example")
+    docblock = docblock "\n" render("h4", "Example")
     docblock = docblock "\n\n" render("code", "bash")
 }
 
@@ -114,7 +114,7 @@ in_example {
     if (!has_args) {
         has_args = 1
 
-        docblock = docblock "\n" render("h3", "Arguments") "\n\n"
+        docblock = docblock "\n" render("h4", "Arguments") "\n\n"
     }
 
     sub(/^[[:space:]]*# @arg /, "")
@@ -133,7 +133,7 @@ in_example {
     if (!has_exitcode) {
         has_exitcode = 1
 
-        docblock = docblock "\n" render("h3", "Exit codes") "\n\n"
+        docblock = docblock "\n" render("h4", "Exit codes") "\n\n"
     }
 
     sub(/^[[:space:]]*# @exitcode /, "")
@@ -157,7 +157,7 @@ in_example {
 
     sub(/^[[:space:]]*# @stdout /, "")
 
-    docblock = docblock "\n" render("h3", "Output on stdout")
+    docblock = docblock "\n" render("h4", "Output on stdout")
     docblock = docblock "\n\n" render("li", $0) "\n"
 }
 
@@ -171,15 +171,15 @@ in_example {
             "g" \
         )
 
-        doc = doc "\n" render("h2", func_name) "\n" docblock
+        doc = doc "\n" render("h3", func_name) "\n" docblock
 
-        url = func_name
-        # https://github.com/jch/html-pipeline/blob/master/lib/html/pipeline/toc_filter.rb#L44-L45
-        url = tolower(url)
-        gsub(/[^[:alnum:] -]/, "", url)
-        gsub(/ /, "-", url)
+        # url = func_name
+        # # https://github.com/jch/html-pipeline/blob/master/lib/html/pipeline/toc_filter.rb#L44-L45
+        # url = tolower(url)
+        # gsub(/[^[:alnum:] -]/, "", url)
+        # gsub(/ /, "-", url)
 
-        toc = toc "\n" "- [" func_name "](#" url ")"
+        # toc = toc "\n" "- [" func_name "](#" url ")"
     }
 
     docblock = ""
@@ -190,7 +190,7 @@ END {
     if (filedoc != "") {
         print filedoc
     }
-    print toc
-    print ""
+    #print toc
+   # print ""
     print doc
 }

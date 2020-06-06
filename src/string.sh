@@ -101,7 +101,7 @@ string::to_lower() {
     if [[ ${BASH_VERSINFO:-0} -ge 4 ]]; then
         printf '%s\n' "${1,,}"
     else
-        printf "${@}\n" | tr '[A-Z]' '[a-z]'
+        printf "%s\n" "${@}" | tr 'A-Z' 'a-z'
     fi
 }
 
@@ -123,7 +123,7 @@ string::to_upper() {
     if [[ ${BASH_VERSINFO:-0} -ge 4 ]]; then
         printf '%s\n' "${1^^}"
     else
-        printf "${@}\n" | tr '[a-z]' '[A-Z]'
+        printf "%s\n" "${@}" | tr 'a-z' 'A-Z'
     fi
 }
 

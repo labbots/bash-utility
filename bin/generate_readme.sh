@@ -4,7 +4,7 @@ README="README.md"
 _setup() {
     INVALID_CHARS="'[]/?!:\`.,()*\";{}+=<>~$|#@&–—"
     MINLEVEL=1
-    MAXLEVEL=2
+    MAXLEVEL=3
     SCRIPT_FILE=$(basename $0)
     SCRIPT_FILENAME="${SCRIPT_FILE%.*}"
     rm README.md
@@ -103,7 +103,7 @@ _insert_toc_to_file() {
     declare info_toc="<!-- DO NOT EDIT THIS SECTION, INSTEAD RE-RUN ${SCRIPT_FILE} TO UPDATE -->"
     declare end_toc="<!-- END ${SCRIPT_FILE} generated TOC please keep comment here to allow auto update -->"
 
-    toc_block="$start_toc\n$info_toc\n**Table of Contents**\n\n$toc_text\n$end_toc"
+    toc_block="$start_toc\n$info_toc\n## Table of Contents\n\n$toc_text\n$end_toc"
 
     # temporary replace of '/' (confused with separator of substitutions) and '&' (confused with match regex symbol) to run the special sed command
     utext_ampersand="id8234923000230gzz"
@@ -114,12 +114,14 @@ _insert_toc_to_file() {
     # search multiline toc block -> https://stackoverflow.com/questions/2686147/how-to-find-patterns-across-multiple-lines-using-grep/2686705
     # grep color for debugging -> https://superuser.com/questions/914856/grep-display-all-output-but-highlight-search-matches
     if grep --color=always -Pzl "(?s)$start_toc.*\n.*$end_toc" $1 &> /dev/null; then
-        echo -e "\n  Updated content of $appname block in $1 succesfully\n"
         # src https://askubuntu.com/questions/533221/how-do-i-replace-multiple-lines-with-single-word-in-fileinplace-replace
         sed -i ":a;N;\$!ba;s/$start_toc.*$end_toc/$toc_block/g" $1
+        echo -e "\n  Updated TOC content in $1 succesfully\n"
+
     else
-        echo -e "\n  Created $appname block in $1 succesfully\n"
         sed -i 1i"$toc_block" "$1"
+        echo -e "\n  Created TOC in $1 succesfully\n"
+
     fi
 
     # undo symbol replacements
