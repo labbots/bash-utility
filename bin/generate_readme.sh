@@ -5,9 +5,8 @@ _setup() {
     INVALID_CHARS="'[]/?!:\`.,()*\";{}+=<>~$|#@&–—"
     MINLEVEL=1
     MAXLEVEL=3
-    SCRIPT_FILE=$(basename $0)
-    SCRIPT_FILENAME="${SCRIPT_FILE%.*}"
-    rm README.md
+    SCRIPT_FILE=$(basename "${0}")
+    rm "$README"
     cp readme-template.md "$README"
 }
 
@@ -32,28 +31,30 @@ _insert_shdoc_to_file() {
     declare info_shdoc="<!-- DO NOT EDIT THIS SECTION, INSTEAD RE-RUN ${SCRIPT_FILE} TO UPDATE -->"
     declare end_shdoc="<!-- END ${SCRIPT_FILE} generated SHDOC please keep comment here to allow auto update -->"
 
-    sed -i "1s/^/$info_shdoc\n/" "$shdoc_temp_file"
+    sed -i "1s/^/$info_shdoc\n/" "$shdoc_tmp_file"
 
     if grep --color=always -Pzl "(?s)$start_shdoc.*\n.*$end_shdoc" $dest_file &> /dev/null; then
         # src https://stackoverflow.com/questions/2699666/replace-delimited-block-of-text-in-file-with-the-contents-of-another-file
 
-        sed -i -ne "/$start_shdoc/ {p; r $shdoc_temp_file" -e ":a; n; /$end_shdoc/ {p; b}; ba}; p" $dest_file
-        echo -e "\n  Updated shdoc content to $dest_file\n"
+        sed -i -ne "/$start_shdoc/ {p; r $shdoc_tmp_file" -e ":a; n; /$end_shdoc/ {p; b}; ba}; p" $dest_file
+        echo -e "\nUpdated shdoc content to $dest_file successfully\n"
 
     else
-
-        echo -e "\n  Created\n"
+        printf "%s\n" "${start_shdoc}" >> "${dest_file}"
+        cat "${shdoc_tmp_file}" >> "${dest_file}"
+        printf "%s\n" "${end_shdoc}" >> "${dest_file}"
+        echo -e "\nCreated shdoc content to $dest_file successfully\n"
     fi
 }
 
 _process_sh_files() {
-    declare shdoc_temp_file=$(_setup_tempfile)
+    declare shdoc_tmp_file=$(_setup_tempfile)
     find ../src -name '*.sh' -print0 | sort -z |
         while IFS= read -r -d '' line; do
-            _generate_shdoc "$line" "$shdoc_temp_file"
+            _generate_shdoc "$line" "$shdoc_tmp_file"
         done
-    _insert_shdoc_to_file "$shdoc_temp_file" "$README"
-    rm "$shdoc_temp_file"
+    _insert_shdoc_to_file "$shdoc_tmp_file" "$README"
+    rm "$shdoc_tmp_file"
 
 }
 
@@ -116,11 +117,11 @@ _insert_toc_to_file() {
     if grep --color=always -Pzl "(?s)$start_toc.*\n.*$end_toc" $1 &> /dev/null; then
         # src https://askubuntu.com/questions/533221/how-do-i-replace-multiple-lines-with-single-word-in-fileinplace-replace
         sed -i ":a;N;\$!ba;s/$start_toc.*$end_toc/$toc_block/g" $1
-        echo -e "\n  Updated TOC content in $1 succesfully\n"
+        echo -e "\nUpdated TOC content in $1 succesfully\n"
 
     else
         sed -i 1i"$toc_block" "$1"
-        echo -e "\n  Created TOC in $1 succesfully\n"
+        echo -e "\nCreated TOC in $1 succesfully\n"
 
     fi
 
