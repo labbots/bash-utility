@@ -37,8 +37,6 @@ Bash library which provides utility functions and helpers for functional program
 
 Functions for array operations and manipulations.
 
-
-
 ### array::contains()
 
 Check if item exists in the given array.
@@ -174,8 +172,6 @@ c
 ## String
 
 Functions for string operations and manipulations.
-
-
 
 ### string::trim()
 
