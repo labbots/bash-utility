@@ -8,7 +8,7 @@ Bash library which provides utility functions and helpers for functional program
 
 <!-- START generate_readme.sh generated TOC please keep comment here to allow auto update -->
 <!-- DO NOT EDIT THIS SECTION, INSTEAD RE-RUN generate_readme.sh TO UPDATE -->
-**Table of Contents**
+## Table of Contents
 
 - [Array](#array)
   - [array::contains()](#arraycontains)
@@ -27,28 +27,23 @@ Bash library which provides utility functions and helpers for functional program
   - [string::starts_with()](#stringstarts_with)
   - [string::ends_with()](#stringends_with)
   - [string::regex()](#stringregex)
-  - [License](#license)
+- [License](#license)
 
 <!-- END generate_readme.sh generated TOC please keep comment here to allow auto update -->
 
 <!-- START generate_readme.sh generated SHDOC please keep comment here to allow auto update -->
 <!-- DO NOT EDIT THIS SECTION, INSTEAD RE-RUN generate_readme.sh TO UPDATE -->
-# Array
+## Array
 
 Functions for array operations and manipulations.
 
-- [array::contains()](#arraycontains)
-- [array::dedupe()](#arraydedupe)
-- [array::join()](#arrayjoin)
-- [array::reverse()](#arrayreverse)
-- [array::random_element()](#arrayrandomelement)
 
 
-## array::contains()
+### array::contains()
 
 Check if item exists in the given array.
 
-### Example
+#### Example
 
 ```bash
 array=("a" "b" "c")
@@ -57,22 +52,22 @@ array::contains "c" ${array[@]}
 0
 ```
 
-### Arguments
+#### Arguments
 
 - **$1** (mixed): Item to search (needle).
 - **$2** (array): array to be searched (haystack).
 
-### Exit codes
+#### Exit codes
 
 - **0**:  If successful.
 - **1**: If no match found in the array.
 - **2**: Function missing arguments.
 
-## array::dedupe()
+### array::dedupe()
 
 Remove duplicate items from the array
 
-### Example
+#### Example
 
 ```bash
 array=("a" "b" "a" "c")
@@ -81,24 +76,24 @@ printf "%s" "$(array::dedupe ${array[@]})"
 a b c
 ```
 
-### Arguments
+#### Arguments
 
 - **$1** (array): Array to be deduped.
 
-### Exit codes
+#### Exit codes
 
 - **0**:  If successful.
 - **2**: Function missing arguments.
 
-### Output on stdout
+#### Output on stdout
 
 - Deduplicated array.
 
-## array::join()
+### array::join()
 
 Join array elements with a string.
 
-### Example
+#### Example
 
 ```bash
 array=("a" "b" "c" "d")
@@ -110,25 +105,25 @@ printf "%s" "$(array::join "" "${array[@]}")"
 abcd
 ```
 
-### Arguments
+#### Arguments
 
 - **$1** (string): String to join the array elements (glue).
 - **$2** (array): array to be joined with glue string.
 
-### Exit codes
+#### Exit codes
 
 - **0**:  If successful.
 - **2**: Function missing arguments.
 
-### Output on stdout
+#### Output on stdout
 
 - String containing a string representation of all the array elements in the same order,with the glue string between each element.
 
-## array::reverse()
+### array::reverse()
 
 Return an array with elements in reverse order.
 
-### Example
+#### Example
 
 ```bash
 array=(1 2 3 4 5)
@@ -137,24 +132,24 @@ printf "%s" "$(array::reverse "${array[@]}")"
 5 4 3 2 1
 ```
 
-### Arguments
+#### Arguments
 
 - **$1** (array): The input array.
 
-### Exit codes
+#### Exit codes
 
 - **0**:  If successful.
 - **2**: Function missing arguments.
 
-### Output on stdout
+#### Output on stdout
 
 - The reversed array.
 
-## array::random_element()
+### array::random_element()
 
 Returns a random item from the array.
 
-### Example
+#### Example
 
 ```bash
 array=("a" "b" "c" "d")
@@ -163,40 +158,30 @@ printf "%s\n" "$(array::random_element "${array[@]}")"
 c
 ```
 
-### Arguments
+#### Arguments
 
 - **$1** (array): The input array.
 
-### Exit codes
+#### Exit codes
 
 - **0**:  If successful.
 - **2**: Function missing arguments.
 
-### Output on stdout
+#### Output on stdout
 
 - Random item out of the array.
 
-# String
+## String
 
 Functions for string operations and manipulations.
 
-- [string::trim()](#stringtrim)
-- [string::split()](#stringsplit)
-- [string::lstrip()](#stringlstrip)
-- [string::rstrip()](#stringrstrip)
-- [string::to_lower()](#stringtolower)
-- [string::to_upper()](#stringtoupper)
-- [string::contains()](#stringcontains)
-- [string::starts_with()](#stringstartswith)
-- [string::ends_with()](#stringendswith)
-- [string::regex()](#stringregex)
 
 
-## string::trim()
+### string::trim()
 
 Strip whitespace from the beginning and end of a string.
 
-### Example
+#### Example
 
 ```bash
 echo "$(string::trim "   Hello World!   ")"
@@ -204,24 +189,24 @@ echo "$(string::trim "   Hello World!   ")"
 Hello World!
 ```
 
-### Arguments
+#### Arguments
 
 - **$1** (The): string that will be trimmed.
 
-### Exit codes
+#### Exit codes
 
 - **0**:  If successful.
 - **2**: Function missing arguments.
 
-### Output on stdout
+#### Output on stdout
 
 - The trimmed string.
 
-## string::split()
+### string::split()
 
 Split a string to array by a delimiter.
 
-### Example
+#### Example
 
 ```bash
 printf "%s" "$(string::split "Hello!World" "!")"
@@ -230,25 +215,25 @@ Hello
 World
 ```
 
-### Arguments
+#### Arguments
 
 - **$1** (string): The input string.
 - **$2** (string): The delimiter string.
 
-### Exit codes
+#### Exit codes
 
 - **0**:  If successful.
 - **2**: Function missing arguments.
 
-### Output on stdout
+#### Output on stdout
 
 - Returns an array of strings created by splitting the string parameter by the delimiter.
 
-## string::lstrip()
+### string::lstrip()
 
 Strip characters from the beginning of a string.
 
-### Example
+#### Example
 
 ```bash
 echo "$(string::lstrip "Hello World!" "He")"
@@ -256,25 +241,25 @@ echo "$(string::lstrip "Hello World!" "He")"
 llo World!
 ```
 
-### Arguments
+#### Arguments
 
 - **$1** (string): The input string.
 - **$2** (string): The characters you want to strip.
 
-### Exit codes
+#### Exit codes
 
 - **0**:  If successful.
 - **2**: Function missing arguments.
 
-### Output on stdout
+#### Output on stdout
 
 - Returns the modified string.
 
-## string::rstrip()
+### string::rstrip()
 
 Strip characters from the end of a string.
 
-### Example
+#### Example
 
 ```bash
 echo "$(string::rstrip "Hello World!" "d!")"
@@ -282,25 +267,25 @@ echo "$(string::rstrip "Hello World!" "d!")"
 Hello Worl
 ```
 
-### Arguments
+#### Arguments
 
 - **$1** (string): The input string.
 - **$2** (string): The characters you want to strip.
 
-### Exit codes
+#### Exit codes
 
 - **0**:  If successful.
 - **2**: Function missing arguments.
 
-### Output on stdout
+#### Output on stdout
 
 - Returns the modified string.
 
-## string::to_lower()
+### string::to_lower()
 
 Make a string lowercase.
 
-### Example
+#### Example
 
 ```bash
 echo "$(string::to_lower "HellO")"
@@ -308,24 +293,24 @@ echo "$(string::to_lower "HellO")"
 hello
 ```
 
-### Arguments
+#### Arguments
 
 - **$1** (string): The input string.
 
-### Exit codes
+#### Exit codes
 
 - **0**:  If successful.
 - **2**: Function missing arguments.
 
-### Output on stdout
+#### Output on stdout
 
 - Returns the lowercased string.
 
-## string::to_upper()
+### string::to_upper()
 
 Make a string all uppercase.
 
-### Example
+#### Example
 
 ```bash
 echo "$(string::to_upper "HellO")"
@@ -333,98 +318,98 @@ echo "$(string::to_upper "HellO")"
 HELLO
 ```
 
-### Arguments
+#### Arguments
 
 - **$1** (string): The input string.
 
-### Exit codes
+#### Exit codes
 
 - **0**:  If successful.
 - **2**: Function missing arguments.
 
-### Output on stdout
+#### Output on stdout
 
 - Returns the uppercased string.
 
-## string::contains()
+### string::contains()
 
 Check whether the search string exists within the input string.
 
-### Example
+#### Example
 
 ```bash
 string::contains "Hello World!" "lo"
 ```
 
-### Arguments
+#### Arguments
 
 - **$1** (string): The input string.
 - **$2** (string): The search key.
 
-### Exit codes
+#### Exit codes
 
 - **0**:  If match found.
 - **1**:  If no match found.
 - **2**: Function missing arguments.
 
-## string::starts_with()
+### string::starts_with()
 
 Check whether the input string starts with key string.
 
-### Example
+#### Example
 
 ```bash
 string::starts_with "Hello World!" "He"
 ```
 
-### Arguments
+#### Arguments
 
 - **$1** (string): The input string.
 - **$2** (string): The search key.
 
-### Exit codes
+#### Exit codes
 
 - **0**:  If match found.
 - **1**:  If no match found.
 - **2**: Function missing arguments.
 
-## string::ends_with()
+### string::ends_with()
 
 Check whether the input string ends with key string.
 
-### Example
+#### Example
 
 ```bash
 string::ends_with "Hello World!" "d!"
 ```
 
-### Arguments
+#### Arguments
 
 - **$1** (string): The input string.
 - **$2** (string): The search key.
 
-### Exit codes
+#### Exit codes
 
 - **0**:  If match found.
 - **1**:  If no match found.
 - **2**: Function missing arguments.
 
-## string::regex()
+### string::regex()
 
 Check whether the input string matches the given regex.
 
-### Example
+#### Example
 
 ```bash
 string::regex "HELLO" "^[A-Z]*$"
 ```
 
-### Arguments
+#### Arguments
 
 - **$1** (string): The input string.
 - **$2** (string): The search key.
 
-### Exit codes
+#### Exit codes
 
 - **0**:  If match found.
 - **1**:  If no match found.
