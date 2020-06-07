@@ -118,7 +118,9 @@ _setup_tempfile() {
 _generate_shdoc() {
     declare file
     file="$(realpath "${1}")"
-    ./bashdoc.awk < "${file}" >> "$2"
+    if [[ -s "${file}" ]]; then
+        ./bashdoc.awk < "${file}" >> "$2"
+    fi
 }
 
 _insert_shdoc_to_file() {

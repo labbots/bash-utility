@@ -198,9 +198,6 @@ c
 
 - Random item out of the array.
 
-
-
-
 ## String
 
 Functions for string operations and manipulations.
