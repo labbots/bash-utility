@@ -24,6 +24,7 @@ Bash library which provides utility functions and helpers for functional program
   - [file::extension()](#fileextension)
   - [file::dirname()](#filedirname)
   - [file::full_path()](#filefull_path)
+  - [file::mime_type()](#filemime_type)
 - [Miscellaneous](#miscellaneous)
   - [misc::check_internet_connection()](#misccheck_internet_connection)
 - [String](#string)
@@ -362,6 +363,33 @@ file::full_path "../path/to/file.md"
 #### Output on stdout
 
 - Absolute path to file/directory.
+
+### file::mime_type()
+
+Get mime type of provided input.
+
+#### Example
+
+```bash
+file::mime_type "../src/file.sh"
+#Output
+application/x-shellscript
+```
+
+#### Arguments
+
+- **$1** (string): relative or absolute path to file/direcotry.
+
+#### Exit codes
+
+- **0**:  If successful.
+- **1**:  If file/directory does not exist.
+- **2**: Function missing arguments.
+- **3**: If file or mimetype command not found in system.
+
+#### Output on stdout
+
+- mime type of file/directory.
 
 ## Miscellaneous
 

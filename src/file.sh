@@ -134,10 +134,42 @@ file::full_path() {
     [[ $# = 0 ]] && printf "%s: Missing arguments\n" "${FUNCNAME[0]}" && return 2
     declare input="${1}"
     if [[ -f ${input} ]]; then
-        printf "%s/%s\n" "$(cd "$(file::dirname "${input}")" && pwd)" "${input##*/}" || return 1
+        printf "%s/%s\n" "$(cd "$(file::dirname "${input}")" && pwd)" "${input##*/}"
     elif [[ -d ${input} ]]; then
         printf "%s\n" "$(cd "${input}" && pwd)"
     else
         return 1
     fi
+}
+
+# @description Get mime type of provided input.
+#
+# @example
+#   file::mime_type "../src/file.sh"
+#   #Output
+#   application/x-shellscript
+#
+# @arg $1 string relative or absolute path to file/direcotry.
+#
+# @exitcode 0  If successful.
+# @exitcode 1  If file/directory does not exist.
+# @exitcode 2 Function missing arguments.
+# @exitcode 3 If file or mimetype command not found in system.
+#
+# @stdout mime type of file/directory.
+file::mime_type() {
+    [[ $# = 0 ]] && printf "%s: Missing arguments\n" "${FUNCNAME[0]}" && return 2
+    declare mime_type
+    if [[ -f "${1}" ]] || [[ -d "${1}" ]]; then
+        if type -p mimetype &> /dev/null; then
+            mime_type=$(mimetype --output-format %m "${1}")
+        elif type -p file &> /dev/null; then
+            mime_type=$(file --brief --mime-type "${1}")
+        else
+            return 3
+        fi
+    else
+        return 1
+    fi
+    printf "%s" "${mime_type}"
 }
