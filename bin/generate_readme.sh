@@ -117,8 +117,8 @@ _setup_tempfile() {
 
 _generate_shdoc() {
     declare file
-    file="$(realpath $1)"
-    ./shdoc.awk < "${file}" >> "$2"
+    file="$(realpath "${1}")"
+    ./bashdoc.awk < "${file}" >> "$2"
 }
 
 _insert_shdoc_to_file() {
@@ -132,7 +132,7 @@ _insert_shdoc_to_file() {
 
     sed -i "1s/^/${info_shdoc}\n/" "${shdoc_tmp_file}"
 
-    if grep --color=always -Pzl "(?s)${start_shdoc}.*\n.*${end_shdoc}" $source_markdown &> /dev/null; then
+    if grep --color=always -Pzl "(?s)${start_shdoc}.*\n.*${end_shdoc}" "${source_markdown}" &> /dev/null; then
         # src https://stackoverflow.com/questions/2699666/replace-delimited-block-of-text-in-file-with-the-contents-of-another-file
 
         sed -i -ne "/${start_shdoc}/ {p; r ${shdoc_tmp_file}" -e ":a; n; /${end_shdoc}/ {p; b}; ba}; p" "${source_markdown}"
@@ -179,13 +179,13 @@ _generate_toc() {
         temp_output=$output"$level- [$title](#$anchor)\n"
         counter=1
         while true; do
-            nlines="$(echo -e $temp_output | wc -l)"
-            duplines="$(echo -e $temp_output | sort | uniq | wc -l)"
-            if [ $nlines = $duplines ]; then
+            nlines="$(echo -e "${temp_output}" | wc -l)"
+            duplines="$(echo -e "${temp_output}" | sort | uniq | wc -l)"
+            if [ "${nlines}" = "${duplines}" ]; then
                 break
             fi
             temp_output=$output"$level- [$title](#$anchor-$counter)\n"
-            counter=$(($counter + 1))
+            counter=$((counter + 1))
         done
 
         output="$temp_output"
@@ -195,8 +195,7 @@ _generate_toc() {
     done <<< "$(grep -E "^#{${MINLEVEL},${MAXLEVEL}} " "${1}" | tr -d '\r' | sed "s/^#\{$((${MINLEVEL} - 1))\}//g")"
 
     # when in toc we have two `--` quit one
-    output="$(echo "$output" | sed 's/--*/-/g')"
-
+    output="${output//--*/-}"
     echo "$output"
 
 }
@@ -247,8 +246,8 @@ _process_toc() {
     sed '/```/,/```/d' "${source_markdown}" > "${toc_temp_file}"
 
     declare level=$MINLEVEL
-    while [[ $(grep -E "^#{$level} " "${toc_temp_file}" | wc -l) -le 1 ]]; do
-        level=$(($level + 1))
+    while [[ $(grep -Ec "^#{$level} " "${toc_temp_file}") -le 1 ]]; do
+        level=$((level + 1))
     done
 
     MINLEVEL=${level}

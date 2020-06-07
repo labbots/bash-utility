@@ -13,6 +13,7 @@ Bash library which provides utility functions and helpers for functional program
 - [Array](#array)
   - [array::contains()](#arraycontains)
   - [array::dedupe()](#arraydedupe)
+  - [array::is_empty()](#arrayis_empty)
   - [array::join()](#arrayjoin)
   - [array::reverse()](#arrayreverse)
   - [array::random_element()](#arrayrandom_element)
@@ -63,7 +64,7 @@ array::contains "c" ${array[@]}
 
 ### array::dedupe()
 
-Remove duplicate items from the array
+Remove duplicate items from the array.
 
 #### Example
 
@@ -86,6 +87,26 @@ a b c
 #### Output on stdout
 
 - Deduplicated array.
+
+### array::is_empty()
+
+Check if a given array is empty.
+
+#### Example
+
+```bash
+array=("a" "b" "c" "d")
+array::is_empty "${array[@]}"
+```
+
+#### Arguments
+
+- **$1** (array): Array to be checked.
+
+#### Exit codes
+
+- **0**: If the given array is empty.
+- **2**: If the given array is not empty.
 
 ### array::join()
 

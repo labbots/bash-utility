@@ -29,7 +29,7 @@ array::contains() {
     return 1
 }
 
-# @description Remove duplicate items from the array
+# @description Remove duplicate items from the array.
 #
 # @example
 #   array=("a" "b" "a" "c")
@@ -54,6 +54,25 @@ array::dedupe() {
     printf '%s\n' "${arr_unique[@]}"
 }
 
+# @description Check if a given array is empty.
+#
+# @example
+#   array=("a" "b" "c" "d")
+#   array::is_empty "${array[@]}"
+#
+# @arg $1 array Array to be checked.
+#
+# @exitcode 0 If the given array is empty.
+# @exitcode 2 If the given array is not empty.
+array::is_empty() {
+    declare -a array
+    local array=("$@")
+    if [ ${#array[@]} -eq 0 ]; then
+        return 0
+    else
+        return 1
+    fi
+}
 # @description Join array elements with a string.
 #
 # @example
