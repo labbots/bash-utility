@@ -58,6 +58,9 @@ Bash library which provides utility functions and helpers for functional program
   - [file::dirname()](#filedirname)
   - [file::full_path()](#filefull_path)
   - [file::mime_type()](#filemime_type)
+- [Interaction](#interaction)
+  - [interaction::prompt_yes_no()](#interactionprompt_yes_no)
+  - [interaction::prompt_response()](#interactionprompt_response)
 - [Miscellaneous](#miscellaneous)
   - [misc::check_internet_connection()](#misccheck_internet_connection)
 - [String](#string)
@@ -1088,7 +1091,7 @@ Format seconds to human readable format.
 ```bash
 echo "$(date::human_readable_seconds "356786")"
 #Output
-4 days 3 hrs 6 minute(s) and 26 seconds
+4 days 3 hours 6 minute(s) and 26 seconds
 ```
 
 #### Arguments
@@ -1286,6 +1289,63 @@ application/x-shellscript
 
 - mime type of file/directory.
 
+## Interaction
+
+Functions to enable interaction with the user.
+
+### interaction::prompt_yes_no()
+
+Prompt yes or no question to the user.
+
+#### Example
+
+```bash
+interaction::prompt_yes_no "Are you sure to proceed" "yes"
+#Output
+Are you sure to proceed (y/n)? [y]
+```
+
+#### Arguments
+
+- **$1** (string): The question to be prompted to the user.
+- **$2** (string): default answer [yes/no] (optional).
+
+#### Exit codes
+
+- **0**:  If user responds with yes.
+- **1**:  If user responds with no.
+- **2**: Function missing arguments.
+
+#### Output on stdout
+
+- question to be prompted to the user.
+
+### interaction::prompt_response()
+
+Prompt question to the user.
+
+#### Example
+
+```bash
+interaction::prompt_response "Choose directory to install" "/home/path"
+#Output
+Choose directory to install? [/home/path]
+```
+
+#### Arguments
+
+- **$1** (string): The question to be prompted to the user.
+- **$2** (string): default answer (optional).
+
+#### Exit codes
+
+- **0**:  If user responds with yes.
+- **2**: Function missing arguments.
+
+#### Output on stdout
+
+- question to be prompted to the user.
+
 ## Miscellaneous
 
 Set of miscellaneous helper functions.
@@ -1325,7 +1385,7 @@ Hello World!
 
 #### Arguments
 
-- **$1** (The): string that will be trimmed.
+- **$1** (string): The string to be trimmed.
 
 #### Exit codes
 

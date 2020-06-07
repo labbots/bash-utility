@@ -748,7 +748,7 @@ date::format() {
 # @example
 #   echo "$(date::human_readable_seconds "356786")"
 #   #Output
-#   4 days 3 hrs 6 minute(s) and 26 seconds
+#   4 days 3 hours 6 minute(s) and 26 seconds
 #
 # @arg $1 int number of seconds.
 #
@@ -762,7 +762,7 @@ date::human_readable_seconds() {
     declare T="${1}"
     declare DAY="$((T / 60 / 60 / 24))" HR="$((T / 60 / 60 % 24))" MIN="$((T / 60 % 60))" SEC="$((T % 60))"
     [[ ${DAY} -gt 0 ]] && printf '%d days ' "${DAY}"
-    [[ ${HR} -gt 0 ]] && printf '%d hrs ' "${HR}"
+    [[ ${HR} -gt 0 ]] && printf '%d hours ' "${HR}"
     [[ ${MIN} -gt 0 ]] && printf '%d minute(s) ' "${MIN}"
     [[ ${DAY} -gt 0 || ${HR} -gt 0 || ${MIN} -gt 0 ]] && printf 'and '
     printf '%d seconds\n' "${SEC}"

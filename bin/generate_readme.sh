@@ -140,7 +140,7 @@ _insert_shdoc_to_file() {
         # src https://stackoverflow.com/questions/2699666/replace-delimited-block-of-text-in-file-with-the-contents-of-another-file
 
         sed -i -ne "/${start_shdoc}/ {p; r ${shdoc_tmp_file}" -e ":a; n; /${end_shdoc}/ {p; b}; ba}; p" "${source_markdown}"
-        echo -e "Updated shdoc content to ${source_markdown} successfully\n"
+        echo -e "Updated bashdoc content to ${source_markdown} successfully\n"
 
     else
         {
@@ -148,7 +148,7 @@ _insert_shdoc_to_file() {
             cat "${shdoc_tmp_file}"
             printf "%s\n" "${end_shdoc}"
         } >> "${source_markdown}"
-        echo -e "Created shdoc content to ${source_markdown} successfully\n"
+        echo -e "Created bashdoc content to ${source_markdown} successfully\n"
     fi
 }
 

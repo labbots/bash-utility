@@ -10,7 +10,7 @@
 #   #Output
 #   Hello World!
 #
-# @arg $1 The string that will be trimmed.
+# @arg $1 string The string to be trimmed.
 #
 # @exitcode 0  If successful.
 # @exitcode 2 Function missing arguments.
