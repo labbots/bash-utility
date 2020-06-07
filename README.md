@@ -1308,7 +1308,7 @@ Are you sure to proceed (y/n)? [y]
 #### Arguments
 
 - **$1** (string): The question to be prompted to the user.
-- **$2** (string): default answer [yes/no] (optional).
+- **$2** (string): default answer \[yes/no\] (optional).
 
 #### Exit codes
 

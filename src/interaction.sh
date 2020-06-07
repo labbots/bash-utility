@@ -11,7 +11,7 @@
 #   Are you sure to proceed (y/n)? [y]
 #
 # @arg $1 string The question to be prompted to the user.
-# @arg $2 string default answer [yes/no] (optional).
+# @arg $2 string default answer \[yes/no\] (optional).
 #
 # @exitcode 0  If user responds with yes.
 # @exitcode 1  If user responds with no.
@@ -37,7 +37,7 @@ interaction::prompt_yes_no() {
         printf "%s (y/n)? " "${1}"
         [[ -n "${def_arg}" ]] && printf "[%s] " "${def_arg}"
 
-        read response
+        read -r response
         [[ -z "${response}" ]] && response="${def_arg}"
 
         case "${response}" in
@@ -81,7 +81,7 @@ interaction::prompt_response() {
 
     while :; do
         printf "%s ? " "${1}"
-        [[ -n "${def_arg}" ]] && [[ "${def_arg}" != "-" ]] && printf "[${def_arg}] "
+        [[ -n "${def_arg}" ]] && [[ "${def_arg}" != "-" ]] && printf "[%s] " "${def_arg}"
 
         read response
         [[ -n "${response}" ]] && break
