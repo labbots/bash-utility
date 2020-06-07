@@ -5,3 +5,4 @@ source src/string.sh
 source src/variable.sh
 source src/file.sh
 source src/misc.sh
+source src/date.sh

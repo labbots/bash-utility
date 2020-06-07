@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+#https://github.com/bkrem/make-toc.sh/blob/master/make-toc.sh
+#https://gitlab.com/pedrolab/doctoc.sh/-/blob/master/doctoc.sh
 _usage() {
     printf "
 Script to autogenerate markdown based on bash source code.\n

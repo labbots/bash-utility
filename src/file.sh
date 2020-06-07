@@ -25,7 +25,7 @@ file::make_temp_file() {
 }
 
 # @description Get only the filename from string path.
-
+#
 # @example
 #   echo "$(file::name "/path/to/test.md")"
 #   #Output
@@ -43,7 +43,7 @@ file::name() {
 }
 
 # @description Get the basename of file from file name.
-
+#
 # @example
 #   echo "$(file::basename "/path/to/test.md")"
 #   #Output
