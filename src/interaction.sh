@@ -68,7 +68,7 @@ interaction::prompt_yes_no() {
 # @arg $1 string The question to be prompted to the user.
 # @arg $2 string default answer (optional).
 #
-# @exitcode 0  If user responds with yes.
+# @exitcode 0  If user responds with answer.
 # @exitcode 2 Function missing arguments.
 #
 # @stdout question to be prompted to the user.

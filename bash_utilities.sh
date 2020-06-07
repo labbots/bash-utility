@@ -7,3 +7,4 @@ source src/file.sh
 source src/misc.sh
 source src/date.sh
 source src/interaction.sh
+source src/check.sh

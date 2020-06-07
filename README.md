@@ -17,6 +17,9 @@ Bash library which provides utility functions and helpers for functional program
   - [array::join()](#arrayjoin)
   - [array::reverse()](#arrayreverse)
   - [array::random_element()](#arrayrandom_element)
+- [Check](#check)
+  - [check::command_exists()](#checkcommand_exists)
+  - [check::is_sudo()](#checkis_sudo)
 - [Date](#date)
   - [date::now()](#datenow)
   - [date::epoc()](#dateepoc)
@@ -244,6 +247,47 @@ c
 #### Output on stdout
 
 - Random item out of the array.
+
+## Check
+
+Helper functions.
+
+### check::command_exists()
+
+Check if the command exists in the system.
+
+#### Example
+
+```bash
+check::command_exists "tput"
+```
+
+#### Arguments
+
+- **$1** (string): Command name to be searched.
+
+#### Exit codes
+
+- **0**:  If the command exists.
+- **1**:  If the command does not exist.
+- **2**: Function missing arguments.
+
+### check::is_sudo()
+
+Check if the script is executed with sudo privilege.
+
+#### Example
+
+```bash
+check::is_sudo
+```
+
+*Function has no arguments.*
+
+#### Exit codes
+
+- **0**:  If the script is executed with root privilege.
+- **1**:  If the script is not executed with root privilege
 
 ## Date
 
@@ -1339,7 +1383,7 @@ Choose directory to install? [/home/path]
 
 #### Exit codes
 
-- **0**:  If user responds with yes.
+- **0**:  If user responds with answer.
 - **2**: Function missing arguments.
 
 #### Output on stdout
