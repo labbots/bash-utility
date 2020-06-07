@@ -83,7 +83,7 @@ interaction::prompt_response() {
         printf "%s ? " "${1}"
         [[ -n "${def_arg}" ]] && [[ "${def_arg}" != "-" ]] && printf "[%s] " "${def_arg}"
 
-        read response
+        read -r response
         [[ -n "${response}" ]] && break
 
         if [[ -z "${response}" ]] && [[ -n "${def_arg}" ]]; then
