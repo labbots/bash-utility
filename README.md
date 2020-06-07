@@ -17,6 +17,13 @@ Bash library which provides utility functions and helpers for functional program
   - [array::join()](#arrayjoin)
   - [array::reverse()](#arrayreverse)
   - [array::random_element()](#arrayrandom_element)
+- [File](#file)
+  - [file::make_temp_file()](#filemake_temp_file)
+  - [file::name()](#filename)
+  - [file::basename()](#filebasename)
+  - [file::extension()](#fileextension)
+- [Miscellaneous](#miscellaneous)
+  - [misc::check_internet_connection()](#misccheck_internet_connection)
 - [String](#string)
   - [string::trim()](#stringtrim)
   - [string::split()](#stringsplit)
@@ -36,6 +43,7 @@ Bash library which provides utility functions and helpers for functional program
   - [variable::is_bool()](#variableis_bool)
   - [variable::is_true()](#variableis_true)
   - [variable::is_false()](#variableis_false)
+- [Inspired By](#inspired-by)
 - [License](#license)
 
 <!-- END generate_readme.sh generated TOC please keep comment here to allow auto update -->
@@ -197,6 +205,131 @@ c
 #### Output on stdout
 
 - Random item out of the array.
+
+## File
+
+Functions for handling files.
+
+### file::make_temp_file()
+
+Create temporary file.
+Function creates temporary file with random name. The temporary file will be deleted when script finishes.
+
+#### Example
+
+```bash
+echo "$(file::make_temp_file)"
+#Output
+tmp.vgftzy
+```
+
+_Function has no arguments._
+
+#### Exit codes
+
+- **0**:  If successful.
+- **1**: If failed to create temp file.
+
+#### Output on stdout
+
+- file name of temporary file created.
+
+### file::name()
+
+Get only the filename from string path.
+
+#### Example
+
+```bash
+echo "$(file::name "/path/to/test.md")"
+#Output
+test.md
+```
+
+#### Arguments
+
+- **$1** (string): path.
+
+#### Exit codes
+
+- **0**:  If successful.
+- **2**: Function missing arguments.
+
+#### Output on stdout
+
+- name of the file with extension.
+
+### file::basename()
+
+Get the basename of file from file name.
+
+#### Example
+
+```bash
+echo "$(file::basename "/path/to/test.md")"
+#Output
+test
+```
+
+#### Arguments
+
+- **$1** (string): path.
+
+#### Exit codes
+
+- **0**:  If successful.
+- **2**: Function missing arguments.
+
+#### Output on stdout
+
+- basename of the file.
+
+### file::extension()
+
+Get the extension of file from file name.
+
+#### Example
+
+```bash
+echo "$(file::extension "/path/to/test.md")"
+#Output
+md
+```
+
+#### Arguments
+
+- **$1** (string): path.
+
+#### Exit codes
+
+- **0**:  If successful.
+- **1**: If no extension is found in the filename.
+- **2**: Function missing arguments.
+
+#### Output on stdout
+
+- extension of the file.
+
+## Miscellaneous
+
+Set of miscellaneous helper functions.
+
+### misc::check_internet_connection()
+
+Check if internet connection is available.
+
+#### Example
+
+```bash
+misc::check_internet_connection
+```
+
+_Function has no arguments._
+
+#### Exit codes
+
+- **0**:  If script can connect to internet.
+- **1**: If script cannot access internet.
 
 ## String
 
@@ -594,6 +727,10 @@ variable::is_false "false"
 
 <!-- END generate_readme.sh generated SHDOC please keep comment here to allow auto update -->
 
+## Inspired By
+
+- [Bash Bible](https://github.com/dylanaraps/pure-bash-bible) - A collection of pure bash alternatives to external processes.
+  
 ## License
 
 [MIT](https://github.com/labbots/google-drive-upload/blob/master/LICENSE)
