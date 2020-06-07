@@ -39,7 +39,7 @@ date::now() {
 date::epoc() {
     [[ $# = 0 ]] && printf "%s: Missing arguments\n" "${FUNCNAME[0]}" && return 2
 
-    declare input date
+    declare date
     date=$(date -d "${1}" +"%s") || return $?
     printf "%s" "${date}"
 }
