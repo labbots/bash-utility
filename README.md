@@ -28,6 +28,14 @@ Bash library which provides utility functions and helpers for functional program
   - [string::starts_with()](#stringstarts_with)
   - [string::ends_with()](#stringends_with)
   - [string::regex()](#stringregex)
+- [Variable](#variable)
+  - [variable::is_array()](#variableis_array)
+  - [variable::is_numeric()](#variableis_numeric)
+  - [variable::is_int()](#variableis_int)
+  - [variable::is_float()](#variableis_float)
+  - [variable::is_bool()](#variableis_bool)
+  - [variable::is_true()](#variableis_true)
+  - [variable::is_false()](#variableis_false)
 - [License](#license)
 
 <!-- END generate_readme.sh generated TOC please keep comment here to allow auto update -->
@@ -189,6 +197,9 @@ c
 #### Output on stdout
 
 - Random item out of the array.
+
+
+
 
 ## String
 
@@ -431,6 +442,158 @@ string::regex "HELLO" "^[A-Z]*$"
 - **0**:  If match found.
 - **1**:  If no match found.
 - **2**: Function missing arguments.
+
+## Variable
+
+Functions for handling variables.
+
+### variable::is_array()
+
+Check if given variable is array.
+
+#### Example
+
+```bash
+array=("a" "b" "c")
+variable::is_array "${array[@]}"
+#Output
+0
+```
+
+#### Arguments
+
+- **$1** (mixed): Value of variable to check.
+
+#### Exit codes
+
+- **0**:  If input is array.
+- **1**: If input is not an array.
+
+### variable::is_numeric()
+
+Check if given variable is a number.
+
+#### Example
+
+```bash
+variable::is_numeric "1234"
+#Output
+0
+```
+
+#### Arguments
+
+- **$1** (mixed): Value of variable to check.
+
+#### Exit codes
+
+- **0**:  If input is number.
+- **1**: If input is not a number.
+
+### variable::is_int()
+
+Check if given variable is an integer.
+
+#### Example
+
+```bash
+variable::is_int "+1234"
+#Output
+0
+```
+
+#### Arguments
+
+- **$1** (mixed): Value of variable to check.
+
+#### Exit codes
+
+- **0**:  If input is an integer.
+- **1**: If input is not an integer.
+
+### variable::is_float()
+
+Check if given variable is a float.
+
+#### Example
+
+```bash
+variable::is_float "+1234.0"
+#Output
+0
+```
+
+#### Arguments
+
+- **$1** (mixed): Value of variable to check.
+
+#### Exit codes
+
+- **0**:  If input is a float.
+- **1**: If input is not a float.
+
+### variable::is_bool()
+
+Check if given variable is a boolean.
+
+#### Example
+
+```bash
+variable::is_bool "true"
+#Output
+0
+```
+
+#### Arguments
+
+- **$1** (mixed): Value of variable to check.
+
+#### Exit codes
+
+- **0**:  If input is a boolean.
+- **1**: If input is not a boolean.
+
+### variable::is_true()
+
+Check if given variable is a true.
+
+#### Example
+
+```bash
+variable::is_true "true"
+#Output
+0
+```
+
+#### Arguments
+
+- **$1** (mixed): Value of variable to check.
+
+#### Exit codes
+
+- **0**:  If input is true.
+- **1**: If input is not true.
+
+### variable::is_false()
+
+Check if given variable is false.
+
+#### Example
+
+```bash
+variable::is_false "false"
+#Output
+0
+```
+
+#### Arguments
+
+- **$1** (mixed): Value of variable to check.
+
+#### Exit codes
+
+- **0**:  If input is false.
+- **1**: If input is not false.
 
 <!-- END generate_readme.sh generated SHDOC please keep comment here to allow auto update -->
 
