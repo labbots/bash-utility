@@ -28,7 +28,7 @@ BEGIN {
     styles["li", "to"] = "- &"
 
     styles["i", "from"] = ".*"
-    styles["i", "to"] = "_&_"
+    styles["i", "to"] = "*&*"
 
     styles["anchor", "from"] = ".*"
     styles["anchor", "to"] = "[&](#&)"

@@ -66,7 +66,7 @@ file::basename() {
 }
 
 # @description Get the extension of file from file name.
-
+#
 # @example
 #   echo "$(file::extension "/path/to/test.md")"
 #   #Output
@@ -83,8 +83,61 @@ file::extension() {
     [[ $# = 0 ]] && printf "%s: Missing arguments\n" "${FUNCNAME[0]}" && return 2
     declare file extension
     file="${1##*/}"
-    extension="${src_file##*.}"
+    extension="${file##*.}"
     [[ "${file}" = "${extension}" ]] && return 1
 
     printf "%s" "${extension}"
+}
+
+# @description Get directory name from file path.
+#
+# @example
+#   echo "$(file::dirname "/path/to/test.md")"
+#   #Output
+#   /path/to
+#
+# @arg $1 string path.
+#
+# @exitcode 0  If successful.
+# @exitcode 2 Function missing arguments.
+#
+# @stdout directory path.
+file::dirname() {
+    [[ $# = 0 ]] && printf "%s: Missing arguments\n" "${FUNCNAME[0]}" && return 2
+
+    declare tmp=${1:-.}
+
+    [[ ${tmp} != *[!/]* ]] && { printf '/\n' && return; }
+    tmp="${tmp%%"${tmp##*[!/]}"}"
+
+    [[ ${tmp} != */* ]] && { printf '.\n' && return; }
+    tmp=${tmp%/*} && tmp="${tmp%%"${tmp##*[!/]}"}"
+
+    printf '%s' "${tmp:-/}"
+}
+
+# @description Get absolute path of file or directory.
+#
+# @example
+#   file::full_path "../path/to/file.md"
+#   #Output
+#   /home/labbots/docs/path/to/file.md
+#
+# @arg $1 string relative or absolute path to file/direcotry.
+#
+# @exitcode 0  If successful.
+# @exitcode 1  If file/directory does not exist.
+# @exitcode 2 Function missing arguments.
+#
+# @stdout Absolute path to file/directory.
+file::full_path() {
+    [[ $# = 0 ]] && printf "%s: Missing arguments\n" "${FUNCNAME[0]}" && return 2
+    declare input="${1}"
+    if [[ -f ${input} ]]; then
+        printf "%s/%s\n" "$(cd "$(file::dirname "${input}")" && pwd)" "${input##*/}" || return 1
+    elif [[ -d ${input} ]]; then
+        printf "%s\n" "$(cd "${input}" && pwd)"
+    else
+        return 1
+    fi
 }

@@ -22,6 +22,8 @@ Bash library which provides utility functions and helpers for functional program
   - [file::name()](#filename)
   - [file::basename()](#filebasename)
   - [file::extension()](#fileextension)
+  - [file::dirname()](#filedirname)
+  - [file::full_path()](#filefull_path)
 - [Miscellaneous](#miscellaneous)
   - [misc::check_internet_connection()](#misccheck_internet_connection)
 - [String](#string)
@@ -223,7 +225,7 @@ echo "$(file::make_temp_file)"
 tmp.vgftzy
 ```
 
-_Function has no arguments._
+*Function has no arguments.*
 
 #### Exit codes
 
@@ -310,6 +312,57 @@ md
 
 - extension of the file.
 
+### file::dirname()
+
+Get directory name from file path.
+
+#### Example
+
+```bash
+echo "$(file::dirname "/path/to/test.md")"
+#Output
+/path/to
+```
+
+#### Arguments
+
+- **$1** (string): path.
+
+#### Exit codes
+
+- **0**:  If successful.
+- **2**: Function missing arguments.
+
+#### Output on stdout
+
+- directory path.
+
+### file::full_path()
+
+Get absolute path of file or directory.
+
+#### Example
+
+```bash
+file::full_path "../path/to/file.md"
+#Output
+/home/labbots/docs/path/to/file.md
+```
+
+#### Arguments
+
+- **$1** (string): relative or absolute path to file/direcotry.
+
+#### Exit codes
+
+- **0**:  If successful.
+- **1**:  If file/directory does not exist.
+- **2**: Function missing arguments.
+
+#### Output on stdout
+
+- Absolute path to file/directory.
+
 ## Miscellaneous
 
 Set of miscellaneous helper functions.
@@ -324,7 +377,7 @@ Check if internet connection is available.
 misc::check_internet_connection
 ```
 
-_Function has no arguments._
+*Function has no arguments.*
 
 #### Exit codes
 
