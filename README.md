@@ -1,4 +1,4 @@
-<h1 align="center">Bash Utilites</h1>
+<h1 align="center">Bash Utility</h1>
 
 <p align="center">
 <a href="https://github.com/labbots/bash-utility/blob/master/LICENSE"><img src="https://img.shields.io/github/license/labbots/bash-utility.svg?style=for-the-badge" alt="License"></a>
@@ -137,7 +137,7 @@ Bash utility functions can be used by simply sourcing the library script file to
 To access all the functions within the bash-utility library, you could import the main bash file as follows.
 
 ```shell
-source "vendor/bash-utility/bash-utilities.sh"
+source "vendor/bash-utility/bash-utility.sh"
 ```
 
 You can also only use the necessary library functions by only importing the required function files. 
