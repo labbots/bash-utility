@@ -1742,7 +1742,7 @@ Functions for handling variables.
 ### variable::is_array()
 
 Check if given variable is array.
-Note: Pass the variable name instead of value of the variable.
+Pass the variable name instead of value of the variable.
 
 #### Example
 

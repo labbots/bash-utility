@@ -4,7 +4,7 @@
 # @brief Functions for handling variables.
 
 # @description Check if given variable is array.
-# Note: Pass the variable name instead of value of the variable.
+# Pass the variable name instead of value of the variable.
 #
 # @example
 #   arr=("a" "b" "c")
@@ -37,7 +37,7 @@ variable::is_array() {
 # @exitcode 0  If input is number.
 # @exitcode 1 If input is not a number.
 variable::is_numeric() {
-    re='^[0-9]+$'
+    declare re='^[0-9]+$'
     if [[ ${1} =~ $re ]]; then
         return 0
     fi
