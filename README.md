@@ -5,7 +5,7 @@
 <a href="https://www.codacy.com/manual/labbots/bash-utility?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=labbots/bash-utility&amp;utm_campaign=Badge_Grade"><img src="https://img.shields.io/codacy/grade/99fbe8d389254b6ebb37899ce89658e3?style=for-the-badge"/></a>
 </p>
 <p align="center">
-<img src="image/logo.png" height="250"/>
+<img src="image/bash-utility.png" height="250"/>
 </p>
 Bash library which provides utility functions and helpers for functional programming in Bash.
 
