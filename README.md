@@ -10,6 +10,10 @@ Bash library which provides utility functions and helpers for functional program
 <!-- DO NOT EDIT THIS SECTION, INSTEAD RE-RUN generate_readme.sh TO UPDATE -->
 ## Table of Contents
 
+- [Installation](#installation)
+  - [Method 1 - Git Submodules](#method-1---git-submodules)
+  - [Method 2 - Git Clone](#method-2---git-clone)
+- [Usage](#usage)
 - [Array](#array)
   - [array::contains()](#arraycontains)
   - [array::dedupe()](#arraydedupe)
@@ -91,6 +95,53 @@ Bash library which provides utility functions and helpers for functional program
 - [License](#license)
 
 <!-- END generate_readme.sh generated TOC please keep comment here to allow auto update -->
+## Installation
+The script can be installed and sourced using following methods.
+
+### Method 1 - Git Submodules
+If the library is used inside a git project then git submodules can be used to install the library to the project.
+Following command will initialize git submodule and download the library to `./vendor/bash-utility` folder.
+
+```shell
+git submodule init
+git submodule add -b master https://github.com/labbots/bash-utility vendor/bash-utility
+```
+
+To Update submodules to latest code execute the following command.
+
+```shell
+git submodule update --rebase --remote
+```
+
+### Method 2 - Git Clone
+If you don't want to use git submodules, you can use `git clone` to download library and then move the files to desired location manually.
+
+The below command will clone the repository to `vendor/bash-utility` folder in current working directory.
+
+```shell
+git clone https://github.com/labbots/bash-utility.git ./vendor/bash-utility
+```
+Once the submodule is added or updated, make sure to commit changes to your repository.
+
+```shell
+git add .
+git commit -m 'Added/updated bash-utility library.'
+```
+**Note:** When cloning your repository, use `--recurse-submodules` flag to `git clone` command to install the git sub modules.
+
+## Usage
+Library functions can be used by simply sourcing the library script file to your own script.
+To access all the functions within the bash-utility library, you could import the main bash file as follows.
+
+```shell
+source "vendor/bash-utility/bash-utilities.sh"
+```
+
+You can also only use the necessary library functions by only importing the required function files. 
+
+```shell
+source "vendor/bash-utility/src/array.sh"
+```
 
 <!-- START generate_readme.sh generated SHDOC please keep comment here to allow auto update -->
 <!-- DO NOT EDIT THIS SECTION, INSTEAD RE-RUN generate_readme.sh TO UPDATE -->
