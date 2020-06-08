@@ -130,7 +130,7 @@ git commit -m 'Added/updated bash-utility library.'
 **Note:** When cloning your repository, use `--recurse-submodules` flag to `git clone` command to install the git sub modules.
 
 ## Usage
-Library functions can be used by simply sourcing the library script file to your own script.
+Bash utility functions can be used by simply sourcing the library script file to your own script.
 To access all the functions within the bash-utility library, you could import the main bash file as follows.
 
 ```shell
@@ -1742,19 +1742,20 @@ Functions for handling variables.
 ### variable::is_array()
 
 Check if given variable is array.
+Note: Pass the variable name instead of value of the variable.
 
 #### Example
 
 ```bash
-array=("a" "b" "c")
-variable::is_array "${array[@]}"
+arr=("a" "b" "c")
+variable::is_array "arr"
 #Output
 0
 ```
 
 #### Arguments
 
-- **$1** (mixed): Value of variable to check.
+- **$1** (string): name of the variable to check.
 
 #### Exit codes
 

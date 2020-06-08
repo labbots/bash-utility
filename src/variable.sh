@@ -4,26 +4,25 @@
 # @brief Functions for handling variables.
 
 # @description Check if given variable is array.
+# Note: Pass the variable name instead of value of the variable.
 #
 # @example
-#   array=("a" "b" "c")
-#   variable::is_array "${array[@]}"
+#   arr=("a" "b" "c")
+#   variable::is_array "arr"
 #   #Output
 #   0
 #
-# @arg $1 mixed Value of variable to check.
+# @arg $1 string name of the variable to check.
 #
 # @exitcode 0  If input is array.
 # @exitcode 1 If input is not an array.
 variable::is_array() {
-    declare input=("$@")
     if [[ -z "${1}" ]]; then
         return 1
-    elif [[ "${#input[@]}" -gt 1 ]]; then
-        return 0
     else
-        return 1
+        declare -p "${1}" 2> /dev/null | grep 'declare \-[aA]' > /dev/null && return 0
     fi
+    return 1
 }
 
 # @description Check if given variable is a number.
@@ -95,7 +94,7 @@ variable::is_float() {
 # @exitcode 0  If input is a boolean.
 # @exitcode 1 If input is not a boolean.
 variable::is_bool() {
-    [[ "${1}" = true || "${1}" = false ]] && return 0 || return 1;
+    [[ "${1}" = true || "${1}" = false ]] && return 0 || return 1
 }
 
 # @description Check if given variable is a true.
@@ -110,7 +109,7 @@ variable::is_bool() {
 # @exitcode 0  If input is true.
 # @exitcode 1 If input is not true.
 variable::is_true() {
-    [[ "${1}" = true || "${1}" -eq 0 ]] && return 0 || return 1;
+    [[ "${1}" = true || "${1}" -eq 0 ]] && return 0 || return 1
 }
 
 # @description Check if given variable is false.
@@ -125,5 +124,5 @@ variable::is_true() {
 # @exitcode 0  If input is false.
 # @exitcode 1 If input is not false.
 variable::is_false() {
-    [[ "${1}" = false || "${1}" -eq 1 ]] && return 0 || return 1;
+    [[ "${1}" = false || "${1}" -eq 1 ]] && return 0 || return 1
 }

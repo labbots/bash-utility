@@ -99,7 +99,7 @@ _setup_arguments() {
         printf "Provided directory for bash script files %s does not exist.\n" "${SOURCE_SCRIPT_DIR}" && exit 1
     fi
 
-    re='^[0-9]+$'
+    declare re='^[0-9]+$'
     if ! [[ "${MINLEVEL}" =~ $re ]] || ! [[ "${MAXLEVEL}" =~ $re ]]; then
         echo "error: Not a number" >&2
         exit 1
@@ -205,7 +205,7 @@ _generate_toc() {
 
 _insert_toc_to_file() {
 
-    declare source_markdown toc_text start_toc info_toc end_toc utext_ampersand utext_slash
+    declare source_markdown toc_text start_toc info_toc end_toc toc_block utext_ampersand utext_slash
     source_markdown="${1}"
     toc_text="${2}"
     start_toc="<!-- START ${SCRIPT_FILE} generated TOC please keep comment here to allow auto update -->"
@@ -239,7 +239,7 @@ _insert_toc_to_file() {
 }
 
 _process_toc() {
-    declare toc_temp_file source_markdown level
+    declare toc_temp_file source_markdown level toc_text
     source_markdown="${1}"
 
     toc_temp_file=$(_setup_tempfile)
@@ -259,6 +259,8 @@ _process_toc() {
 }
 
 main() {
+    # export PS4='+(${BASH_SOURCE}:${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
+    # set -x
     trap 'exit "$?"' INT TERM && trap 'exit "$?"' EXIT
     set -o errexit -o noclobber -o pipefail
 
