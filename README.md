@@ -52,7 +52,6 @@ Bash library which provides utility functions and helpers for functional program
   - [date::sub_minutes()](#datesub_minutes)
   - [date::sub_seconds()](#datesub_seconds)
   - [date::format()](#dateformat)
-  - [date::human_readable_seconds()](#datehuman_readable_seconds)
 - [File](#file)
   - [file::make_temp_file()](#filemake_temp_file)
   - [file::name()](#filename)
@@ -61,6 +60,9 @@ Bash library which provides utility functions and helpers for functional program
   - [file::dirname()](#filedirname)
   - [file::full_path()](#filefull_path)
   - [file::mime_type()](#filemime_type)
+- [Format](#format)
+  - [format::human_readable_seconds()](#formathuman_readable_seconds)
+  - [format::bytes_to_human()](#formatbytes_to_human)
 - [Interaction](#interaction)
   - [interaction::prompt_yes_no()](#interactionprompt_yes_no)
   - [interaction::prompt_response()](#interactionprompt_response)
@@ -1126,31 +1128,6 @@ echo echo "$(date::format "1594143480")"
 
 - formatted time string.
 
-### date::human_readable_seconds()
-
-Format seconds to human readable format.
-
-#### Example
-
-```bash
-echo "$(date::human_readable_seconds "356786")"
-#Output
-4 days 3 hours 6 minute(s) and 26 seconds
-```
-
-#### Arguments
-
-- **$1** (int): number of seconds.
-
-#### Exit codes
-
-- **0**:  If successful.
-- **2**: Function missing arguments.
-
-#### Output on stdout
-
-- formatted time string.
-
 ## File
 
 Functions for handling files.
@@ -1332,6 +1309,60 @@ application/x-shellscript
 #### Output on stdout
 
 - mime type of file/directory.
+
+## Format
+
+Functions to format provided input.
+
+### format::human_readable_seconds()
+
+Format seconds to human readable format.
+
+#### Example
+
+```bash
+echo "$(format::human_readable_seconds "356786")"
+#Output
+4 days 3 hours 6 minute(s) and 26 seconds
+```
+
+#### Arguments
+
+- **$1** (int): number of seconds.
+
+#### Exit codes
+
+- **0**:  If successful.
+- **2**: Function missing arguments.
+
+#### Output on stdout
+
+- formatted time string.
+
+### format::bytes_to_human()
+
+Format bytes to human readable format.
+
+#### Example
+
+```bash
+echo "$(format::bytes_to_human "2250")"
+#Output
+2.19 KB
+```
+
+#### Arguments
+
+- **$1** (int): size in bytes.
+
+#### Exit codes
+
+- **0**:  If successful.
+- **2**: Function missing arguments.
+
+#### Output on stdout
+
+- formatted file size string.
 
 ## Interaction
 
