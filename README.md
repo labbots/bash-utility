@@ -33,7 +33,7 @@ Bash library which provides utility functions and helpers for functional program
   - [check::command_exists()](#checkcommand_exists)
   - [check::is_sudo()](#checkis_sudo)
 - [Collection](#collection)
-  - [test_func()](#test_func)
+  - [collection::each()](#collectioneach)
 - [Date](#date)
   - [date::now()](#datenow)
   - [date::epoc()](#dateepoc)
@@ -482,17 +482,15 @@ check::is_sudo
 
 (Experimental) Functions to iterates over a list of elements, yielding each in turn to an iteratee function.
 
-### test_func()
+### collection::each()
 
 Iterates over elements of collection and invokes iteratee for each element.
-Input to the function can here a pipe output, here-string or file
+Input to the function can be a pipe output, here-string or file.
 
 #### Example
 
 ```bash
 test_func(){
-### collection::each()
-
    printf "print value: %s\n" "$1"
    return 0
  }

@@ -4,7 +4,7 @@
 # @brief (Experimental) Functions to iterates over a list of elements, yielding each in turn to an iteratee function.
 
 # @description Iterates over elements of collection and invokes iteratee for each element.
-# Input to the function can here a pipe output, here-string or file
+# Input to the function can be a pipe output, here-string or file.
 # @example
 #   test_func(){
 #      printf "print value: %s\n" "$1"

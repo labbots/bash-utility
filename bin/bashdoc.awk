@@ -161,7 +161,7 @@ in_example {
     docblock = docblock "\n\n" render("li", $0) "\n"
 }
 
-/^[ \t]*(function([ \t])+)?([a-zA-Z0-9_:-]+)([ \t]*)(\(([ \t]*)\))?[ \t]*\{/ && docblock != "" {
+/^[ \t]*(function([ \t])+)?([a-zA-Z0-9_:-]+)([ \t]*)(\(([ \t]*)\))?[ \t]*\{/ && docblock != "" && !in_example {
     if (is_internal) {
         is_internal = 0
     } else {
@@ -170,7 +170,6 @@ in_example {
             "\\3()", \
             "g" \
         )
-
         doc = doc "\n" render("h3", func_name) "\n" docblock
 
         # url = func_name
