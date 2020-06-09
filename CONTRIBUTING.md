@@ -25,31 +25,31 @@ Before making a pull request, make sure to follow below guidelines:
 
 #### Styleguide
 
--  Variable names must be meaningful and self-documenting.
--  Long variable names must be structured by underscores to improve legibility.
--  Global variables and constants must be ALL CAPS with underscores. (eg., INPUT_FILE)
--  local variables used within functions must be all lower case with underscores ( only if required ). (eg., input_data)
--  Variable names can be alphanumeric with underscores. No special characters in variable names.
--  Variables name must not start with number.
--  Variables within function must be declared. So the scope of variable is restricted to the function.
--  Avoid accessing global variables within functions.
--  Function names must be all lower case with underscores to seperate words (snake_case).
--  Function name must start with section name followed by 2 colons and then the function name  (eg., `array::contains()`)
--  Try using bash builtins and string substitution as much as possible.
--  Use printf everywhere instead of echo.
--  Before adding a new logic, be sure to check the existing code.
--  Make sure to add the function in appropriate section based on its operation.
--  Use [shfmt](https://github.com/mvdan/sh) to format the script. Use below command:
+-   Variable names must be meaningful and self-documenting.
+-   Long variable names must be structured by underscores to improve legibility.
+-   Global variables and constants must be ALL CAPS with underscores. (eg., INPUT_FILE)
+-   local variables used within functions must be all lower case with underscores ( only if required ). (eg., input_data)
+-   Variable names can be alphanumeric with underscores. No special characters in variable names.
+-   Variables name must not start with number.
+-   Variables within function must be declared. So the scope of variable is restricted to the function.
+-   Avoid accessing global variables within functions.
+-   Function names must be all lower case with underscores to seperate words (snake_case).
+-   Function name must start with section name followed by 2 colons and then the function name  (eg., `array::contains()`)
+-   Try using bash builtins and string substitution as much as possible.
+-   Use printf everywhere instead of echo.
+-   Before adding a new logic, be sure to check the existing code.
+-   Make sure to add the function in appropriate section based on its operation.
+-   Use [shfmt](https://github.com/mvdan/sh) to format the script. Use below command:
 
-   ```shell
-   shfmt upload.sh
-   ```
+    ```shell
+     shfmt upload.sh
+     ```
 
-   The repo already provides the .editorconfig file, which shfmt reads, so no need for extra flags.
-   You can also install shfmt for various editors, refer their repo for information.
-   Note: This is strictly necessary to maintain consistency, do not skip.
+    The repo already provides the .editorconfig file, which shfmt reads, so no need for extra flags.
+    You can also install shfmt for various editors, refer their repo for information.
+    Note: This is strictly necessary to maintain consistency, do not skip.
 
--  Script should pass all [shellcheck](https://www.shellcheck.net/) warnings, if not, then disable the warning and give a valid reason.
+-   Script should pass all [shellcheck](https://www.shellcheck.net/) warnings, if not, then disable the warning and give a valid reason.
 
 #### Bashdoc guideline
 
