@@ -5,7 +5,7 @@
 _usage() {
     printf "
 Script to autogenerate markdown based on bash source code.\n
-The script generates table of contents and bashdoc and update it the given markdown template.\n
+The script generates table of contents and bashdoc and update the given markdown file.\n
 Usage:\n %s [options.. ]\n
 Options:\n
   -f | --file <filename.md> - Relative or absolute path to the README.md file.
@@ -18,7 +18,7 @@ Options:\n
 
 _setup_arguments() {
 
-    unset MINLEVEL MAXLEVEL SCRIPT_FILE SOURCE_MARKDOWN SOURCE_SCRIPT_DIR
+    unset MINLEVEL MAXLEVEL SCRIPT_FILE SOURCE_MARKDOWN SOURCE_SCRIPT_DIR SCRIPT_DIR
     MINLEVEL=1
     MAXLEVEL=3
     SCRIPT_FILE="${0##*/}"
@@ -108,6 +108,13 @@ _setup_arguments() {
         printf "Minimum level for TOC cannot be greater than the depth of TOC to be printed.\n" && exit 1
     fi
 
+    declare source="${BASH_SOURCE[0]}"
+    while [ -h "$source" ]; do # resolve $source until the file is no longer a symlink
+        SCRIPT_DIR="$(cd -P "$(dirname "$source")" > /dev/null 2>&1 && pwd)"
+        source="$(readlink "$source")"
+        [[ $source != /* ]] && source="$SCRIPT_DIR/$source" # if $SOURCE was a relative symlink, we need to resolve it relative to the path where the symlink file was located
+    done
+    SCRIPT_DIR="$(cd -P "$(dirname "$source")" > /dev/null 2>&1 && pwd)"
 }
 
 _setup_tempfile() {
@@ -121,7 +128,7 @@ _generate_shdoc() {
     declare file
     file="$(realpath "${1}")"
     if [[ -s "${file}" ]]; then
-        ./bashdoc.awk < "${file}" >> "$2"
+        "${SCRIPT_DIR}"/bashdoc.awk < "${file}" >> "$2"
     fi
 }
 

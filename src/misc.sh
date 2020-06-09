@@ -54,8 +54,7 @@ misc::check_internet_connection() {
 misc::get_pid() {
     [[ $# = 0 ]] && printf "%s: Missing arguments\n" "${FUNCNAME[0]}" && return 2
 
-    ps -ef | grep "${1}" | grep -v grep | awk '{ print $2; }'
-    unset psopts
+    pgrep "${1}"
 }
 
 # @description Get user id based on username.
@@ -74,14 +73,14 @@ misc::get_pid() {
 misc::get_uid() {
     [[ $# = 0 ]] && printf "%s: Missing arguments\n" "${FUNCNAME[0]}" && return 2
 
-    user_id=$(id ${1} 2> /dev/null)
+    user_id=$(id "${1}" 2> /dev/null)
     declare -i ret=$?
     if [[ $ret -ne 0 ]]; then
         printf "No user found with username: %s" "${1}\n"
         return 1
     fi
 
-    printf "${user_id}\n" | sed -e 's/(.*$//' -e 's/^uid=//'
+    printf "%s\n" "${user_id}" | sed -e 's/(.*$//' -e 's/^uid=//'
 
     unset user_id
 }
@@ -99,7 +98,6 @@ misc::get_uid() {
 #
 # @stdout random generated uuid.
 misc::generate_uuid() {
-    # Usage: generate_uuid
     C="89ab"
 
     for ((N=0;N<16;++N)); do
