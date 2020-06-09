@@ -87,6 +87,8 @@ Bash library which provides utility functions and helpers for functional program
 - [Interaction](#interaction)
   - [interaction::prompt_yes_no()](#interactionprompt_yes_no)
   - [interaction::prompt_response()](#interactionprompt_response)
+- [Json](#json)
+  - [json::get_value()](#jsonget_value)
 - [Miscellaneous](#miscellaneous)
   - [misc::check_internet_connection()](#misccheck_internet_connection)
 - [String](#string)
@@ -1855,6 +1857,37 @@ Choose directory to install? [/home/path]
 #### Output on stdout
 
 - question to be prompted to the user.
+
+## Json
+
+Simple json manipulation. These functions does not completely replace `jq` in any way.
+
+### json::get_value()
+
+Extract value from json based on key and position.
+Input to the function can be a pipe output, here-string or file.
+
+#### Example
+
+```bash
+json::get_value "id" "1" < json_file
+json::get_value "id" <<< "${json_var}"
+echo "{\"data\":{\"id\":\"123\",\"value\":\"name string\"}}" | json::get_value "id"
+```
+
+#### Arguments
+
+- **$1** (id): of the field to fetch.
+- **$2** (position): of value to extract.Defaults to 1.(optional)
+
+#### Exit codes
+
+- **0**:  If match successful.
+- **2**: Function missing arguments.
+
+#### Output on stdout
+
+- string value of extracted key.
 
 ## Miscellaneous
 
