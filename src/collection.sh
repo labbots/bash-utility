@@ -34,7 +34,7 @@
 # @stdout Output of iteratee function.
 collection::each() {
     [[ $# = 0 ]] && printf "%s: Missing arguments\n" "${FUNCNAME[0]}" && return 2
-    declare func="${@}"
+    declare func="${1}"
     declare IFS=$'\n'
     while read -r it; do
         if [[ "${func}" == *"$"* ]]; then
@@ -64,7 +64,7 @@ collection::each() {
 # @exitcode 2 Function missing arguments.
 collection::every() {
     [[ $# = 0 ]] && printf "%s: Missing arguments\n" "${FUNCNAME[0]}" && return 2
-    declare func="${@}"
+    declare func="${1}"
     declare IFS=$'\n'
     while read -r it; do
         if [[ "${func}" == *"$"* ]]; then
@@ -99,7 +99,7 @@ collection::every() {
 # @stdout array values matching the iteratee function.
 collection::filter() {
     [[ $# = 0 ]] && printf "%s: Missing arguments\n" "${FUNCNAME[0]}" && return 2
-    declare func="${@}"
+    declare func="${1}"
     declare IFS=$'\n'
     while read -r it; do
         if [[ "${func}" == *"$"* ]]; then
@@ -134,7 +134,7 @@ collection::filter() {
 # @stdout first array value matching the iteratee function.
 collection::find() {
     [[ $# = 0 ]] && printf "%s: Missing arguments\n" "${FUNCNAME[0]}" && return 2
-    declare func="${@}"
+    declare func="${1}"
     declare IFS=$'\n'
     while read -r it; do
 
@@ -169,7 +169,7 @@ collection::find() {
 collection::invoke() {
     [[ $# = 0 ]] && printf "%s: Missing arguments\n" "${FUNCNAME[0]}" && return 2
     declare -a args=()
-    declare func="${@}"
+    declare func="${1}"
     while read -r it; do
         args=("${args[@]}" "$it")
     done
@@ -197,7 +197,7 @@ collection::invoke() {
 # @stdout Output result of iteratee on value.
 collection::map() {
     [[ $# = 0 ]] && printf "%s: Missing arguments\n" "${FUNCNAME[0]}" && return 2
-    declare func="${@}"
+    declare func="${1}"
     declare IFS=$'\n'
     declare out
 
@@ -236,7 +236,7 @@ collection::map() {
 # @see collection::filter
 collection::reject() {
     [[ $# = 0 ]] && printf "%s: Missing arguments\n" "${FUNCNAME[0]}" && return 2
-    declare func="${@}"
+    declare func="${1}"
     declare IFS=$'\n'
     while read -r it; do
 
@@ -266,7 +266,7 @@ collection::reject() {
 # @exitcode 2 Function missing arguments.
 collection::some() {
     [[ $# = 0 ]] && printf "%s: Missing arguments\n" "${FUNCNAME[0]}" && return 2
-    declare func="${@}"
+    declare func="${1}"
     declare IFS=$'\n'
     while read -r it; do
 

@@ -10,3 +10,4 @@ source src/interaction.sh
 source src/check.sh
 source src/format.sh
 source src/collection.sh
+source src/json.sh
