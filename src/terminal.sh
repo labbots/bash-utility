@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# @file Miscellaneous
+# @file Terminal
 # @brief Set of useful terminal functions.
 
 # @description Check if script is run in terminal.

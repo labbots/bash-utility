@@ -105,7 +105,7 @@ Bash library which provides utility functions and helpers for functional program
   - [string::starts_with()](#stringstarts_with)
   - [string::ends_with()](#stringends_with)
   - [string::regex()](#stringregex)
-- [Miscellaneous](#miscellaneous-1)
+- [Terminal](#terminal)
   - [terminal::is_term()](#terminalis_term)
   - [terminal::detect_profile()](#terminaldetect_profile)
   - [terminal::clear_line()](#terminalclear_line)
@@ -2234,7 +2234,7 @@ string::regex "HELLO" "^[A-Z]*$"
 - **1**:  If no match found.
 - **2**: Function missing arguments.
 
-## Miscellaneous
+## Terminal
 
 Set of useful terminal functions.
 
