@@ -179,7 +179,8 @@ array::sort() {
     [[ $# = 0 ]] && printf "%s: Missing arguments\n" "${FUNCNAME[0]}" && return 2
     declare -a array=("$@")
     declare -a sorted
-    declare noglobtate="$(shopt -po noglob)"
+    declare noglobtate
+    noglobtate="$(shopt -po noglob)"
     set -o noglob
     declare IFS=$'\n'
     sorted=($(sort <<< "${array[*]}"))
@@ -211,7 +212,8 @@ array::rsort() {
     [[ $# = 0 ]] && printf "%s: Missing arguments\n" "${FUNCNAME[0]}" && return 2
     declare -a array=("$@")
     declare -a sorted
-    declare noglobtate="$(shopt -po noglob)"
+    declare noglobtate
+    noglobtate="$(shopt -po noglob)"
     set -o noglob
     declare IFS=$'\n'
     sorted=($(sort -r<<< "${array[*]}"))

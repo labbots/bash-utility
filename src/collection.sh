@@ -34,13 +34,13 @@
 # @stdout Output of iteratee function.
 collection::each() {
     [[ $# = 0 ]] && printf "%s: Missing arguments\n" "${FUNCNAME[0]}" && return 2
-
+    declare func="${@}"
     declare IFS=$'\n'
     while read -r it; do
-        if [[ "$@" == *"$"* ]]; then
-            eval "$@"
+        if [[ "${func}" == *"$"* ]]; then
+            eval "${func}"
         else
-            eval "$@" "'${it}'"
+            eval "${func}" "'${it}'"
         fi
         declare -i ret="$?"
 
@@ -49,4 +49,106 @@ collection::each() {
         fi
 
     done
+}
+
+# @description Checks if iteratee function returns truthy for all elements of collection. Iteration is stopped once predicate returns false.
+# Input to the function can be a pipe output, here-string or file.
+# @example
+#   arri=("1" "2" "3" "4")
+#   printf "%s\n" "${arri[@]}" | collection::every "variable::is_numeric"
+#
+# @arg $1 string Iteratee function.
+#
+# @exitcode 0  If successful.
+# @exitcode 1 If iteratee function fails.
+# @exitcode 2 Function missing arguments.
+collection::every() {
+    [[ $# = 0 ]] && printf "%s: Missing arguments\n" "${FUNCNAME[0]}" && return 2
+    declare func="${@}"
+    declare IFS=$'\n'
+    while read -r it; do
+        if [[ "${func}" == *"$"* ]]; then
+            eval "${func}"
+        else
+            eval "${func}" "'${it}'"
+        fi
+        declare -i ret="$?"
+
+        if [[ $ret -ne 0 ]]; then
+            return 1
+        fi
+
+    done
+}
+
+# @description Iterates over elements of array, returning all elements where iteratee returns true.
+# Input to the function can be a pipe output, here-string or file.
+# @example
+#   arri=("1" "2" "3" "a")
+#   printf "%s\n" "${arri[@]}" | collection::filter "variable::is_numeric"
+#   #output
+#   1
+#   2
+#   3
+#
+# @arg $1 string Iteratee function.
+#
+# @exitcode 0  If successful.
+# @exitcode 2 Function missing arguments.
+#
+# @stdout array values matching the iteratee function.
+collection::filter() {
+    [[ $# = 0 ]] && printf "%s: Missing arguments\n" "${FUNCNAME[0]}" && return 2
+    declare func="${@}"
+    declare IFS=$'\n'
+    while read -r it; do
+        if [[ "${func}" == *"$"* ]]; then
+            eval "${func}"
+        else
+            eval "${func}" "'${it}'"
+        fi
+        declare -i ret="$?"
+        if [[ $ret = 0 ]]; then
+            printf "%s\n" "${it}"
+        fi
+    done
+}
+
+# @description Iterates over elements of collection, returning the first element where iteratee returns true.
+# Input to the function can be a pipe output, here-string or file.
+# @example
+#   arr=("1" "2" "3" "a")
+#   check_a(){
+#       [[ "$1" = "a" ]]
+#   }
+#   printf "%s\n" "${arr[@]}" | collection::find "check_a"
+#   #output
+#   a
+#
+# @arg $1 string Iteratee function.
+#
+# @exitcode 0  If successful.
+# @exitcode 1 If no match found.
+# @exitcode 2 Function missing arguments.
+#
+# @stdout first array value matching the iteratee function.
+function collection::find() {
+    [[ $# = 0 ]] && printf "%s: Missing arguments\n" "${FUNCNAME[0]}" && return 2
+    declare func="${@}"
+    declare IFS=$'\n'
+    while read -r it; do
+
+        if [[ "${func}" == *"$"* ]]; then
+            eval "${func}"
+        else
+            eval "${func}" "'$it'"
+        fi
+        declare -i ret="$?"
+        if [[ $ret = 0 ]]; then
+            echo "$it"
+            return 0
+        fi
+    done
+
+    return 1
 }

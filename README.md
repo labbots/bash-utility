@@ -34,6 +34,9 @@ Bash library which provides utility functions and helpers for functional program
   - [check::is_sudo()](#checkis_sudo)
 - [Collection](#collection)
   - [collection::each()](#collectioneach)
+  - [collection::every()](#collectionevery)
+  - [collection::filter()](#collectionfilter)
+  - [collection::find()](#collectionfind)
 - [Date](#date)
   - [date::now()](#datenow)
   - [date::epoc()](#dateepoc)
@@ -526,6 +529,88 @@ collection::each "test_func"  <<< "${out[@]}"
 #### Output on stdout
 
 - Output of iteratee function.
+
+### collection::every()
+
+Checks if iteratee function returns truthy for all elements of collection. Iteration is stopped once predicate returns false.
+Input to the function can be a pipe output, here-string or file.
+
+#### Example
+
+```bash
+arri=("1" "2" "3" "4")
+printf "%s\n" "${arri[@]}" | collection::every "variable::is_numeric"
+```
+
+#### Arguments
+
+- **$1** (string): Iteratee function.
+
+#### Exit codes
+
+- **0**:  If successful.
+- **1**: If iteratee function fails.
+- **2**: Function missing arguments.
+
+### collection::filter()
+
+Iterates over elements of array, returning all elements where iteratee returns true.
+Input to the function can be a pipe output, here-string or file.
+
+#### Example
+
+```bash
+arri=("1" "2" "3" "a")
+printf "%s\n" "${arri[@]}" | collection::filter "variable::is_numeric"
+#output
+1
+2
+3
+```
+
+#### Arguments
+
+- **$1** (string): Iteratee function.
+
+#### Exit codes
+
+- **0**:  If successful.
+- **2**: Function missing arguments.
+
+#### Output on stdout
+
+- array values matching the iteratee function.
+
+### collection::find()
+
+Iterates over elements of collection, returning the first element where iteratee returns true.
+Input to the function can be a pipe output, here-string or file.
+
+#### Example
+
+```bash
+arr=("1" "2" "3" "a")
+check_a(){
+    [[ "$1" = "a" ]]
+}
+printf "%s\n" "${arr[@]}" | collection::find "check_a"
+#output
+a
+```
+
+#### Arguments
+
+- **$1** (string): Iteratee function.
+
+#### Exit codes
+
+- **0**:  If successful.
+- **1**: If no match found.
+- **2**: Function missing arguments.
+
+#### Output on stdout
+
+- first array value matching the iteratee function.
 
 ## Date
 
