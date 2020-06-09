@@ -9,3 +9,4 @@ source src/date.sh
 source src/interaction.sh
 source src/check.sh
 source src/format.sh
+source src/collection.sh

@@ -32,6 +32,8 @@ Bash library which provides utility functions and helpers for functional program
 - [Check](#check)
   - [check::command_exists()](#checkcommand_exists)
   - [check::is_sudo()](#checkis_sudo)
+- [Collection](#collection)
+  - [test_func()](#test_func)
 - [Date](#date)
   - [date::now()](#datenow)
   - [date::epoc()](#dateepoc)
@@ -475,6 +477,57 @@ check::is_sudo
 
 - **0**:  If the script is executed with root privilege.
 - **1**:  If the script is not executed with root privilege
+
+## Collection
+
+(Experimental) Functions to iterates over a list of elements, yielding each in turn to an iteratee function.
+
+### test_func()
+
+Iterates over elements of collection and invokes iteratee for each element.
+Input to the function can here a pipe output, here-string or file
+
+#### Example
+
+```bash
+test_func(){
+### collection::each()
+
+   printf "print value: %s\n" "$1"
+   return 0
+ }
+arr1=("a b" "c d" "a" "d")
+printf "%s\n" "${arr1[@]}" | collection::each "test_func"
+collection::each "test_func"  < <(printf "%s\n" "${arr1[@]}") #alternative approach
+#output
+ print value: a b
+ print value: c d
+ print value: a
+ print value: d
+```
+
+#### Example
+
+```bash
+# If other function from this library is already used to process the array.
+# Then following method could be used to pass the array to the function.
+out=("$(array::dedupe "${arr1[@]}")")
+collection::each "test_func"  <<< "${out[@]}"
+```
+
+#### Arguments
+
+- **$1** (string): Iteratee function.
+
+#### Exit codes
+
+- **0**:  If successful.
+- **2**: Function missing arguments.
+- other exitcode returned by iteratee
+
+#### Output on stdout
+
+- Output of iteratee function.
 
 ## Date
 
