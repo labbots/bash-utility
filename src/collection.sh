@@ -29,7 +29,7 @@
 #
 # @exitcode 0  If successful.
 # @exitcode 2 Function missing arguments.
-# @exitcode other exitcode returned by iteratee
+# @exitcode other exitcode returned by iteratee.
 #
 # @stdout Output of iteratee function.
 collection::each() {
@@ -122,7 +122,7 @@ collection::filter() {
 #       [[ "$1" = "a" ]]
 #   }
 #   printf "%s\n" "${arr[@]}" | collection::find "check_a"
-#   #output
+#   #Output
 #   a
 #
 # @arg $1 string Iteratee function.
@@ -132,7 +132,109 @@ collection::filter() {
 # @exitcode 2 Function missing arguments.
 #
 # @stdout first array value matching the iteratee function.
-function collection::find() {
+collection::find() {
+    [[ $# = 0 ]] && printf "%s: Missing arguments\n" "${FUNCNAME[0]}" && return 2
+    declare func="${@}"
+    declare IFS=$'\n'
+    while read -r it; do
+
+        if [[ "${func}" == *"$"* ]]; then
+            eval "${func}"
+        else
+            eval "${func}" "'${it}'"
+        fi
+        declare -i ret="$?"
+        if [[ $ret = 0 ]]; then
+            printf "%s" "${it}"
+            return 0
+        fi
+    done
+
+    return 1
+}
+
+# @description Invokes the iteratee with each element passed as argument to the iteratee.
+# Input to the function can be a pipe output, here-string or file.
+# @example
+#   opt=("-a" "-l")
+#   printf "%s\n" "${opt[@]}" | collection::invoke "ls"
+#
+# @arg $1 string Iteratee function.
+#
+# @exitcode 0  If successful.
+# @exitcode 2 Function missing arguments.
+# @exitcode other exitcode returned by iteratee.
+#
+# @stdout Output from the iteratee function.
+collection::invoke() {
+    [[ $# = 0 ]] && printf "%s: Missing arguments\n" "${FUNCNAME[0]}" && return 2
+    declare -a args=()
+    declare func="${@}"
+    while read -r it; do
+        args=("${args[@]}" "$it")
+    done
+
+    eval "${func}" "${args[@]}"
+}
+
+# @description Creates an array of values by running each element in array through iteratee.
+# Input to the function can be a pipe output, here-string or file.
+# @example
+#   arri=("1" "2" "3")
+#   add_one(){
+#     i=${1}
+#     i=$(( i + 1 ))
+#     printf "%s\n" "$i"
+#   }
+#   printf "%s\n" "${arri[@]}" | collection::map "add_one"
+#
+# @arg $1 string Iteratee function.
+#
+# @exitcode 0  If successful.
+# @exitcode 2 Function missing arguments.
+# @exitcode other exitcode returned by iteratee.
+#
+# @stdout Output result of iteratee on value.
+collection::map() {
+    [[ $# = 0 ]] && printf "%s: Missing arguments\n" "${FUNCNAME[0]}" && return 2
+    declare func="${@}"
+    declare IFS=$'\n'
+    declare out
+
+    while read -r it; do
+
+        if [[ "${func}" == *"$"* ]]; then
+            out="$("${func}")"
+        else
+            out="$("${func}" "$it")"
+        fi
+
+        declare -i ret=$?
+
+        if [[ $ret -ne 0 ]]; then
+            return $ret
+        fi
+
+        printf "%s\n" "${out}"
+    done
+}
+
+# @description The opposite of filter function; this method returns the elements of collection that iteratee does not return true.
+# Input to the function can be a pipe output, here-string or file.
+# @example
+#   arri=("1" "2" "3" "a")
+#   printf "%s\n" "${arri[@]}" | collection::reject "variable::is_numeric"
+#   #Ouput
+#   a
+#
+# @arg $1 string Iteratee function.
+#
+# @exitcode 0  If successful.
+# @exitcode 2 Function missing arguments.
+#
+# @stdout array values not matching the iteratee function.
+# @see collection::filter
+collection::reject() {
     [[ $# = 0 ]] && printf "%s: Missing arguments\n" "${FUNCNAME[0]}" && return 2
     declare func="${@}"
     declare IFS=$'\n'
@@ -143,9 +245,40 @@ function collection::find() {
         else
             eval "${func}" "'$it'"
         fi
-        declare -i ret="$?"
-        if [[ $ret = 0 ]]; then
+        declare -i ret=$?
+        if [[ $ret -ne 0 ]]; then
             echo "$it"
+        fi
+
+    done
+}
+
+# @description Checks if iteratee returns true for any element of the array.
+# Input to the function can be a pipe output, here-string or file.
+# @example
+#   arr=("a" "b" "3" "a")
+#   printf "%s\n" "${arr[@]}" | collection::reject "variable::is_numeric"
+#
+# @arg $1 string Iteratee function.
+#
+# @exitcode 0  If match successful.
+# @exitcode 1 If no match found.
+# @exitcode 2 Function missing arguments.
+collection::some() {
+    [[ $# = 0 ]] && printf "%s: Missing arguments\n" "${FUNCNAME[0]}" && return 2
+    declare func="${@}"
+    declare IFS=$'\n'
+    while read -r it; do
+
+        if [[ "${func}" == *"$"* ]]; then
+            eval "${func}"
+        else
+            eval "${func}" "'$it'"
+        fi
+
+        declare -i ret=$?
+
+        if [[ $ret -eq 0 ]]; then
             return 0
         fi
     done

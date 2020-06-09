@@ -37,6 +37,10 @@ Bash library which provides utility functions and helpers for functional program
   - [collection::every()](#collectionevery)
   - [collection::filter()](#collectionfilter)
   - [collection::find()](#collectionfind)
+  - [collection::invoke()](#collectioninvoke)
+  - [collection::map()](#collectionmap)
+  - [collection::reject()](#collectionreject)
+  - [collection::some()](#collectionsome)
 - [Date](#date)
   - [date::now()](#datenow)
   - [date::epoc()](#dateepoc)
@@ -524,7 +528,7 @@ collection::each "test_func"  <<< "${out[@]}"
 
 - **0**:  If successful.
 - **2**: Function missing arguments.
-- other exitcode returned by iteratee
+- other exitcode returned by iteratee.
 
 #### Output on stdout
 
@@ -594,7 +598,7 @@ check_a(){
     [[ "$1" = "a" ]]
 }
 printf "%s\n" "${arr[@]}" | collection::find "check_a"
-#output
+#Output
 a
 ```
 
@@ -611,6 +615,116 @@ a
 #### Output on stdout
 
 - first array value matching the iteratee function.
+
+### collection::invoke()
+
+Invokes the iteratee with each element passed as argument to the iteratee.
+Input to the function can be a pipe output, here-string or file.
+
+#### Example
+
+```bash
+opt=("-a" "-l")
+printf "%s\n" "${opt[@]}" | collection::invoke "ls"
+```
+
+#### Arguments
+
+- **$1** (string): Iteratee function.
+
+#### Exit codes
+
+- **0**:  If successful.
+- **2**: Function missing arguments.
+- other exitcode returned by iteratee.
+
+#### Output on stdout
+
+- Output from the iteratee function.
+
+### collection::map()
+
+Creates an array of values by running each element in array through iteratee.
+Input to the function can be a pipe output, here-string or file.
+
+#### Example
+
+```bash
+arri=("1" "2" "3")
+add_one(){
+  i=${1}
+  i=$(( i + 1 ))
+  printf "%s\n" "$i"
+}
+printf "%s\n" "${arri[@]}" | collection::map "add_one"
+```
+
+#### Arguments
+
+- **$1** (string): Iteratee function.
+
+#### Exit codes
+
+- **0**:  If successful.
+- **2**: Function missing arguments.
+- other exitcode returned by iteratee.
+
+#### Output on stdout
+
+- Output result of iteratee on value.
+
+### collection::reject()
+
+The opposite of filter function; this method returns the elements of collection that iteratee does not return true.
+Input to the function can be a pipe output, here-string or file.
+
+#### Example
+
+```bash
+arri=("1" "2" "3" "a")
+printf "%s\n" "${arri[@]}" | collection::reject "variable::is_numeric"
+#Ouput
+a
+```
+
+#### Arguments
+
+- **$1** (string): Iteratee function.
+
+#### Exit codes
+
+- **0**:  If successful.
+- **2**: Function missing arguments.
+
+#### Output on stdout
+
+- array values not matching the iteratee function.
+
+#### See also
+
+- [collection::filter](#collection::filter)
+
+### collection::some()
+
+Checks if iteratee returns true for any element of the array.
+Input to the function can be a pipe output, here-string or file.
+
+#### Example
+
+```bash
+arr=("a" "b" "3" "a")
+printf "%s\n" "${arr[@]}" | collection::reject "variable::is_numeric"
+```
+
+#### Arguments
+
+- **$1** (string): Iteratee function.
+
+#### Exit codes
+
+- **0**:  If match successful.
+- **1**: If no match found.
+- **2**: Function missing arguments.
 
 ## Date
 
