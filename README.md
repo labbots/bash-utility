@@ -105,6 +105,10 @@ Bash library which provides utility functions and helpers for functional program
   - [string::starts_with()](#stringstarts_with)
   - [string::ends_with()](#stringends_with)
   - [string::regex()](#stringregex)
+- [Miscellaneous](#miscellaneous-1)
+  - [terminal::is_term()](#terminalis_term)
+  - [terminal::detect_profile()](#terminaldetect_profile)
+  - [terminal::clear_line()](#terminalclear_line)
 - [Variable](#variable)
   - [variable::is_array()](#variableis_array)
   - [variable::is_numeric()](#variableis_numeric)
@@ -2229,6 +2233,53 @@ string::regex "HELLO" "^[A-Z]*$"
 - **0**:  If match found.
 - **1**:  If no match found.
 - **2**: Function missing arguments.
+
+## Miscellaneous
+
+Set of useful terminal functions.
+
+### terminal::is_term()
+
+Check if script is run in terminal.
+
+*Function has no arguments.*
+
+#### Exit codes
+
+- **0**:  If script is run on terminal.
+- **1**: If script is not run on terminal.
+
+### terminal::detect_profile()
+
+Detect profile rc file for zsh and bash of current script running user.
+
+*Function has no arguments.*
+
+#### Exit codes
+
+- **0**:  If script is run on terminal.
+- **1**: If script is not run on terminal.
+
+#### Output on stdout
+
+- path to the profile file.
+
+### terminal::clear_line()
+
+Clear the output in terminal on the specified line number.
+This function clears line only on terminal.
+
+#### Arguments
+
+- **$1** (Line): number to clear. Defaults to 1. (optional)
+
+#### Exit codes
+
+- **0**:  If script is run on terminal.
+
+#### Output on stdout
+
+- clear line ansi code.
 
 ## Variable
 
