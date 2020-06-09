@@ -1,6 +1,7 @@
 <h1 align="center">Bash Utility</h1>
 
 <p align="center">
+<a href="https://github.com/labbots/bash-utility/stargazers"><img src="https://img.shields.io/github/stars/labbots/bash-utility.svg?color=blueviolet&style=for-the-badge" alt="Stars"></a>
 <a href="https://github.com/labbots/bash-utility/blob/master/LICENSE"><img src="https://img.shields.io/github/license/labbots/bash-utility.svg?style=for-the-badge" alt="License"></a>
 <a href="https://www.codacy.com/manual/labbots/bash-utility?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=labbots/bash-utility&amp;utm_campaign=Badge_Grade"><img src="https://img.shields.io/codacy/grade/99fbe8d389254b6ebb37899ce89658e3?style=for-the-badge"/></a>
 </p>
@@ -24,6 +25,10 @@ Bash library which provides utility functions and helpers for functional program
   - [array::join()](#arrayjoin)
   - [array::reverse()](#arrayreverse)
   - [array::random_element()](#arrayrandom_element)
+  - [array::sort()](#arraysort)
+  - [array::rsort()](#arrayrsort)
+  - [array::bsort()](#arraybsort)
+  - [array::merge()](#arraymerge)
 - [Check](#check)
   - [check::command_exists()](#checkcommand_exists)
   - [check::is_sudo()](#checkis_sudo)
@@ -186,7 +191,9 @@ Remove duplicate items from the array.
 array=("a" "b" "a" "c")
 printf "%s" "$(array::dedupe ${array[@]})"
 #Output
-a b c
+a
+b
+c
 ```
 
 #### Arguments
@@ -303,6 +310,130 @@ c
 #### Output on stdout
 
 - Random item out of the array.
+
+### array::sort()
+
+Sort an array from lowest to highest.
+
+#### Example
+
+```bash
+sarr=("a c" "a" "d" 2 1 "4 5")
+array::array_sort "${sarr[@]}"
+#Output
+1
+2
+4 5
+a
+a c
+d
+```
+
+#### Arguments
+
+- **$1** (array): The input array.
+
+#### Exit codes
+
+- **0**:  If successful.
+- **2**: Function missing arguments.
+
+#### Output on stdout
+
+- sorted array.
+
+### array::rsort()
+
+Sort an array in reverse order (highest to lowest).
+
+#### Example
+
+```bash
+sarr=("a c" "a" "d" 2 1 "4 5")
+array::array_sort "${sarr[@]}"
+#Output
+d
+a c
+a
+4 5
+2
+1
+```
+
+#### Arguments
+
+- **$1** (array): The input array.
+
+#### Exit codes
+
+- **0**:  If successful.
+- **2**: Function missing arguments.
+
+#### Output on stdout
+
+- reverse sorted array.
+
+### array::bsort()
+
+Bubble sort an integer array from lowest to highest.
+This sort does not work on string array.
+
+#### Example
+
+```bash
+iarr=(4 5 1 3)
+array::bsort "${iarr[@]}"
+#Output
+1
+3
+4
+5
+```
+
+#### Arguments
+
+- **$1** (array): The input array.
+
+#### Exit codes
+
+- **0**:  If successful.
+- **2**: Function missing arguments.
+
+#### Output on stdout
+
+- bubble sorted array.
+
+### array::merge()
+
+Merge two arrays.
+Pass the variable name of the array instead of value of the variable.
+
+#### Example
+
+```bash
+a=("a" "c")
+b=("d" "c")
+array::merge "a[@]" "b[@]"
+#Output
+a
+c
+d
+c
+```
+
+#### Arguments
+
+- **$1** (string): variable name of first array.
+- **$2** (string): variable name of second array.
+
+#### Exit codes
+
+- **0**:  If successful.
+- **2**: Function missing arguments.
+
+#### Output on stdout
+
+- Merged array.
 
 ## Check
 
