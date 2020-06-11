@@ -10,8 +10,8 @@
 #   json::get_value "id" <<< "${json_var}"
 #   echo "{\"data\":{\"id\":\"123\",\"value\":\"name string\"}}" | json::get_value "id"
 #
-# @arg $1 id of the field to fetch.
-# @arg $2 position of value to extract.Defaults to 1.(optional)
+# @arg $1 string id of the field to fetch.
+# @arg $2 int position of value to extract.Defaults to 1.(optional)
 #
 # @exitcode 0  If match successful.
 # @exitcode 2 Function missing arguments.

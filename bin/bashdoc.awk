@@ -1,6 +1,17 @@
 #!/usr/bin/awk -f
 
+# Varibles
+# style = readme or doc
+# toc = 0 or 1
 BEGIN {
+    if (! style) {
+        style = "doc"
+    }
+
+    if (! toc) {
+        toc = 0
+    }
+
     styles["h1", "from"] = ".*"
     styles["h1", "to"] = "# &"
 
@@ -59,7 +70,7 @@ function reset() {
 
 /^[[:space:]]*# @file/ {
     sub(/^[[:space:]]*# @file /, "")
-    filedoc = render("h2", $0) "\n"
+    filedoc = render((style == "readme" ? "h2" : "h1"), $0) "\n"
 }
 
 /^[[:space:]]*# @brief/ {
@@ -106,7 +117,7 @@ in_example {
 /^[[:space:]]*# @example/ {
     in_example = 1
 
-    docblock = docblock "\n" render("h4", "Example")
+    docblock = docblock "\n" render((style == "readme" ? "h4" : "h3"), "Example")
     docblock = docblock "\n\n" render("code", "bash")
 }
 
@@ -114,7 +125,7 @@ in_example {
     if (!has_args) {
         has_args = 1
 
-        docblock = docblock "\n" render("h4", "Arguments") "\n\n"
+        docblock = docblock "\n" render((style == "readme" ? "h4" : "h3"), "Arguments") "\n\n"
     }
 
     sub(/^[[:space:]]*# @arg /, "")
@@ -133,7 +144,7 @@ in_example {
     if (!has_exitcode) {
         has_exitcode = 1
 
-        docblock = docblock "\n" render("h4", "Exit codes") "\n\n"
+        docblock = docblock "\n" render((style == "readme" ? "h4" : "h3"), "Exit codes") "\n\n"
     }
 
     sub(/^[[:space:]]*# @exitcode /, "")
@@ -149,7 +160,7 @@ in_example {
     $0 = render("anchor", $0)
     $0 = render("li", $0)
 
-    docblock = docblock "\n" render("h4", "See also") "\n\n" $0 "\n"
+    docblock = docblock "\n" render((style == "readme" ? "h4" : "h3"), "See also") "\n\n" $0 "\n"
 }
 
 /^[[:space:]]*# @stdout/ {
@@ -157,7 +168,7 @@ in_example {
 
     sub(/^[[:space:]]*# @stdout /, "")
 
-    docblock = docblock "\n" render("h4", "Output on stdout")
+    docblock = docblock "\n" render((style == "readme" ? "h4" : "h3"), "Output on stdout")
     docblock = docblock "\n\n" render("li", $0) "\n"
 }
 
@@ -170,15 +181,16 @@ in_example {
             "\\3()", \
             "g" \
         )
-        doc = doc "\n" render("h3", func_name) "\n" docblock
+        doc = doc "\n" render((style == "readme" ? "h3" : "h2"), func_name) "\n" docblock
+        if (toc) {
+            url = func_name
+            # https://github.com/jch/html-pipeline/blob/master/lib/html/pipeline/toc_filter.rb#L44-L45
+            url = tolower(url)
+            gsub(/[^[:alnum:] -]/, "", url)
+            gsub(/ /, "-", url)
 
-        # url = func_name
-        # # https://github.com/jch/html-pipeline/blob/master/lib/html/pipeline/toc_filter.rb#L44-L45
-        # url = tolower(url)
-        # gsub(/[^[:alnum:] -]/, "", url)
-        # gsub(/ /, "-", url)
-
-        # toc = toc "\n" "- [" func_name "](#" url ")"
+            content_idx = content_idx "\n" "- [" func_name "](#" url ")"
+        }
     }
 
     docblock = ""
@@ -189,7 +201,13 @@ END {
     if (filedoc != "") {
         print filedoc
     }
-    #print toc
-   # print ""
+
+    if (toc) {
+        print ""
+        print render((style == "readme" ? "h3" : "h2"), "Table of Contents")
+        print content_idx
+        print ""
+    }
+
     print doc
 }

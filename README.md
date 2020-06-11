@@ -1884,8 +1884,8 @@ echo "{\"data\":{\"id\":\"123\",\"value\":\"name string\"}}" | json::get_value "
 
 #### Arguments
 
-- **$1** (id): of the field to fetch.
-- **$2** (position): of value to extract.Defaults to 1.(optional)
+- **$1** (string): id of the field to fetch.
+- **$2** (int): position of value to extract.Defaults to 1.(optional)
 
 #### Exit codes
 
