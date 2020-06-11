@@ -9,7 +9,7 @@ The script generates table of contents and bashdoc and update the given markdown
 Usage:\n %s [options.. ]\n
 Options:\n
   -f | --file <filename.md> - Relative or absolute path to the README.md file.
-  -p | --sh-dir <folderpath> - path to the bash script source folder to generate shdocs.\n
+  -s | --sh-dir <folderpath> - path to the bash script source folder to generate shdocs.\n
   -l | --toc-level <number> - Minimum level of header to print in Table of Contents.\n
   -d | --toc-depth <number> - Maximum depth of tree to print in Table of Contents.\n
   -h | --help - Display usage instructions.\n" "${0##*/}"
@@ -18,14 +18,22 @@ Options:\n
 
 _setup_arguments() {
 
-    unset MINLEVEL MAXLEVEL SCRIPT_FILE SOURCE_MARKDOWN SOURCE_SCRIPT_DIR SCRIPT_DIR
+    unset MINLEVEL MAXLEVEL SCRIPT_FILE SOURCE_MARKDOWN SOURCE_SCRIPT_DIR SCRIPT_DIR WEBDOC WEBDOC_DEST_DIR
     MINLEVEL=1
     MAXLEVEL=3
     SCRIPT_FILE="${0##*/}"
-    SOURCE_MARKDOWN="../README.md"
-    SOURCE_SCRIPT_DIR="../src"
+    declare source="${BASH_SOURCE[0]}"
+    while [ -h "$source" ]; do # resolve $source until the file is no longer a symlink
+        SCRIPT_DIR="$(cd -P "$(dirname "$source")" > /dev/null 2>&1 && pwd)"
+        source="$(readlink "$source")"
+        [[ $source != /* ]] && source="$SCRIPT_DIR/$source" # if $SOURCE was a relative symlink, we need to resolve it relative to the path where the symlink file was located
+    done
+    SCRIPT_DIR="$(cd -P "$(dirname "$source")" > /dev/null 2>&1 && pwd)"
+    SOURCE_MARKDOWN="${SCRIPT_DIR}/../README.md"
+    SOURCE_SCRIPT_DIR="${SCRIPT_DIR}/../src"
+    WEBDOC_DEST_DIR="${SCRIPT_DIR}/../docs"
 
-    SHORTOPTS="hp:f:m:d:-:"
+    SHORTOPTS="whp:f:m:d:s:-:"
 
     while getopts "${SHORTOPTS}" OPTION; do
         case "${OPTION}" in
@@ -51,6 +59,12 @@ _setup_arguments() {
                         _check_longoptions "${!OPTIND}"
                         SOURCE_SCRIPT_DIR="${!OPTIND}" && OPTIND=$((OPTIND + 1))
                         ;;
+                    webdoc)
+                        WEBDOC=true
+                        ;;
+                    dest-dir)
+                        WEBDOC_DEST_DIR="${OPTARG}"
+                        ;;
                     '')
                         _usage
                         ;;
@@ -71,8 +85,14 @@ _setup_arguments() {
             d)
                 MAXLEVEL="${OPTARG}"
                 ;;
-            p)
+            s)
                 SOURCE_SCRIPT_DIR="${OPTARG}"
+                ;;
+            w)
+                WEBDOC=true
+                ;;
+            p)
+                WEBDOC_DEST_DIR="${OPTARG}"
                 ;;
             :)
                 printf '%s: -%s: option requires an argument\nTry '"%s -h/--help"' for more information.\n' "${0##*/}" "${OPTARG}" "${0##*/}" && exit 1
@@ -108,13 +128,8 @@ _setup_arguments() {
         printf "Minimum level for TOC cannot be greater than the depth of TOC to be printed.\n" && exit 1
     fi
 
-    declare source="${BASH_SOURCE[0]}"
-    while [ -h "$source" ]; do # resolve $source until the file is no longer a symlink
-        SCRIPT_DIR="$(cd -P "$(dirname "$source")" > /dev/null 2>&1 && pwd)"
-        source="$(readlink "$source")"
-        [[ $source != /* ]] && source="$SCRIPT_DIR/$source" # if $SOURCE was a relative symlink, we need to resolve it relative to the path where the symlink file was located
-    done
-    SCRIPT_DIR="$(cd -P "$(dirname "$source")" > /dev/null 2>&1 && pwd)"
+    [ -d "${WEBDOC_DEST_DIR}" ] || mkdir -p "${DEST_DIR}"
+
 }
 
 _setup_tempfile() {
@@ -128,7 +143,8 @@ _generate_shdoc() {
     declare file
     file="$(realpath "${1}")"
     if [[ -s "${file}" ]]; then
-        "${SCRIPT_DIR}"/bashdoc.awk < "${file}" >> "$2"
+        awk -v style="readme" -v toc=0 -f "${SCRIPT_DIR}"/bashdoc.awk < "${file}" >> "$2"
+        #awk -v style="doc" -v toc=1 -f "${SCRIPT_DIR}"/bashdoc.awk < "${file}" >> "../docs/${file##*/}.md"
     fi
 }
 
@@ -265,6 +281,78 @@ _process_toc() {
     _insert_toc_to_file "${source_markdown}" "${toc_text}"
 }
 
+_generate_webdoc() {
+    declare webdoc file_basename dest_dir filename file_basename dest_file_path shdoc_tmp_file is_new_file
+    declare title description start_shdoc end_shdoc
+    file="$(realpath "${1}")"
+    dest_dir="${2}"
+    shdoc_tmp_file=$(_setup_tempfile)
+    if [[ -s "${file}" ]]; then
+        awk -v style="webdoc" -v toc=1 -f "${SCRIPT_DIR}"/bashdoc-test.awk < "${file}" >> "${shdoc_tmp_file}"
+
+    fi
+    filename="${file##*/}"
+    file_basename="${filename%.*}"
+    dest_file_path="${dest_dir}/${file_basename}.md"
+
+    start_shdoc="<!-- START ${SCRIPT_FILE} generated SHDOC please keep comment here to allow auto update -->"
+    end_shdoc="<!-- END ${SCRIPT_FILE} generated SHDOC please keep comment here to allow auto update -->"
+    if [[ ! -f "${dest_file_path}" ]]; then
+
+        cat << EOF > "${dest_file_path}"
+---
+title : <!-- file -->
+description : <!-- brief -->
+date : $(date +"%FT%T%:z")
+lastmod : $(date +"%FT%T%:z")
+---
+${start_shdoc}
+${end_shdoc}
+EOF
+        is_new_file=true
+    fi
+
+    if grep --color=always -Pzl "(?s)${start_shdoc}.*\n.*${end_shdoc}" "${dest_file_path}" &> /dev/null; then
+        sed -i -ne "/${start_shdoc}/ {p; r ${shdoc_tmp_file}" -e ":a; n; /${end_shdoc}/ {p; b}; ba}; p" "${dest_file_path}"
+    fi
+
+    # Extract title and description from webdoc
+    title="$(sed -ne 's/-->//; s/^.*<!-- file=//p' "${dest_file_path}")"
+    description="$(sed -ne 's/-->//; s/^.*<!-- brief=//p' "${dest_file_path}")"
+    sed -i '/^.*<!-- file=/d' "${dest_file_path}"
+    sed -i '/^.*<!-- brief=/d' "${dest_file_path}"
+
+    # Replace Frontmatter content with values from the document
+    if [[ "${is_new_file}" = true ]]; then
+
+        sed -i -e "s/<!-- file -->/${title}/g" "${dest_file_path}"
+        sed -i -e "s/<!-- brief -->/${description}/g" "${dest_file_path}"
+    else
+        sed -i -e "s/title : .*/title : ${title}/g" "${dest_file_path}"
+        sed -i -e "s/description : .*/description : ${description}/g" "${dest_file_path}"
+
+    fi
+
+    # Update the last modified timestamp in front matter
+    sed -i -e "s/lastmod : .*/lastmod : $(date +"%FT%T%:z")/g" "${dest_file_path}"
+
+    rm "${shdoc_tmp_file}"
+
+    echo -e "Updated bashdoc content to ${dest_file_path} successfully."
+
+}
+_process_webdoc_files() {
+    declare source_script_dir dest_dir
+
+    source_script_dir="${1}"
+    dest_dir="${2}"
+
+    find "${source_script_dir}" -name '*.sh' -print0 | sort -z |
+        while IFS= read -r -d '' line; do
+            _generate_webdoc "${line}" "${dest_dir}"
+        done
+}
+
 main() {
     # export PS4='+(${BASH_SOURCE}:${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
     # set -x
@@ -274,6 +362,10 @@ main() {
     _setup_arguments "${@}"
     _process_sh_files "${SOURCE_MARKDOWN}" "${SOURCE_SCRIPT_DIR}"
     _process_toc "${SOURCE_MARKDOWN}"
+
+    if [[ -n ${WEBDOC} ]]; then
+        _process_webdoc_files "${SOURCE_SCRIPT_DIR}" "${WEBDOC_DEST_DIR}"
+    fi
 }
 
 main "${@}"

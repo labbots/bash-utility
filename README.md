@@ -179,15 +179,6 @@ Functions for array operations and manipulations.
 
 Check if item exists in the given array.
 
-#### Example
-
-```bash
-array=("a" "b" "c")
-array::contains "c" ${array[@]}
-#Output
-0
-```
-
 #### Arguments
 
 - **$1** (mixed): Item to search (needle).
@@ -199,20 +190,18 @@ array::contains "c" ${array[@]}
 - **1**: If no match found in the array.
 - **2**: Function missing arguments.
 
-### array::dedupe()
-
-Remove duplicate items from the array.
-
 #### Example
 
 ```bash
-array=("a" "b" "a" "c")
-printf "%s" "$(array::dedupe ${array[@]})"
+array=("a" "b" "c")
+array::contains "c" ${array[@]}
 #Output
-a
-b
-c
+0
 ```
+
+### array::dedupe()
+
+Remove duplicate items from the array.
 
 #### Arguments
 
@@ -227,16 +216,20 @@ c
 
 - Deduplicated array.
 
-### array::is_empty()
-
-Check if a given array is empty.
-
 #### Example
 
 ```bash
-array=("a" "b" "c" "d")
-array::is_empty "${array[@]}"
+array=("a" "b" "a" "c")
+printf "%s" "$(array::dedupe ${array[@]})"
+#Output
+a
+b
+c
 ```
+
+### array::is_empty()
+
+Check if a given array is empty.
 
 #### Arguments
 
@@ -247,21 +240,16 @@ array::is_empty "${array[@]}"
 - **0**: If the given array is empty.
 - **2**: If the given array is not empty.
 
-### array::join()
-
-Join array elements with a string.
-
 #### Example
 
 ```bash
 array=("a" "b" "c" "d")
-printf "%s" "$(array::join "," "${array[@]}")"
-#Output
-a,b,c,d
-printf "%s" "$(array::join "" "${array[@]}")"
-#Output
-abcd
+array::is_empty "${array[@]}"
 ```
+
+### array::join()
+
+Join array elements with a string.
 
 #### Arguments
 
@@ -277,18 +265,21 @@ abcd
 
 - String containing a string representation of all the array elements in the same order,with the glue string between each element.
 
-### array::reverse()
-
-Return an array with elements in reverse order.
-
 #### Example
 
 ```bash
-array=(1 2 3 4 5)
-printf "%s" "$(array::reverse "${array[@]}")"
+array=("a" "b" "c" "d")
+printf "%s" "$(array::join "," "${array[@]}")"
 #Output
-5 4 3 2 1
+a,b,c,d
+printf "%s" "$(array::join "" "${array[@]}")"
+#Output
+abcd
 ```
+
+### array::reverse()
+
+Return an array with elements in reverse order.
 
 #### Arguments
 
@@ -303,18 +294,18 @@ printf "%s" "$(array::reverse "${array[@]}")"
 
 - The reversed array.
 
-### array::random_element()
-
-Returns a random item from the array.
-
 #### Example
 
 ```bash
-array=("a" "b" "c" "d")
-printf "%s\n" "$(array::random_element "${array[@]}")"
+array=(1 2 3 4 5)
+printf "%s" "$(array::reverse "${array[@]}")"
 #Output
-c
+5 4 3 2 1
 ```
+
+### array::random_element()
+
+Returns a random item from the array.
 
 #### Arguments
 
@@ -329,23 +320,18 @@ c
 
 - Random item out of the array.
 
-### array::sort()
-
-Sort an array from lowest to highest.
-
 #### Example
 
 ```bash
-sarr=("a c" "a" "d" 2 1 "4 5")
-array::array_sort "${sarr[@]}"
+array=("a" "b" "c" "d")
+printf "%s\n" "$(array::random_element "${array[@]}")"
 #Output
-1
-2
-4 5
-a
-a c
-d
+c
 ```
+
+### array::sort()
+
+Sort an array from lowest to highest.
 
 #### Arguments
 
@@ -360,9 +346,36 @@ d
 
 - sorted array.
 
+#### Example
+
+```bash
+sarr=("a c" "a" "d" 2 1 "4 5")
+array::array_sort "${sarr[@]}"
+#Output
+1
+2
+4 5
+a
+a c
+d
+```
+
 ### array::rsort()
 
 Sort an array in reverse order (highest to lowest).
+
+#### Arguments
+
+- **$1** (array): The input array.
+
+#### Exit codes
+
+- **0**:  If successful.
+- **2**: Function missing arguments.
+
+#### Output on stdout
+
+- reverse sorted array.
 
 #### Example
 
@@ -378,35 +391,10 @@ a
 1
 ```
 
-#### Arguments
-
-- **$1** (array): The input array.
-
-#### Exit codes
-
-- **0**:  If successful.
-- **2**: Function missing arguments.
-
-#### Output on stdout
-
-- reverse sorted array.
-
 ### array::bsort()
 
 Bubble sort an integer array from lowest to highest.
 This sort does not work on string array.
-
-#### Example
-
-```bash
-iarr=(4 5 1 3)
-array::bsort "${iarr[@]}"
-#Output
-1
-3
-4
-5
-```
 
 #### Arguments
 
@@ -421,23 +409,22 @@ array::bsort "${iarr[@]}"
 
 - bubble sorted array.
 
+#### Example
+
+```bash
+iarr=(4 5 1 3)
+array::bsort "${iarr[@]}"
+#Output
+1
+3
+4
+5
+```
+
 ### array::merge()
 
 Merge two arrays.
 Pass the variable name of the array instead of value of the variable.
-
-#### Example
-
-```bash
-a=("a" "c")
-b=("d" "c")
-array::merge "a[@]" "b[@]"
-#Output
-a
-c
-d
-c
-```
 
 #### Arguments
 
@@ -453,6 +440,19 @@ c
 
 - Merged array.
 
+#### Example
+
+```bash
+a=("a" "c")
+b=("d" "c")
+array::merge "a[@]" "b[@]"
+#Output
+a
+c
+d
+c
+```
+
 ## Check
 
 Helper functions.
@@ -460,12 +460,6 @@ Helper functions.
 ### check::command_exists()
 
 Check if the command exists in the system.
-
-#### Example
-
-```bash
-check::command_exists "tput"
-```
 
 #### Arguments
 
@@ -477,15 +471,15 @@ check::command_exists "tput"
 - **1**:  If the command does not exist.
 - **2**: Function missing arguments.
 
-### check::is_sudo()
-
-Check if the script is executed with sudo privilege.
-
 #### Example
 
 ```bash
-check::is_sudo
+check::command_exists "tput"
 ```
+
+### check::is_sudo()
+
+Check if the script is executed with sudo privilege.
 
 *Function has no arguments.*
 
@@ -493,6 +487,12 @@ check::is_sudo
 
 - **0**:  If the script is executed with root privilege.
 - **1**:  If the script is not executed with root privilege
+
+#### Example
+
+```bash
+check::is_sudo
+```
 
 ## Collection
 
@@ -502,6 +502,20 @@ check::is_sudo
 
 Iterates over elements of collection and invokes iteratee for each element.
 Input to the function can be a pipe output, here-string or file.
+
+#### Arguments
+
+- **$1** (string): Iteratee function.
+
+#### Exit codes
+
+- **0**:  If successful.
+- **2**: Function missing arguments.
+- other exitcode returned by iteratee.
+
+#### Output on stdout
+
+- Output of iteratee function.
 
 #### Example
 
@@ -529,31 +543,10 @@ out=("$(array::dedupe "${arr1[@]}")")
 collection::each "test_func"  <<< "${out[@]}"
 ```
 
-#### Arguments
-
-- **$1** (string): Iteratee function.
-
-#### Exit codes
-
-- **0**:  If successful.
-- **2**: Function missing arguments.
-- other exitcode returned by iteratee.
-
-#### Output on stdout
-
-- Output of iteratee function.
-
 ### collection::every()
 
 Checks if iteratee function returns truthy for all elements of collection. Iteration is stopped once predicate returns false.
 Input to the function can be a pipe output, here-string or file.
-
-#### Example
-
-```bash
-arri=("1" "2" "3" "4")
-printf "%s\n" "${arri[@]}" | collection::every "variable::is_numeric"
-```
 
 #### Arguments
 
@@ -565,21 +558,17 @@ printf "%s\n" "${arri[@]}" | collection::every "variable::is_numeric"
 - **1**: If iteratee function fails.
 - **2**: Function missing arguments.
 
+#### Example
+
+```bash
+arri=("1" "2" "3" "4")
+printf "%s\n" "${arri[@]}" | collection::every "variable::is_numeric"
+```
+
 ### collection::filter()
 
 Iterates over elements of array, returning all elements where iteratee returns true.
 Input to the function can be a pipe output, here-string or file.
-
-#### Example
-
-```bash
-arri=("1" "2" "3" "a")
-printf "%s\n" "${arri[@]}" | collection::filter "variable::is_numeric"
-#output
-1
-2
-3
-```
 
 #### Arguments
 
@@ -594,22 +583,21 @@ printf "%s\n" "${arri[@]}" | collection::filter "variable::is_numeric"
 
 - array values matching the iteratee function.
 
+#### Example
+
+```bash
+arri=("1" "2" "3" "a")
+printf "%s\n" "${arri[@]}" | collection::filter "variable::is_numeric"
+#output
+1
+2
+3
+```
+
 ### collection::find()
 
 Iterates over elements of collection, returning the first element where iteratee returns true.
 Input to the function can be a pipe output, here-string or file.
-
-#### Example
-
-```bash
-arr=("1" "2" "3" "a")
-check_a(){
-    [[ "$1" = "a" ]]
-}
-printf "%s\n" "${arr[@]}" | collection::find "check_a"
-#Output
-a
-```
 
 #### Arguments
 
@@ -625,17 +613,22 @@ a
 
 - first array value matching the iteratee function.
 
+#### Example
+
+```bash
+arr=("1" "2" "3" "a")
+check_a(){
+    [[ "$1" = "a" ]]
+}
+printf "%s\n" "${arr[@]}" | collection::find "check_a"
+#Output
+a
+```
+
 ### collection::invoke()
 
 Invokes the iteratee with each element passed as argument to the iteratee.
 Input to the function can be a pipe output, here-string or file.
-
-#### Example
-
-```bash
-opt=("-a" "-l")
-printf "%s\n" "${opt[@]}" | collection::invoke "ls"
-```
 
 #### Arguments
 
@@ -651,22 +644,17 @@ printf "%s\n" "${opt[@]}" | collection::invoke "ls"
 
 - Output from the iteratee function.
 
+#### Example
+
+```bash
+opt=("-a" "-l")
+printf "%s\n" "${opt[@]}" | collection::invoke "ls"
+```
+
 ### collection::map()
 
 Creates an array of values by running each element in array through iteratee.
 Input to the function can be a pipe output, here-string or file.
-
-#### Example
-
-```bash
-arri=("1" "2" "3")
-add_one(){
-  i=${1}
-  i=$(( i + 1 ))
-  printf "%s\n" "$i"
-}
-printf "%s\n" "${arri[@]}" | collection::map "add_one"
-```
 
 #### Arguments
 
@@ -682,19 +670,22 @@ printf "%s\n" "${arri[@]}" | collection::map "add_one"
 
 - Output result of iteratee on value.
 
+#### Example
+
+```bash
+arri=("1" "2" "3")
+add_one(){
+  i=${1}
+  i=$(( i + 1 ))
+  printf "%s\n" "$i"
+}
+printf "%s\n" "${arri[@]}" | collection::map "add_one"
+```
+
 ### collection::reject()
 
 The opposite of filter function; this method returns the elements of collection that iteratee does not return true.
 Input to the function can be a pipe output, here-string or file.
-
-#### Example
-
-```bash
-arri=("1" "2" "3" "a")
-printf "%s\n" "${arri[@]}" | collection::reject "variable::is_numeric"
-#Ouput
-a
-```
 
 #### Arguments
 
@@ -709,21 +700,23 @@ a
 
 - array values not matching the iteratee function.
 
+#### Example
+
+```bash
+arri=("1" "2" "3" "a")
+printf "%s\n" "${arri[@]}" | collection::reject "variable::is_numeric"
+#Ouput
+a
+```
+
 #### See also
 
-- [collection::filter](#collection::filter)
+- [collection::filter](#collectionfilter)
 
 ### collection::some()
 
 Checks if iteratee returns true for any element of the array.
 Input to the function can be a pipe output, here-string or file.
-
-#### Example
-
-```bash
-arr=("a" "b" "3" "a")
-printf "%s\n" "${arr[@]}" | collection::reject "variable::is_numeric"
-```
 
 #### Arguments
 
@@ -735,6 +728,13 @@ printf "%s\n" "${arr[@]}" | collection::reject "variable::is_numeric"
 - **1**: If no match found.
 - **2**: Function missing arguments.
 
+#### Example
+
+```bash
+arr=("a" "b" "3" "a")
+printf "%s\n" "${arr[@]}" | collection::reject "variable::is_numeric"
+```
+
 ## Date
 
 Functions for manipulating dates.
@@ -742,14 +742,6 @@ Functions for manipulating dates.
 ### date::now()
 
 Get current time in unix timestamp.
-
-#### Example
-
-```bash
-echo "$(date::now)"
-#Output
-1591554426
-```
 
 *Function has no arguments.*
 
@@ -762,17 +754,17 @@ echo "$(date::now)"
 
 - current timestamp.
 
-### date::epoc()
-
-convert datetime string to unix timestamp.
-
 #### Example
 
 ```bash
-echo "$(date::epoc "2020-07-07 18:38")"
+echo "$(date::now)"
 #Output
-1594143480
+1591554426
 ```
+
+### date::epoc()
+
+convert datetime string to unix timestamp.
 
 #### Arguments
 
@@ -788,10 +780,33 @@ echo "$(date::epoc "2020-07-07 18:38")"
 
 - timestamp for specified datetime.
 
+#### Example
+
+```bash
+echo "$(date::epoc "2020-07-07 18:38")"
+#Output
+1594143480
+```
+
 ### date::add_days_from()
 
 Add number of days from specified timestamp.
 If number of days not specified then it defaults to 1 day.
+
+#### Arguments
+
+- **$1** (int): unix timestamp.
+- **$2** (int): number of days (optional).
+
+#### Exit codes
+
+- **0**:  If successful.
+- **1**: If unable to generate timestamp.
+- **2**: Function missing arguments.
+
+#### Output on stdout
+
+- timestamp.
 
 #### Example
 
@@ -801,10 +816,15 @@ echo "$(date::add_days_from "1594143480")"
 1594229880
 ```
 
+### date::add_months_from()
+
+Add number of months from specified timestamp.
+If number of months not specified then it defaults to 1 month.
+
 #### Arguments
 
 - **$1** (int): unix timestamp.
-- **$2** (int): number of days (optional).
+- **$2** (int): number of months (optional).
 
 #### Exit codes
 
@@ -815,11 +835,6 @@ echo "$(date::add_days_from "1594143480")"
 #### Output on stdout
 
 - timestamp.
-
-### date::add_months_from()
-
-Add number of months from specified timestamp.
-If number of months not specified then it defaults to 1 month.
 
 #### Example
 
@@ -829,33 +844,10 @@ echo "$(date::add_months_from "1594143480")"
 1596821880
 ```
 
-#### Arguments
-
-- **$1** (int): unix timestamp.
-- **$2** (int): number of months (optional).
-
-#### Exit codes
-
-- **0**:  If successful.
-- **1**: If unable to generate timestamp.
-- **2**: Function missing arguments.
-
-#### Output on stdout
-
-- timestamp.
-
 ### date::add_years_from()
 
 Add number of years from specified timestamp.
 If number of years not specified then it defaults to 1 year.
-
-#### Example
-
-```bash
-echo "$(date::add_years_from "1594143480")"
-#Output
-1625679480
-```
 
 #### Arguments
 
@@ -872,18 +864,18 @@ echo "$(date::add_years_from "1594143480")"
 
 - timestamp.
 
+#### Example
+
+```bash
+echo "$(date::add_years_from "1594143480")"
+#Output
+1625679480
+```
+
 ### date::add_weeks_from()
 
 Add number of weeks from specified timestamp.
 If number of weeks not specified then it defaults to 1 week.
-
-#### Example
-
-```bash
-echo "$(date::add_weeks_from "1594143480")"
-#Output
-1594748280
-```
 
 #### Arguments
 
@@ -900,18 +892,18 @@ echo "$(date::add_weeks_from "1594143480")"
 
 - timestamp.
 
+#### Example
+
+```bash
+echo "$(date::add_weeks_from "1594143480")"
+#Output
+1594748280
+```
+
 ### date::add_hours_from()
 
 Add number of hours from specified timestamp.
 If number of hours not specified then it defaults to 1 hour.
-
-#### Example
-
-```bash
-echo "$(date::add_hours_from "1594143480")"
-#Output
-1594147080
-```
 
 #### Arguments
 
@@ -928,18 +920,18 @@ echo "$(date::add_hours_from "1594143480")"
 
 - timestamp.
 
+#### Example
+
+```bash
+echo "$(date::add_hours_from "1594143480")"
+#Output
+1594147080
+```
+
 ### date::add_minutes_from()
 
 Add number of minutes from specified timestamp.
 If number of minutes not specified then it defaults to 1 minute.
-
-#### Example
-
-```bash
-echo "$(date::add_minutes_from "1594143480")"
-#Output
-1594143540
-```
 
 #### Arguments
 
@@ -956,18 +948,18 @@ echo "$(date::add_minutes_from "1594143480")"
 
 - timestamp.
 
+#### Example
+
+```bash
+echo "$(date::add_minutes_from "1594143480")"
+#Output
+1594143540
+```
+
 ### date::add_seconds_from()
 
 Add number of seconds from specified timestamp.
 If number of seconds not specified then it defaults to 1 second.
-
-#### Example
-
-```bash
-echo "$(date::add_seconds_from "1594143480")"
-#Output
-1594143481
-```
 
 #### Arguments
 
@@ -984,18 +976,18 @@ echo "$(date::add_seconds_from "1594143480")"
 
 - timestamp.
 
+#### Example
+
+```bash
+echo "$(date::add_seconds_from "1594143480")"
+#Output
+1594143481
+```
+
 ### date::add_days()
 
 Add number of days from current day timestamp.
 If number of days not specified then it defaults to 1 day.
-
-#### Example
-
-```bash
-echo "$(date::add_days "1")"
-#Output
-1591640826
-```
 
 #### Arguments
 
@@ -1010,18 +1002,18 @@ echo "$(date::add_days "1")"
 
 - timestamp.
 
+#### Example
+
+```bash
+echo "$(date::add_days "1")"
+#Output
+1591640826
+```
+
 ### date::add_months()
 
 Add number of months from current day timestamp.
 If number of months not specified then it defaults to 1 month.
-
-#### Example
-
-```bash
-echo "$(date::add_months "1")"
-#Output
-1594146426
-```
 
 #### Arguments
 
@@ -1036,18 +1028,18 @@ echo "$(date::add_months "1")"
 
 - timestamp.
 
+#### Example
+
+```bash
+echo "$(date::add_months "1")"
+#Output
+1594146426
+```
+
 ### date::add_years()
 
 Add number of years from current day timestamp.
 If number of years not specified then it defaults to 1 year.
-
-#### Example
-
-```bash
-echo "$(date::add_years "1")"
-#Output
-1623090426
-```
 
 #### Arguments
 
@@ -1062,18 +1054,18 @@ echo "$(date::add_years "1")"
 
 - timestamp.
 
+#### Example
+
+```bash
+echo "$(date::add_years "1")"
+#Output
+1623090426
+```
+
 ### date::add_weeks()
 
 Add number of weeks from current day timestamp.
 If number of weeks not specified then it defaults to 1 year.
-
-#### Example
-
-```bash
-echo "$(date::add_weeks "1")"
-#Output
-1592159226
-```
 
 #### Arguments
 
@@ -1088,18 +1080,18 @@ echo "$(date::add_weeks "1")"
 
 - timestamp.
 
+#### Example
+
+```bash
+echo "$(date::add_weeks "1")"
+#Output
+1592159226
+```
+
 ### date::add_hours()
 
 Add number of hours from current day timestamp.
 If number of hours not specified then it defaults to 1 hour.
-
-#### Example
-
-```bash
-echo "$(date::add_hours "1")"
-#Output
-1591558026
-```
 
 #### Arguments
 
@@ -1114,18 +1106,18 @@ echo "$(date::add_hours "1")"
 
 - timestamp.
 
+#### Example
+
+```bash
+echo "$(date::add_hours "1")"
+#Output
+1591558026
+```
+
 ### date::add_minutes()
 
 Add number of minutes from current day timestamp.
 If number of minutes not specified then it defaults to 1 minute.
-
-#### Example
-
-```bash
-echo "$(date::add_minutes "1")"
-#Output
-1591554486
-```
 
 #### Arguments
 
@@ -1140,18 +1132,18 @@ echo "$(date::add_minutes "1")"
 
 - timestamp.
 
+#### Example
+
+```bash
+echo "$(date::add_minutes "1")"
+#Output
+1591554486
+```
+
 ### date::add_seconds()
 
 Add number of seconds from current day timestamp.
 If number of seconds not specified then it defaults to 1 second.
-
-#### Example
-
-```bash
-echo "$(date::add_seconds "1")"
-#Output
-1591554427
-```
 
 #### Arguments
 
@@ -1166,18 +1158,18 @@ echo "$(date::add_seconds "1")"
 
 - timestamp.
 
+#### Example
+
+```bash
+echo "$(date::add_seconds "1")"
+#Output
+1591554427
+```
+
 ### date::sub_days_from()
 
 Subtract number of days from specified timestamp.
 If number of days not specified then it defaults to 1 day.
-
-#### Example
-
-```bash
-echo "$(date::sub_days_from "1594143480")"
-#Output
-1594057080
-```
 
 #### Arguments
 
@@ -1194,18 +1186,18 @@ echo "$(date::sub_days_from "1594143480")"
 
 - timestamp.
 
+#### Example
+
+```bash
+echo "$(date::sub_days_from "1594143480")"
+#Output
+1594057080
+```
+
 ### date::sub_months_from()
 
 Subtract number of months from specified timestamp.
 If number of months not specified then it defaults to 1 month.
-
-#### Example
-
-```bash
-echo "$(date::sub_months_from "1594143480")"
-#Output
-1591551480
-```
 
 #### Arguments
 
@@ -1222,18 +1214,18 @@ echo "$(date::sub_months_from "1594143480")"
 
 - timestamp.
 
+#### Example
+
+```bash
+echo "$(date::sub_months_from "1594143480")"
+#Output
+1591551480
+```
+
 ### date::sub_years_from()
 
 Subtract number of years from specified timestamp.
 If number of years not specified then it defaults to 1 year.
-
-#### Example
-
-```bash
-echo "$(date::sub_years_from "1594143480")"
-#Output
-1562521080
-```
 
 #### Arguments
 
@@ -1250,18 +1242,18 @@ echo "$(date::sub_years_from "1594143480")"
 
 - timestamp.
 
+#### Example
+
+```bash
+echo "$(date::sub_years_from "1594143480")"
+#Output
+1562521080
+```
+
 ### date::sub_weeks_from()
 
 Subtract number of weeks from specified timestamp.
 If number of weeks not specified then it defaults to 1 week.
-
-#### Example
-
-```bash
-echo "$(date::sub_weeks_from "1594143480")"
-#Output
-1593538680
-```
 
 #### Arguments
 
@@ -1278,18 +1270,18 @@ echo "$(date::sub_weeks_from "1594143480")"
 
 - timestamp.
 
+#### Example
+
+```bash
+echo "$(date::sub_weeks_from "1594143480")"
+#Output
+1593538680
+```
+
 ### date::sub_hours_from()
 
 Subtract number of hours from specified timestamp.
 If number of hours not specified then it defaults to 1 hour.
-
-#### Example
-
-```bash
-echo "$(date::sub_hours_from "1594143480")"
-#Output
-1594139880
-```
 
 #### Arguments
 
@@ -1306,18 +1298,18 @@ echo "$(date::sub_hours_from "1594143480")"
 
 - timestamp.
 
+#### Example
+
+```bash
+echo "$(date::sub_hours_from "1594143480")"
+#Output
+1594139880
+```
+
 ### date::sub_minutes_from()
 
 Subtract number of minutes from specified timestamp.
 If number of minutes not specified then it defaults to 1 minute.
-
-#### Example
-
-```bash
-echo "$(date::sub_minutes_from "1594143480")"
-#Output
-1594143420
-```
 
 #### Arguments
 
@@ -1334,18 +1326,18 @@ echo "$(date::sub_minutes_from "1594143480")"
 
 - timestamp.
 
+#### Example
+
+```bash
+echo "$(date::sub_minutes_from "1594143480")"
+#Output
+1594143420
+```
+
 ### date::sub_seconds_from()
 
 Subtract number of seconds from specified timestamp.
 If number of seconds not specified then it defaults to 1 second.
-
-#### Example
-
-```bash
-echo "$(date::sub_seconds_from "1594143480")"
-#Output
-1594143479
-```
 
 #### Arguments
 
@@ -1362,18 +1354,18 @@ echo "$(date::sub_seconds_from "1594143480")"
 
 - timestamp.
 
+#### Example
+
+```bash
+echo "$(date::sub_seconds_from "1594143480")"
+#Output
+1594143479
+```
+
 ### date::sub_days()
 
 Subtract number of days from current day timestamp.
 If number of days not specified then it defaults to 1 day.
-
-#### Example
-
-```bash
-echo "$(date::sub_days "1")"
-#Output
-1588876026
-```
 
 #### Arguments
 
@@ -1388,18 +1380,18 @@ echo "$(date::sub_days "1")"
 
 - timestamp.
 
+#### Example
+
+```bash
+echo "$(date::sub_days "1")"
+#Output
+1588876026
+```
+
 ### date::sub_months()
 
 Subtract number of months from current day timestamp.
 If number of months not specified then it defaults to 1 month.
-
-#### Example
-
-```bash
-echo "$(date::sub_months "1")"
-#Output
-1559932026
-```
 
 #### Arguments
 
@@ -1414,18 +1406,18 @@ echo "$(date::sub_months "1")"
 
 - timestamp.
 
+#### Example
+
+```bash
+echo "$(date::sub_months "1")"
+#Output
+1559932026
+```
+
 ### date::sub_years()
 
 Subtract number of years from current day timestamp.
 If number of years not specified then it defaults to 1 year.
-
-#### Example
-
-```bash
-echo "$(date::sub_years "1")"
-#Output
-1591468026
-```
 
 #### Arguments
 
@@ -1440,18 +1432,18 @@ echo "$(date::sub_years "1")"
 
 - timestamp.
 
+#### Example
+
+```bash
+echo "$(date::sub_years "1")"
+#Output
+1591468026
+```
+
 ### date::sub_weeks()
 
 Subtract number of weeks from current day timestamp.
 If number of weeks not specified then it defaults to 1 week.
-
-#### Example
-
-```bash
-echo "$(date::sub_weeks "1")"
-#Output
-1590949626
-```
 
 #### Arguments
 
@@ -1466,18 +1458,18 @@ echo "$(date::sub_weeks "1")"
 
 - timestamp.
 
+#### Example
+
+```bash
+echo "$(date::sub_weeks "1")"
+#Output
+1590949626
+```
+
 ### date::sub_hours()
 
 Subtract number of hours from current day timestamp.
 If number of hours not specified then it defaults to 1 hour.
-
-#### Example
-
-```bash
-echo "$(date::sub_hours "1")"
-#Output
-1591550826
-```
 
 #### Arguments
 
@@ -1492,18 +1484,18 @@ echo "$(date::sub_hours "1")"
 
 - timestamp.
 
+#### Example
+
+```bash
+echo "$(date::sub_hours "1")"
+#Output
+1591550826
+```
+
 ### date::sub_minutes()
 
 Subtract number of minutes from current day timestamp.
 If number of minutes not specified then it defaults to 1 minute.
-
-#### Example
-
-```bash
-echo "$(date::sub_minutes "1")"
-#Output
-1591554366
-```
 
 #### Arguments
 
@@ -1518,18 +1510,18 @@ echo "$(date::sub_minutes "1")"
 
 - timestamp.
 
+#### Example
+
+```bash
+echo "$(date::sub_minutes "1")"
+#Output
+1591554366
+```
+
 ### date::sub_seconds()
 
 Subtract number of seconds from current day timestamp.
 If number of seconds not specified then it defaults to 1 second.
-
-#### Example
-
-```bash
-echo "$(date::sub_seconds "1")"
-#Output
-1591554425
-```
 
 #### Arguments
 
@@ -1544,18 +1536,18 @@ echo "$(date::sub_seconds "1")"
 
 - timestamp.
 
+#### Example
+
+```bash
+echo "$(date::sub_seconds "1")"
+#Output
+1591554425
+```
+
 ### date::format()
 
 Format unix timestamp to human readable format.
 If format string is not specified then it defaults to "yyyy-mm-dd hh:mm:ss" format.
-
-#### Example
-
-```bash
-echo echo "$(date::format "1594143480")"
-#Output
-2020-07-07 18:38:00
-```
 
 #### Arguments
 
@@ -1572,6 +1564,14 @@ echo echo "$(date::format "1594143480")"
 
 - formatted time string.
 
+#### Example
+
+```bash
+echo echo "$(date::format "1594143480")"
+#Output
+2020-07-07 18:38:00
+```
+
 ## File
 
 Functions for handling files.
@@ -1580,14 +1580,6 @@ Functions for handling files.
 
 Create temporary file.
 Function creates temporary file with random name. The temporary file will be deleted when script finishes.
-
-#### Example
-
-```bash
-echo "$(file::make_temp_file)"
-#Output
-tmp.vgftzy
-```
 
 *Function has no arguments.*
 
@@ -1600,17 +1592,17 @@ tmp.vgftzy
 
 - file name of temporary file created.
 
-### file::name()
-
-Get only the filename from string path.
-
 #### Example
 
 ```bash
-echo "$(file::name "/path/to/test.md")"
+echo "$(file::make_temp_file)"
 #Output
-test.md
+tmp.vgftzy
 ```
+
+### file::name()
+
+Get only the filename from string path.
 
 #### Arguments
 
@@ -1625,17 +1617,17 @@ test.md
 
 - name of the file with extension.
 
-### file::basename()
-
-Get the basename of file from file name.
-
 #### Example
 
 ```bash
-echo "$(file::basename "/path/to/test.md")"
+echo "$(file::name "/path/to/test.md")"
 #Output
-test
+test.md
 ```
+
+### file::basename()
+
+Get the basename of file from file name.
 
 #### Arguments
 
@@ -1650,17 +1642,17 @@ test
 
 - basename of the file.
 
-### file::extension()
-
-Get the extension of file from file name.
-
 #### Example
 
 ```bash
-echo "$(file::extension "/path/to/test.md")"
+echo "$(file::basename "/path/to/test.md")"
 #Output
-md
+test
 ```
+
+### file::extension()
+
+Get the extension of file from file name.
 
 #### Arguments
 
@@ -1676,17 +1668,17 @@ md
 
 - extension of the file.
 
-### file::dirname()
-
-Get directory name from file path.
-
 #### Example
 
 ```bash
-echo "$(file::dirname "/path/to/test.md")"
+echo "$(file::extension "/path/to/test.md")"
 #Output
-/path/to
+md
 ```
+
+### file::dirname()
+
+Get directory name from file path.
 
 #### Arguments
 
@@ -1701,17 +1693,17 @@ echo "$(file::dirname "/path/to/test.md")"
 
 - directory path.
 
-### file::full_path()
-
-Get absolute path of file or directory.
-
 #### Example
 
 ```bash
-file::full_path "../path/to/file.md"
+echo "$(file::dirname "/path/to/test.md")"
 #Output
-/home/labbots/docs/path/to/file.md
+/path/to
 ```
+
+### file::full_path()
+
+Get absolute path of file or directory.
 
 #### Arguments
 
@@ -1727,17 +1719,17 @@ file::full_path "../path/to/file.md"
 
 - Absolute path to file/directory.
 
-### file::mime_type()
-
-Get mime type of provided input.
-
 #### Example
 
 ```bash
-file::mime_type "../src/file.sh"
+file::full_path "../path/to/file.md"
 #Output
-application/x-shellscript
+/home/labbots/docs/path/to/file.md
 ```
+
+### file::mime_type()
+
+Get mime type of provided input.
 
 #### Arguments
 
@@ -1754,6 +1746,14 @@ application/x-shellscript
 
 - mime type of file/directory.
 
+#### Example
+
+```bash
+file::mime_type "../src/file.sh"
+#Output
+application/x-shellscript
+```
+
 ## Format
 
 Functions to format provided input.
@@ -1761,14 +1761,6 @@ Functions to format provided input.
 ### format::human_readable_seconds()
 
 Format seconds to human readable format.
-
-#### Example
-
-```bash
-echo "$(format::human_readable_seconds "356786")"
-#Output
-4 days 3 hours 6 minute(s) and 26 seconds
-```
 
 #### Arguments
 
@@ -1783,17 +1775,17 @@ echo "$(format::human_readable_seconds "356786")"
 
 - formatted time string.
 
-### format::bytes_to_human()
-
-Format bytes to human readable format.
-
 #### Example
 
 ```bash
-echo "$(format::bytes_to_human "2250")"
+echo "$(format::human_readable_seconds "356786")"
 #Output
-2.19 KB
+4 days 3 hours 6 minute(s) and 26 seconds
 ```
+
+### format::bytes_to_human()
+
+Format bytes to human readable format.
 
 #### Arguments
 
@@ -1808,6 +1800,14 @@ echo "$(format::bytes_to_human "2250")"
 
 - formatted file size string.
 
+#### Example
+
+```bash
+echo "$(format::bytes_to_human "2250")"
+#Output
+2.19 KB
+```
+
 ## Interaction
 
 Functions to enable interaction with the user.
@@ -1815,14 +1815,6 @@ Functions to enable interaction with the user.
 ### interaction::prompt_yes_no()
 
 Prompt yes or no question to the user.
-
-#### Example
-
-```bash
-interaction::prompt_yes_no "Are you sure to proceed" "yes"
-#Output
-Are you sure to proceed (y/n)? [y]
-```
 
 #### Arguments
 
@@ -1839,17 +1831,17 @@ Are you sure to proceed (y/n)? [y]
 
 - question to be prompted to the user.
 
-### interaction::prompt_response()
-
-Prompt question to the user.
-
 #### Example
 
 ```bash
-interaction::prompt_response "Choose directory to install" "/home/path"
+interaction::prompt_yes_no "Are you sure to proceed" "yes"
 #Output
-Choose directory to install? [/home/path]
+Are you sure to proceed (y/n)? [y]
 ```
+
+### interaction::prompt_response()
+
+Prompt question to the user.
 
 #### Arguments
 
@@ -1865,6 +1857,14 @@ Choose directory to install? [/home/path]
 
 - question to be prompted to the user.
 
+#### Example
+
+```bash
+interaction::prompt_response "Choose directory to install" "/home/path"
+#Output
+Choose directory to install? [/home/path]
+```
+
 ## Json
 
 Simple json manipulation. These functions does not completely replace `jq` in any way.
@@ -1873,14 +1873,6 @@ Simple json manipulation. These functions does not completely replace `jq` in an
 
 Extract value from json based on key and position.
 Input to the function can be a pipe output, here-string or file.
-
-#### Example
-
-```bash
-json::get_value "id" "1" < json_file
-json::get_value "id" <<< "${json_var}"
-echo "{\"data\":{\"id\":\"123\",\"value\":\"name string\"}}" | json::get_value "id"
-```
 
 #### Arguments
 
@@ -1896,6 +1888,14 @@ echo "{\"data\":{\"id\":\"123\",\"value\":\"name string\"}}" | json::get_value "
 
 - string value of extracted key.
 
+#### Example
+
+```bash
+json::get_value "id" "1" < json_file
+json::get_value "id" <<< "${json_var}"
+echo "{\"data\":{\"id\":\"123\",\"value\":\"name string\"}}" | json::get_value "id"
+```
+
 ## Miscellaneous
 
 Set of miscellaneous helper functions.
@@ -1904,12 +1904,6 @@ Set of miscellaneous helper functions.
 
 Check if internet connection is available.
 
-#### Example
-
-```bash
-misc::check_internet_connection
-```
-
 *Function has no arguments.*
 
 #### Exit codes
@@ -1917,20 +1911,15 @@ misc::check_internet_connection
 - **0**:  If script can connect to internet.
 - **1**: If script cannot access internet.
 
-### misc::get_pid()
-
-Get list of process ids based on process name.
-
 #### Example
 
 ```bash
-misc::get_pid "chrome"
-#Ouput
-25951
-26043
-26528
-26561
+misc::check_internet_connection
 ```
+
+### misc::get_pid()
+
+Get list of process ids based on process name.
 
 #### Arguments
 
@@ -1945,17 +1934,20 @@ misc::get_pid "chrome"
 
 - list of process ids.
 
-### misc::get_uid()
-
-Get user id based on username.
-
 #### Example
 
 ```bash
-misc::get_uid "labbots"
+misc::get_pid "chrome"
 #Ouput
-1000
+25951
+26043
+26528
+26561
 ```
+
+### misc::get_uid()
+
+Get user id based on username.
 
 #### Arguments
 
@@ -1970,17 +1962,17 @@ misc::get_uid "labbots"
 
 - string uid for the username.
 
-### misc::generate_uuid()
-
-Generate random uuid.
-
 #### Example
 
 ```bash
-misc::generate_uuid
+misc::get_uid "labbots"
 #Ouput
-65bc64d1-d355-4ffc-a9d9-dc4f3954c34c
+1000
 ```
+
+### misc::generate_uuid()
+
+Generate random uuid.
 
 *Function has no arguments.*
 
@@ -1992,6 +1984,14 @@ misc::generate_uuid
 
 - random generated uuid.
 
+#### Example
+
+```bash
+misc::generate_uuid
+#Ouput
+65bc64d1-d355-4ffc-a9d9-dc4f3954c34c
+```
+
 ## String
 
 Functions for string operations and manipulations.
@@ -1999,14 +1999,6 @@ Functions for string operations and manipulations.
 ### string::trim()
 
 Strip whitespace from the beginning and end of a string.
-
-#### Example
-
-```bash
-echo "$(string::trim "   Hello World!   ")"
-#Output
-Hello World!
-```
 
 #### Arguments
 
@@ -2021,18 +2013,17 @@ Hello World!
 
 - The trimmed string.
 
-### string::split()
-
-Split a string to array by a delimiter.
-
 #### Example
 
 ```bash
-printf "%s" "$(string::split "Hello!World" "!")"
+echo "$(string::trim "   Hello World!   ")"
 #Output
-Hello
-World
+Hello World!
 ```
+
+### string::split()
+
+Split a string to array by a delimiter.
 
 #### Arguments
 
@@ -2048,9 +2039,32 @@ World
 
 - Returns an array of strings created by splitting the string parameter by the delimiter.
 
+#### Example
+
+```bash
+printf "%s" "$(string::split "Hello!World" "!")"
+#Output
+Hello
+World
+```
+
 ### string::lstrip()
 
 Strip characters from the beginning of a string.
+
+#### Arguments
+
+- **$1** (string): The input string.
+- **$2** (string): The characters you want to strip.
+
+#### Exit codes
+
+- **0**:  If successful.
+- **2**: Function missing arguments.
+
+#### Output on stdout
+
+- Returns the modified string.
 
 #### Example
 
@@ -2060,6 +2074,10 @@ echo "$(string::lstrip "Hello World!" "He")"
 llo World!
 ```
 
+### string::rstrip()
+
+Strip characters from the end of a string.
+
 #### Arguments
 
 - **$1** (string): The input string.
@@ -2073,10 +2091,6 @@ llo World!
 #### Output on stdout
 
 - Returns the modified string.
-
-### string::rstrip()
-
-Strip characters from the end of a string.
 
 #### Example
 
@@ -2086,31 +2100,9 @@ echo "$(string::rstrip "Hello World!" "d!")"
 Hello Worl
 ```
 
-#### Arguments
-
-- **$1** (string): The input string.
-- **$2** (string): The characters you want to strip.
-
-#### Exit codes
-
-- **0**:  If successful.
-- **2**: Function missing arguments.
-
-#### Output on stdout
-
-- Returns the modified string.
-
 ### string::to_lower()
 
 Make a string lowercase.
-
-#### Example
-
-```bash
-echo "$(string::to_lower "HellO")"
-#Output
-hello
-```
 
 #### Arguments
 
@@ -2125,17 +2117,17 @@ hello
 
 - Returns the lowercased string.
 
-### string::to_upper()
-
-Make a string all uppercase.
-
 #### Example
 
 ```bash
-echo "$(string::to_upper "HellO")"
+echo "$(string::to_lower "HellO")"
 #Output
-HELLO
+hello
 ```
+
+### string::to_upper()
+
+Make a string all uppercase.
 
 #### Arguments
 
@@ -2150,9 +2142,28 @@ HELLO
 
 - Returns the uppercased string.
 
+#### Example
+
+```bash
+echo "$(string::to_upper "HellO")"
+#Output
+HELLO
+```
+
 ### string::contains()
 
 Check whether the search string exists within the input string.
+
+#### Arguments
+
+- **$1** (string): The input string.
+- **$2** (string): The search key.
+
+#### Exit codes
+
+- **0**:  If match found.
+- **1**:  If no match found.
+- **2**: Function missing arguments.
 
 #### Example
 
@@ -2160,6 +2171,10 @@ Check whether the search string exists within the input string.
 string::contains "Hello World!" "lo"
 ```
 
+### string::starts_with()
+
+Check whether the input string starts with key string.
+
 #### Arguments
 
 - **$1** (string): The input string.
@@ -2170,10 +2185,6 @@ string::contains "Hello World!" "lo"
 - **0**:  If match found.
 - **1**:  If no match found.
 - **2**: Function missing arguments.
-
-### string::starts_with()
-
-Check whether the input string starts with key string.
 
 #### Example
 
@@ -2181,6 +2192,10 @@ Check whether the input string starts with key string.
 string::starts_with "Hello World!" "He"
 ```
 
+### string::ends_with()
+
+Check whether the input string ends with key string.
+
 #### Arguments
 
 - **$1** (string): The input string.
@@ -2191,10 +2206,6 @@ string::starts_with "Hello World!" "He"
 - **0**:  If match found.
 - **1**:  If no match found.
 - **2**: Function missing arguments.
-
-### string::ends_with()
-
-Check whether the input string ends with key string.
 
 #### Example
 
@@ -2202,6 +2213,10 @@ Check whether the input string ends with key string.
 string::ends_with "Hello World!" "d!"
 ```
 
+### string::regex()
+
+Check whether the input string matches the given regex.
+
 #### Arguments
 
 - **$1** (string): The input string.
@@ -2212,27 +2227,12 @@ string::ends_with "Hello World!" "d!"
 - **0**:  If match found.
 - **1**:  If no match found.
 - **2**: Function missing arguments.
-
-### string::regex()
-
-Check whether the input string matches the given regex.
 
 #### Example
 
 ```bash
 string::regex "HELLO" "^[A-Z]*$"
 ```
-
-#### Arguments
-
-- **$1** (string): The input string.
-- **$2** (string): The search key.
-
-#### Exit codes
-
-- **0**:  If match found.
-- **1**:  If no match found.
-- **2**: Function missing arguments.
 
 ## Terminal
 
@@ -2290,15 +2290,6 @@ Functions for handling variables.
 Check if given variable is array.
 Pass the variable name instead of value of the variable.
 
-#### Example
-
-```bash
-arr=("a" "b" "c")
-variable::is_array "arr"
-#Output
-0
-```
-
 #### Arguments
 
 - **$1** (string): name of the variable to check.
@@ -2308,17 +2299,18 @@ variable::is_array "arr"
 - **0**:  If input is array.
 - **1**: If input is not an array.
 
-### variable::is_numeric()
-
-Check if given variable is a number.
-
 #### Example
 
 ```bash
-variable::is_numeric "1234"
+arr=("a" "b" "c")
+variable::is_array "arr"
 #Output
 0
 ```
+
+### variable::is_numeric()
+
+Check if given variable is a number.
 
 #### Arguments
 
@@ -2329,17 +2321,17 @@ variable::is_numeric "1234"
 - **0**:  If input is number.
 - **1**: If input is not a number.
 
-### variable::is_int()
-
-Check if given variable is an integer.
-
 #### Example
 
 ```bash
-variable::is_int "+1234"
+variable::is_numeric "1234"
 #Output
 0
 ```
+
+### variable::is_int()
+
+Check if given variable is an integer.
 
 #### Arguments
 
@@ -2350,17 +2342,17 @@ variable::is_int "+1234"
 - **0**:  If input is an integer.
 - **1**: If input is not an integer.
 
-### variable::is_float()
-
-Check if given variable is a float.
-
 #### Example
 
 ```bash
-variable::is_float "+1234.0"
+variable::is_int "+1234"
 #Output
 0
 ```
+
+### variable::is_float()
+
+Check if given variable is a float.
 
 #### Arguments
 
@@ -2371,17 +2363,17 @@ variable::is_float "+1234.0"
 - **0**:  If input is a float.
 - **1**: If input is not a float.
 
-### variable::is_bool()
-
-Check if given variable is a boolean.
-
 #### Example
 
 ```bash
-variable::is_bool "true"
+variable::is_float "+1234.0"
 #Output
 0
 ```
+
+### variable::is_bool()
+
+Check if given variable is a boolean.
 
 #### Arguments
 
@@ -2392,17 +2384,17 @@ variable::is_bool "true"
 - **0**:  If input is a boolean.
 - **1**: If input is not a boolean.
 
-### variable::is_true()
-
-Check if given variable is a true.
-
 #### Example
 
 ```bash
-variable::is_true "true"
+variable::is_bool "true"
 #Output
 0
 ```
+
+### variable::is_true()
+
+Check if given variable is a true.
 
 #### Arguments
 
@@ -2413,17 +2405,17 @@ variable::is_true "true"
 - **0**:  If input is true.
 - **1**: If input is not true.
 
-### variable::is_false()
-
-Check if given variable is false.
-
 #### Example
 
 ```bash
-variable::is_false "false"
+variable::is_true "true"
 #Output
 0
 ```
+
+### variable::is_false()
+
+Check if given variable is false.
 
 #### Arguments
 
@@ -2433,6 +2425,14 @@ variable::is_false "false"
 
 - **0**:  If input is false.
 - **1**: If input is not false.
+
+#### Example
+
+```bash
+variable::is_false "false"
+#Output
+0
+```
 
 <!-- END generate_readme.sh generated SHDOC please keep comment here to allow auto update -->
 
