@@ -128,7 +128,7 @@ _setup_arguments() {
         printf "Minimum level for TOC cannot be greater than the depth of TOC to be printed.\n" && exit 1
     fi
 
-    [ -d "${WEBDOC_DEST_DIR}" ] || mkdir -p "${DEST_DIR}"
+    [ -d "${WEBDOC_DEST_DIR}" ] || mkdir -p "${WEBDOC_DEST_DIR}"
 
 }
 
@@ -282,7 +282,7 @@ _process_toc() {
 }
 
 _generate_webdoc() {
-    declare webdoc file_basename dest_dir filename file_basename dest_file_path shdoc_tmp_file is_new_file
+    declare dest_dir filename file_basename dest_file_path shdoc_tmp_file is_new_file
     declare title description start_shdoc end_shdoc
     file="$(realpath "${1}")"
     dest_dir="${2}"
