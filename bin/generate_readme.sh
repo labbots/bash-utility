@@ -288,7 +288,7 @@ _generate_webdoc() {
     dest_dir="${2}"
     shdoc_tmp_file=$(_setup_tempfile)
     if [[ -s "${file}" ]]; then
-        awk -v style="webdoc" -v toc=1 -f "${SCRIPT_DIR}"/bashdoc-test.awk < "${file}" >> "${shdoc_tmp_file}"
+        awk -v style="webdoc" -v toc=1 -f "${SCRIPT_DIR}"/bashdoc.awk < "${file}" >> "${shdoc_tmp_file}"
 
     fi
     filename="${file##*/}"
