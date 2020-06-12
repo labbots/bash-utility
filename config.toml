@@ -12,7 +12,7 @@ home = [ "HTML", "RSS", "JSON"]
   disableNextPrev = true
   showVisitedLinks = false
 [[menu.shortcuts]]
-name = "<i class='fab fa-github'></i> Github repo"
+name = "<i class='fab fa-github'></i>&nbsp;Github repo"
 identifier = "ds"
 url = "https://github.com/labbots/bash-utility"
 weight = 10
