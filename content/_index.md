@@ -1,5 +1,6 @@
 ---
 title : "Bash Utility"
+description : "Bash library which provides utility functions and helpers for functional programming in Bash."
 date : 2020-06-10T13:04:06+01:00
 weight : 1
 chapter : true
