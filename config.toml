@@ -3,6 +3,13 @@ languageCode = "en-us"
 title = "Bash Utility"
 theme = "hugo-theme-learn"
 canonifyurls = true
+googleAnalytics= "UA-75820294-2"
+[privacy]
+  [privacy.googleAnalytics]
+    anonymizeIP = true
+    disable = false
+    respectDoNotTrack = true
+    useSessionStorage = true
 # For search functionality
 [outputs]
 home = [ "HTML", "RSS", "JSON"]
