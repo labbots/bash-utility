@@ -1,14 +1,957 @@
-<!doctype html><html lang=en class="js csstransforms3d"><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.72.0"><meta name=description content><link rel=icon href=https://labbots.github.io/bash-utility/images/favicon.png type=image/png><title>Installation :: Bash Utility</title><link href=https://labbots.github.io/bash-utility/css/nucleus.css?1591960808 rel=stylesheet><link href=https://labbots.github.io/bash-utility/css/fontawesome-all.min.css?1591960808 rel=stylesheet><link href=https://labbots.github.io/bash-utility/css/hybrid.css?1591960808 rel=stylesheet><link href=https://labbots.github.io/bash-utility/css/featherlight.min.css?1591960808 rel=stylesheet><link href=https://labbots.github.io/bash-utility/css/perfect-scrollbar.min.css?1591960808 rel=stylesheet><link href=https://labbots.github.io/bash-utility/css/auto-complete.css?1591960808 rel=stylesheet><link href=https://labbots.github.io/bash-utility/css/atom-one-dark-reasonable.css?1591960808 rel=stylesheet><link href=https://labbots.github.io/bash-utility/css/theme.css?1591960808 rel=stylesheet><link href=https://labbots.github.io/bash-utility/css/hugo-theme.css?1591960808 rel=stylesheet><link href=https://labbots.github.io/bash-utility/css/theme-blue.css?1591960808 rel=stylesheet><script src=https://labbots.github.io/bash-utility/js/jquery-3.3.1.min.js?1591960808></script><style>:root #header+#content>#left>#rlblock_left{display:none!important}</style><style type=text/css>#chapter ul{display:table;margin-right:auto;margin-left:auto}#sidebar ul li span{line-height:2rem;font-size:1.1rem;color:var(--MENU-SECTIONS-LINK-color)}#sidebar li>span b{opacity:.5;font-weight:400}</style><script src=https://unpkg.com/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js></script></head><body data-url=/basics/installation/><nav id=sidebar><div id=header-wrapper><div id=header><a id=logo href=https://labbots.github.io/bash-utility/><svg style="width:100%;height:100%;max-width:70%" viewBox="0 0 124.96 38.595" xmlns="http://www.w3.org/2000/svg"><defs><clipPath id="clipPath79"><rect x="82.162" y="59.672" width="185.36" height="53.021" rx="5.4963" ry="6.9073" fill="none" stroke-width=".26458"/></clipPath></defs><g transform="translate(-79.067 -64.165)"><g transform="matrix(.745 0 0 .86 6.6538 10.07)" clip-path="url(#clipPath79)" fill="#fff" aria-label="Bash Utility"><g transform="translate(-1.4206)" fill="#fff" stroke-width=".47916"><path d="m153.98 92.933q-1.0967.0-2.2133-.07976-1.1166-.05982-1.9541-.27916v-13.419q.43868-.07976.93717-.13958.49849-.07976 1.0169-.11964.51844-.03988 1.0169-.05982.51843-.01994.97704-.01994 1.2562.0 2.333.1994 1.0767.17946 1.8544.61813.79759.43867 1.2363 1.1565.43868.71783.43868 1.7746.0.97704-.47856 1.6749-.45861.69789-1.2961 1.1166 1.2562.41873 1.8544 1.2363.5982.81753.5982 2.0737.0 2.1335-1.5553 3.2103-1.5553 1.0568-4.7656 1.0568zm-1.6949-6.3807v4.2073q.41873.03988.89728.05982.47856.01994.87735.01994.77765.0 1.4357-.0997.67795-.0997 1.1565-.33898.49849-.25922.77765-.67795.29909-.41873.29909-1.0767.0-1.1764-.8574-1.6351-.85741-.45861-2.3728-.45861zm0-1.974h1.7746q1.4357.0 2.2532-.39879.81752-.41873.81752-1.4755.0-.99698-.8574-1.4157-.83747-.41873-2.1934-.41873-.57825.0-1.0369.01994-.43868.01994-.75771.05982z"/><path d="m167.25 91.078q1.1166.0 1.6949-.11964v-2.6719q-.19939-.05982-.57825-.11964-.37885-.05982-.83747-.05982-.39879.0-.81752.05982-.3988.05982-.73777.21934-.31904.15952-.51843.45861-.1994.27916-.1994.71783.0.85741.53837 1.1964.53837.31904 1.4556.31904zm-.1994-8.9928q1.1964.0 2.0139.2991.81753.2991 1.2961.83747.49849.53837.69789 1.316.21934.75771.21934 1.6749v6.3209q-.55831.11964-1.6949.27916-1.1166.17946-2.5323.17946-.93716.0-1.7148-.17946t-1.336-.57825q-.53837-.39879-.85741-1.0369-.2991-.63807-.2991-1.5752.0-.89729.33898-1.5154.35891-.61813.95711-.99698.59819-.39879 1.3758-.55831.79759-.17946 1.655-.17946.39879.0.83747.05982.43867.03988.93716.15952v-.39879q0-.41873-.0997-.79759t-.35891-.65801q-.23928-.2991-.65801-.45861-.39879-.15952-1.0169-.15952-.83746.0-1.5354.11964t-1.1366.27916l-.2991-1.9541q.45861-.15952 1.336-.31904.87735-.15952 1.8743-.15952z"/><path d="m177.63 91.039q.95711.0 1.3958-.21934.43868-.23928.43868-.79759.0-.51843-.47856-.85741-.45861-.33898-1.5354-.73777-.65801-.23928-1.2163-.49849-.53837-.27916-.93716-.63807-.39879-.35891-.63807-.85741-.21934-.51843-.21934-1.2562.0-1.4357 1.0568-2.2532 1.0568-.83747 2.8713-.83747.91723.0 1.7547.17946.83746.15952 1.2562.31904l-.43868 1.9541q-.39879-.17946-1.0169-.31904-.61813-.15952-1.4357-.15952-.73777.0-1.1964.25922-.45861.23928-.45861.75771.0.25922.0797.45861.0997.1994.31904.37885.21934.15952.57825.33898.35892.15952.87735.33898.85741.31904 1.4556.63807.59819.2991.97704.69789.3988.37885.57825.87735.17946.49849.17946 1.1964.0 1.4955-1.1166 2.2731-1.0967.75771-3.1505.75771-1.3758.0-2.2133-.23928-.83747-.21934-1.1764-.35891l.41873-2.0139q.53837.21934 1.2761.41873.75771.1994 1.7148.1994z"/><path d="m184.93 92.773V77.699l2.4127-.39879v5.1644q.3988-.13958.91723-.23928.53837-.0997 1.0568-.0997 1.2562.0 2.0737.35892.83747.33898 1.336.97704.49849.61813.69789 1.4955.21934.87735.21934 1.9541v5.8623h-2.4127v-5.4834q0-.83747-.11963-1.4157-.0997-.59819-.35892-.95711-.23928-.37885-.65801-.53837-.41873-.17946-1.0369-.17946-.47856.0-.97705.0997t-.73777.17946v8.2949z"/><path d="m210.88 93.072q-1.4157.0-2.4326-.39879-1.0169-.41873-1.6949-1.1565-.65801-.73777-.97704-1.7348-.31904-.99698-.31904-2.1934v-8.6339h2.5323v8.3946q0 .93717.1994 1.6151.21934.65801.59819 1.0767.39879.41873.91723.61813.53837.1994 1.1964.1994t1.1964-.1994.91723-.61813q.39879-.41873.59819-1.0767.21933-.67795.21933-1.6151v-8.3946h2.5324v8.6339q0 1.1964-.33898 2.1934-.31903.99698-.99698 1.7348-.65801.73777-1.6949 1.1565-1.0369.39879-2.4526.39879z"/><path d="m220.14 79.593 2.4127-.39879v3.1505h3.7088v2.0139h-3.7088v4.2472q0 1.2562.39879 1.7946.3988.53837 1.3559.53837.65801.0 1.1565-.13958.51844-.13958.81753-.25922l.39879 1.9142q-.41873.17946-1.0967.35892-.67795.1994-1.5952.1994-1.1166.0-1.8743-.2991-.73777-.2991-1.1764-.85741-.43867-.57825-.61813-1.3758-.17946-.81753-.17946-1.8544z"/><path d="m231.83 92.773h-2.4127V82.345h2.4127zm.25921-13.479q0 .67795-.43867 1.0767t-1.0369.39879q-.61813.0-1.0568-.39879t-.43867-1.0767q0-.69789.43867-1.0967.43868-.39879 1.0568-.39879.59819.0 1.0369.39879t.43867 1.0967z"/><path d="m239.32 92.973q-1.0767-.01994-1.7946-.23928-.69789-.21934-1.1166-.61813-.41873-.41873-.59819-1.0169-.15951-.61813-.15951-1.3958v-12.004l2.4127-.39879v11.944q0 .43867.0598.73777.0798.2991.25921.51843.17946.1994.47856.31904.31903.0997.79759.15952z"/><path d="m244.84 92.773h-2.4127V82.345h2.4127zm.25921-13.479q0 .67795-.43867 1.0767t-1.0369.39879q-.61813.0-1.0568-.39879t-.43867-1.0767q0-.69789.43867-1.0967.43868-.39879 1.0568-.39879.59819.0 1.0369.39879t.43867 1.0967z"/><path d="m248.58 79.593 2.4127-.39879v3.1505h3.7088v2.0139h-3.7088v4.2472q0 1.2562.39879 1.7946.3988.53837 1.3559.53837.65801.0 1.1565-.13958.51844-.13958.81753-.25922l.3988 1.9142q-.41874.17946-1.0967.35892-.67795.1994-1.5952.1994-1.1166.0-1.8743-.2991-.73776-.2991-1.1764-.85741-.43867-.57825-.61813-1.3758-.17946-.81753-.17946-1.8544z"/><path d="m266.35 82.345q-1.6151 5.942-3.7487 10.767-.39879.89729-.81752 1.5354-.41874.63807-.93717 1.0568-.51843.41873-1.1565.59819-.63807.1994-1.4755.1994-.55831.0-1.1166-.11964-.53838-.11964-.81753-.25922l.43867-1.9342q.71783.27916 1.4157.27916.93717.0 1.4556-.45861.53837-.43867.93716-1.3758-1.1366-2.1934-2.1934-4.7855-1.0369-2.5922-1.8544-5.5034h2.5722q.19939.83747.47855 1.8145.29909.97705.63807 1.994.33897.99698.71783 1.994.37885.99698.75771 1.8544.63807-1.7746 1.1964-3.7686.55831-2.0139 1.0169-3.8882z"/></g></g><g transform="matrix(.94906 0 0 .95374 6.5386 4.2485)" fill-rule="evenodd"><path d="m110.98 71.084-13.402-7.5835c-1.5996-.90517-3.5712-.90517-5.1708.0l-13.402 7.5835c-1.5991.90517-2.5847 2.5777-2.5847 4.388v15.167c0 1.8099.98558 3.4833 2.5851 4.3884l13.402 7.5822c.7998.45281 1.6918.67854 2.5852.67854.89292.0 1.7849-.22573 2.5847-.67854l13.402-7.5822c1.5996-.90517 2.5856-2.5786 2.5856-4.3884v-15.167c0-1.8103-.98605-3.4828-2.5852-4.388z" fill="#fefefe"/><path d="m92.877 101.83-13.402-7.5822c-1.3108-.74189-2.1251-2.1257-2.1251-3.6122v-15.167c0-1.4865.81428-2.8703 2.1246-3.6118l13.402-7.5835c.64254-.36358 1.3745-.55586 2.1167-.55586.74175.0 1.4737.19228 2.1167.55586l13.402 7.5835c1.1044.62501 1.8495 1.7073 2.0591 2.9212-.4446-.90428-1.447-1.1501-2.6151-.49965l-12.679 7.4653c-1.5808.88108-2.7466 1.8697-2.7475 3.6867v14.893c-93e-5 1.0881.46004 1.7929 1.1681 1.9973-.23257.0384-.46704.0651-.7043.0651-.74222.0-1.4742-.19228-2.1167-.55586m18.103-30.749-13.402-7.5831c-.79977-.45281-1.6927-.67899-2.5851-.67899-.89292.0-1.7858.22618-2.5856.67899l-13.402 7.5831c-1.5991.90517-2.5847 2.5781-2.5847 4.3884v15.167c0 1.8099.98557 3.4833 2.5851 4.3884l13.402 7.5826c.80024.45237 1.6922.67855 2.5851.67855s1.7849-.22618 2.5847-.67855l13.402-7.5826c1.5996-.90517 2.5851-2.5786 2.5851-4.3884v-15.167c0-1.8103-.98559-3.4833-2.5851-4.3884"/><path d="m107.47 92.106-3.3372 1.904c-.0884.04907-.15353.10439-.15388.20566v.83245c0 .10171.0716.1441.16007.09457l3.3887-1.9634c.0884-.04906.10206-.1432.10241-.24447v-.73431c0-.10127-.0716-.14366-.16007-.09457" fill="#47b353"/><path d="m100.36 85.099c.10807-.0522.19702.01197.19842.14678l.0106 1.1006c.48344-.18336.90322-.23243 1.2837-.14856.0824.02097.11886.12804.0851.25518l-.25411.97521c-.0196.07361-.0632.14811-.1155.19451-.0219.02052-.0444.03659-.0669.0473-.0341.01652-.0679.02187-.10011.01568-.17369-.03747-.58638-.12358-1.2359.19005-.68138.32879-.91959.89312-.9149 1.312.005.5001.2747.65178 1.2041.66694 1.2383.01963 1.7732.53534 1.7863 1.7242.0124 1.1675-.64114 2.4211-1.6412 3.1893l.0219 1.0894c.001.13116-.0879.2815-.19609.33369l-.67669.37162c-.1086.0522-.1975-.01197-.19889-.1432l-.0124-1.0716c-.57983.22975-1.1671.28507-1.5425.14141-.0708-.02632-.10118-.1258-.0731-.23912l.24522-.98502c.0196-.07763.0626-.15526.12116-.20477.0205-.01919.0421-.03391.0637-.04416.0389-.01873.0768-.02275.10913-.01113.40434.12981.92147.06915 1.4189-.17086.63179-.3047 1.0544-.919 1.0478-1.5293-.005-.55363-.32057-.78383-1.0853-.78918-.9734.0027-1.8808-.18023-1.8958-1.5462-.0124-1.1247.60134-2.2948 1.5724-3.0349l-.0124-1.0997c-.001-.13518.0851-.28373.19654-.33726z" fill="#fefefe"/></g></g></svg></a></div><div class=searchbox><label for=search-by><i class="fas fa-search"></i></label><input data-search-input id=search-by type=search placeholder=Search...>
-<span data-search-clear><i class="fas fa-times"></i></span></div><script type=text/javascript src=https://labbots.github.io/bash-utility/js/lunr.min.js?1591960808></script><script type=text/javascript src=https://labbots.github.io/bash-utility/js/auto-complete.js?1591960808></script><script type=text/javascript>var baseurl="https:\/\/labbots.github.io\/bash-utility\/";</script><script type=text/javascript src=https://labbots.github.io/bash-utility/js/search.js?1591960808></script></div><div class=highlightable><ul class=topics><li data-nav-id=/basics/ title=Basics class="dd-item
-parent
-parent"><span class=menu-item><b>1. </b>Basics</span><ul><li data-nav-id=/basics/installation/ title=Installation class="dd-item active"><a href=https://labbots.github.io/bash-utility/basics/installation/>Installation</a></li><li data-nav-id=/basics/usage/ title=Usage class=dd-item><a href=https://labbots.github.io/bash-utility/basics/usage/>Usage</a></li></ul></li><li data-nav-id=/functions/ title=Functions class="dd-item
-parent"><span class=menu-item><b>2. </b>Functions</span><ul><li data-nav-id=/functions/array/ title=Array class=dd-item><a href=https://labbots.github.io/bash-utility/functions/array/>Array</a></li><li data-nav-id=/functions/check/ title=Check class=dd-item><a href=https://labbots.github.io/bash-utility/functions/check/>Check</a></li><li data-nav-id=/functions/collection/ title=Collection class=dd-item><a href=https://labbots.github.io/bash-utility/functions/collection/>Collection</a></li><li data-nav-id=/functions/date/ title=Date class=dd-item><a href=https://labbots.github.io/bash-utility/functions/date/>Date</a></li><li data-nav-id=/functions/file/ title=File class=dd-item><a href=https://labbots.github.io/bash-utility/functions/file/>File</a></li><li data-nav-id=/functions/format/ title=Format class=dd-item><a href=https://labbots.github.io/bash-utility/functions/format/>Format</a></li><li data-nav-id=/functions/interaction/ title=Interaction class=dd-item><a href=https://labbots.github.io/bash-utility/functions/interaction/>Interaction</a></li><li data-nav-id=/functions/json/ title=Json class=dd-item><a href=https://labbots.github.io/bash-utility/functions/json/>Json</a></li><li data-nav-id=/functions/misc/ title=Miscellaneous class=dd-item><a href=https://labbots.github.io/bash-utility/functions/misc/>Miscellaneous</a></li><li data-nav-id=/functions/string/ title=String class=dd-item><a href=https://labbots.github.io/bash-utility/functions/string/>String</a></li><li data-nav-id=/functions/terminal/ title=Terminal class=dd-item><a href=https://labbots.github.io/bash-utility/functions/terminal/>Terminal</a></li><li data-nav-id=/functions/variable/ title=Variable class=dd-item><a href=https://labbots.github.io/bash-utility/functions/variable/>Variable</a></li></ul></li></ul><section id=shortcuts><h3>More</h3><ul><li><a class=padding href=https://github.com/labbots/bash-utility><i class="fab fa-github"></i>&nbsp;Github repo</a></li></ul></section><section id=footer><p align=center><a href=https://github.com/labbots/bash-utility/stargazers><img src="https://img.shields.io/github/stars/labbots/bash-utility.svg?color=blueviolet&style=for-the-badge" alt=Stars></a>
-<a href=https://github.com/labbots/bash-utility/blob/master/LICENSE><img src="https://img.shields.io/github/license/labbots/bash-utility.svg?style=for-the-badge" alt=License></a></p><p align=center>Built with <i class="fas fa-heart"></i>&nbsp;from&nbsp;<a href=https://labbots.com/>Labbots</a></p></section></div></nav><section id=body><div id=overlay></div><div class="padding highlightable"><div><div id=top-bar><div id=breadcrumbs itemscope itemtype=http://data-vocabulary.org/Breadcrumb><span id=sidebar-toggle-span><a href=# id=sidebar-toggle data-sidebar-toggle><i class="fas fa-bars"></i></a></span><span id=toc-menu><i class="fas fa-list-alt"></i></span><span class=links><a href=https://labbots.github.io/bash-utility/>Bash Utility</a> > Basics > Installation</span></div><div class=progress><div class=wrapper><nav id=TableOfContents><ul><li><ul><li><a href=#method-1---git-submodules>Method 1 - Git Submodules</a></li><li><a href=#method-2---git-clone>Method 2 - Git Clone</a></li></ul></li></ul></nav></div></div></div></div><div id=head-tags></div><div id=body-inner><h1>Installation</h1><p>The script can be installed and sourced using following methods.</p><h3 id=method-1---git-submodules>Method 1 - Git Submodules</h3><p>If the library is used inside a git project then git submodules can be used to install the library to the project.
-Following command will initialize git submodule and download the library to <code>./vendor/bash-utility</code> folder.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>git submodule init
+<!DOCTYPE html>
+<html lang="en" class="js csstransforms3d">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Hugo 0.72.0" />
+    <meta name="description" content="">
+
+
+    <link rel="icon" href="https://labbots.github.io/bash-utility/images/favicon.png" type="image/png">
+
+    <title>Installation :: Bash Utility</title>
+
+    
+    <link href="https://labbots.github.io/bash-utility/css/nucleus.css?1591961450" rel="stylesheet">
+    <link href="https://labbots.github.io/bash-utility/css/fontawesome-all.min.css?1591961450" rel="stylesheet">
+    <link href="https://labbots.github.io/bash-utility/css/hybrid.css?1591961450" rel="stylesheet">
+    <link href="https://labbots.github.io/bash-utility/css/featherlight.min.css?1591961450" rel="stylesheet">
+    <link href="https://labbots.github.io/bash-utility/css/perfect-scrollbar.min.css?1591961450" rel="stylesheet">
+    <link href="https://labbots.github.io/bash-utility/css/auto-complete.css?1591961450" rel="stylesheet">
+    <link href="https://labbots.github.io/bash-utility/css/atom-one-dark-reasonable.css?1591961450" rel="stylesheet">
+    <link href="https://labbots.github.io/bash-utility/css/theme.css?1591961450" rel="stylesheet">
+    <link href="https://labbots.github.io/bash-utility/css/hugo-theme.css?1591961450" rel="stylesheet">
+    
+    <link href="https://labbots.github.io/bash-utility/css/theme-blue.css?1591961450" rel="stylesheet">
+    
+    
+
+    <script src="https://labbots.github.io/bash-utility/js/jquery-3.3.1.min.js?1591961450"></script>
+
+    <style>
+      :root #header + #content > #left > #rlblock_left{
+          display:none !important;
+      }
+      
+    </style>
+    <style type="text/css">
+    #chapter ul {
+        display: table;
+        margin-right: auto;
+        margin-left: auto;
+    }
+    #sidebar ul li span{
+        line-height: 2rem;
+        font-size: 1.1rem;
+        color: var(--MENU-SECTIONS-LINK-color);
+    }
+    #sidebar li > span b {
+    opacity: 0.5;
+    font-weight: normal;
+    }
+</style>
+
+    <script src="https://unpkg.com/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js"></script>
+
+  </head>
+  <body class="" data-url="/basics/installation/">
+    <nav id="sidebar" class="">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <a id="logo" href="https://labbots.github.io/bash-utility/">
+<svg width="100%" height="100%" style="width:100%; height:100%;max-width:70%" version="1.1" viewBox="0 0 124.96 38.595" xmlns="http://www.w3.org/2000/svg">
+ <defs>
+  <clipPath id="clipPath79">
+   <rect x="82.162" y="59.672" width="185.36" height="53.021" rx="5.4963" ry="6.9073" fill="none" stroke-width=".26458"/>
+  </clipPath>
+ </defs>
+ <g transform="translate(-79.067 -64.165)">
+  <g transform="matrix(.745 0 0 .86 6.6538 10.07)" clip-path="url(#clipPath79)" fill="#fff" aria-label="Bash Utility">
+   <g transform="translate(-1.4206)" fill="#fff" stroke-width=".47916">
+    <path d="m153.98 92.933q-1.0967 0-2.2133-0.07976-1.1166-0.05982-1.9541-0.27916v-13.419q0.43868-0.07976 0.93717-0.13958 0.49849-0.07976 1.0169-0.11964 0.51844-0.03988 1.0169-0.05982 0.51843-0.01994 0.97704-0.01994 1.2562 0 2.333 0.1994 1.0767 0.17946 1.8544 0.61813 0.79759 0.43867 1.2363 1.1565 0.43868 0.71783 0.43868 1.7746 0 0.97704-0.47856 1.6749-0.45861 0.69789-1.2961 1.1166 1.2562 0.41873 1.8544 1.2363 0.5982 0.81753 0.5982 2.0737 0 2.1335-1.5553 3.2103-1.5553 1.0568-4.7656 1.0568zm-1.6949-6.3807v4.2073q0.41873 0.03988 0.89728 0.05982 0.47856 0.01994 0.87735 0.01994 0.77765 0 1.4357-0.0997 0.67795-0.0997 1.1565-0.33898 0.49849-0.25922 0.77765-0.67795 0.29909-0.41873 0.29909-1.0767 0-1.1764-0.8574-1.6351-0.85741-0.45861-2.3728-0.45861zm0-1.974h1.7746q1.4357 0 2.2532-0.39879 0.81752-0.41873 0.81752-1.4755 0-0.99698-0.8574-1.4157-0.83747-0.41873-2.1934-0.41873-0.57825 0-1.0369 0.01994-0.43868 0.01994-0.75771 0.05982z"/>
+    <path d="m167.25 91.078q1.1166 0 1.6949-0.11964v-2.6719q-0.19939-0.05982-0.57825-0.11964-0.37885-0.05982-0.83747-0.05982-0.39879 0-0.81752 0.05982-0.3988 0.05982-0.73777 0.21934-0.31904 0.15952-0.51843 0.45861-0.1994 0.27916-0.1994 0.71783 0 0.85741 0.53837 1.1964 0.53837 0.31904 1.4556 0.31904zm-0.1994-8.9928q1.1964 0 2.0139 0.2991 0.81753 0.2991 1.2961 0.83747 0.49849 0.53837 0.69789 1.316 0.21934 0.75771 0.21934 1.6749v6.3209q-0.55831 0.11964-1.6949 0.27916-1.1166 0.17946-2.5323 0.17946-0.93716 0-1.7148-0.17946t-1.336-0.57825q-0.53837-0.39879-0.85741-1.0369-0.2991-0.63807-0.2991-1.5752 0-0.89729 0.33898-1.5154 0.35891-0.61813 0.95711-0.99698 0.59819-0.39879 1.3758-0.55831 0.79759-0.17946 1.655-0.17946 0.39879 0 0.83747 0.05982 0.43867 0.03988 0.93716 0.15952v-0.39879q0-0.41873-0.0997-0.79759t-0.35891-0.65801q-0.23928-0.2991-0.65801-0.45861-0.39879-0.15952-1.0169-0.15952-0.83746 0-1.5354 0.11964t-1.1366 0.27916l-0.2991-1.9541q0.45861-0.15952 1.336-0.31904 0.87735-0.15952 1.8743-0.15952z"/>
+    <path d="m177.63 91.039q0.95711 0 1.3958-0.21934 0.43868-0.23928 0.43868-0.79759 0-0.51843-0.47856-0.85741-0.45861-0.33898-1.5354-0.73777-0.65801-0.23928-1.2163-0.49849-0.53837-0.27916-0.93716-0.63807-0.39879-0.35891-0.63807-0.85741-0.21934-0.51843-0.21934-1.2562 0-1.4357 1.0568-2.2532 1.0568-0.83747 2.8713-0.83747 0.91723 0 1.7547 0.17946 0.83746 0.15952 1.2562 0.31904l-0.43868 1.9541q-0.39879-0.17946-1.0169-0.31904-0.61813-0.15952-1.4357-0.15952-0.73777 0-1.1964 0.25922-0.45861 0.23928-0.45861 0.75771 0 0.25922 0.0797 0.45861 0.0997 0.1994 0.31904 0.37885 0.21934 0.15952 0.57825 0.33898 0.35892 0.15952 0.87735 0.33898 0.85741 0.31904 1.4556 0.63807 0.59819 0.2991 0.97704 0.69789 0.3988 0.37885 0.57825 0.87735 0.17946 0.49849 0.17946 1.1964 0 1.4955-1.1166 2.2731-1.0967 0.75771-3.1505 0.75771-1.3758 0-2.2133-0.23928-0.83747-0.21934-1.1764-0.35891l0.41873-2.0139q0.53837 0.21934 1.2761 0.41873 0.75771 0.1994 1.7148 0.1994z"/>
+    <path d="m184.93 92.773v-15.074l2.4127-0.39879v5.1644q0.3988-0.13958 0.91723-0.23928 0.53837-0.0997 1.0568-0.0997 1.2562 0 2.0737 0.35892 0.83747 0.33898 1.336 0.97704 0.49849 0.61813 0.69789 1.4955 0.21934 0.87735 0.21934 1.9541v5.8623h-2.4127v-5.4834q0-0.83747-0.11963-1.4157-0.0997-0.59819-0.35892-0.95711-0.23928-0.37885-0.65801-0.53837-0.41873-0.17946-1.0369-0.17946-0.47856 0-0.97705 0.0997t-0.73777 0.17946v8.2949z"/>
+    <path d="m210.88 93.072q-1.4157 0-2.4326-0.39879-1.0169-0.41873-1.6949-1.1565-0.65801-0.73777-0.97704-1.7348-0.31904-0.99698-0.31904-2.1934v-8.6339h2.5323v8.3946q0 0.93717 0.1994 1.6151 0.21934 0.65801 0.59819 1.0767 0.39879 0.41873 0.91723 0.61813 0.53837 0.1994 1.1964 0.1994t1.1964-0.1994 0.91723-0.61813q0.39879-0.41873 0.59819-1.0767 0.21933-0.67795 0.21933-1.6151v-8.3946h2.5324v8.6339q0 1.1964-0.33898 2.1934-0.31903 0.99698-0.99698 1.7348-0.65801 0.73777-1.6949 1.1565-1.0369 0.39879-2.4526 0.39879z"/>
+    <path d="m220.14 79.593 2.4127-0.39879v3.1505h3.7088v2.0139h-3.7088v4.2472q0 1.2562 0.39879 1.7946 0.3988 0.53837 1.3559 0.53837 0.65801 0 1.1565-0.13958 0.51844-0.13958 0.81753-0.25922l0.39879 1.9142q-0.41873 0.17946-1.0967 0.35892-0.67795 0.1994-1.5952 0.1994-1.1166 0-1.8743-0.2991-0.73777-0.2991-1.1764-0.85741-0.43867-0.57825-0.61813-1.3758-0.17946-0.81753-0.17946-1.8544z"/>
+    <path d="m231.83 92.773h-2.4127v-10.428h2.4127zm0.25921-13.479q0 0.67795-0.43867 1.0767t-1.0369 0.39879q-0.61813 0-1.0568-0.39879-0.43867-0.39879-0.43867-1.0767 0-0.69789 0.43867-1.0967 0.43868-0.39879 1.0568-0.39879 0.59819 0 1.0369 0.39879t0.43867 1.0967z"/>
+    <path d="m239.32 92.973q-1.0767-0.01994-1.7946-0.23928-0.69789-0.21934-1.1166-0.61813-0.41873-0.41873-0.59819-1.0169-0.15951-0.61813-0.15951-1.3958v-12.004l2.4127-0.39879v11.944q0 0.43867 0.0598 0.73777 0.0798 0.2991 0.25921 0.51843 0.17946 0.1994 0.47856 0.31904 0.31903 0.0997 0.79759 0.15952z"/>
+    <path d="m244.84 92.773h-2.4127v-10.428h2.4127zm0.25921-13.479q0 0.67795-0.43867 1.0767t-1.0369 0.39879q-0.61813 0-1.0568-0.39879-0.43867-0.39879-0.43867-1.0767 0-0.69789 0.43867-1.0967 0.43868-0.39879 1.0568-0.39879 0.59819 0 1.0369 0.39879t0.43867 1.0967z"/>
+    <path d="m248.58 79.593 2.4127-0.39879v3.1505h3.7088v2.0139h-3.7088v4.2472q0 1.2562 0.39879 1.7946 0.3988 0.53837 1.3559 0.53837 0.65801 0 1.1565-0.13958 0.51844-0.13958 0.81753-0.25922l0.3988 1.9142q-0.41874 0.17946-1.0967 0.35892-0.67795 0.1994-1.5952 0.1994-1.1166 0-1.8743-0.2991-0.73776-0.2991-1.1764-0.85741-0.43867-0.57825-0.61813-1.3758-0.17946-0.81753-0.17946-1.8544z"/>
+    <path d="m266.35 82.345q-1.6151 5.942-3.7487 10.767-0.39879 0.89729-0.81752 1.5354-0.41874 0.63807-0.93717 1.0568-0.51843 0.41873-1.1565 0.59819-0.63807 0.1994-1.4755 0.1994-0.55831 0-1.1166-0.11964-0.53838-0.11964-0.81753-0.25922l0.43867-1.9342q0.71783 0.27916 1.4157 0.27916 0.93717 0 1.4556-0.45861 0.53837-0.43867 0.93716-1.3758-1.1366-2.1934-2.1934-4.7855-1.0369-2.5922-1.8544-5.5034h2.5722q0.19939 0.83747 0.47855 1.8145 0.29909 0.97705 0.63807 1.994 0.33897 0.99698 0.71783 1.994 0.37885 0.99698 0.75771 1.8544 0.63807-1.7746 1.1964-3.7686 0.55831-2.0139 1.0169-3.8882z"/>
+   </g>
+  </g>
+  <g transform="matrix(.94906 0 0 .95374 6.5386 4.2485)" fill-rule="evenodd">
+   <path d="m110.98 71.084-13.402-7.5835c-1.5996-0.90517-3.5712-0.90517-5.1708 0l-13.402 7.5835c-1.5991 0.90517-2.5847 2.5777-2.5847 4.388v15.167c0 1.8099 0.98558 3.4833 2.5851 4.3884l13.402 7.5822c0.7998 0.45281 1.6918 0.67854 2.5852 0.67854 0.89292 0 1.7849-0.22573 2.5847-0.67854l13.402-7.5822c1.5996-0.90517 2.5856-2.5786 2.5856-4.3884v-15.167c0-1.8103-0.98605-3.4828-2.5852-4.388z" fill="#fefefe"/>
+   <path d="m92.877 101.83-13.402-7.5822c-1.3108-0.74189-2.1251-2.1257-2.1251-3.6122v-15.167c0-1.4865 0.81428-2.8703 2.1246-3.6118l13.402-7.5835c0.64254-0.36358 1.3745-0.55586 2.1167-0.55586 0.74175 0 1.4737 0.19228 2.1167 0.55586l13.402 7.5835c1.1044 0.62501 1.8495 1.7073 2.0591 2.9212-0.4446-0.90428-1.447-1.1501-2.6151-0.49965l-12.679 7.4653c-1.5808 0.88108-2.7466 1.8697-2.7475 3.6867v14.893c-9.3e-4 1.0881 0.46004 1.7929 1.1681 1.9973-0.23257 0.0384-0.46704 0.0651-0.7043 0.0651-0.74222 0-1.4742-0.19228-2.1167-0.55586m18.103-30.749-13.402-7.5831c-0.79977-0.45281-1.6927-0.67899-2.5851-0.67899-0.89292 0-1.7858 0.22618-2.5856 0.67899l-13.402 7.5831c-1.5991 0.90517-2.5847 2.5781-2.5847 4.3884v15.167c0 1.8099 0.98557 3.4833 2.5851 4.3884l13.402 7.5826c0.80024 0.45237 1.6922 0.67855 2.5851 0.67855 0.8929 0 1.7849-0.22618 2.5847-0.67855l13.402-7.5826c1.5996-0.90517 2.5851-2.5786 2.5851-4.3884v-15.167c0-1.8103-0.98559-3.4833-2.5851-4.3884"/>
+   <path d="m107.47 92.106-3.3372 1.904c-0.0884 0.04907-0.15353 0.10439-0.15388 0.20566v0.83245c0 0.10171 0.0716 0.1441 0.16007 0.09457l3.3887-1.9634c0.0884-0.04906 0.10206-0.1432 0.10241-0.24447v-0.73431c0-0.10127-0.0716-0.14366-0.16007-0.09457" fill="#47b353"/>
+   <path d="m100.36 85.099c0.10807-0.0522 0.19702 0.01197 0.19842 0.14678l0.0106 1.1006c0.48344-0.18336 0.90322-0.23243 1.2837-0.14856 0.0824 0.02097 0.11886 0.12804 0.0851 0.25518l-0.25411 0.97521c-0.0196 0.07361-0.0632 0.14811-0.1155 0.19451-0.0219 0.02052-0.0444 0.03659-0.0669 0.0473-0.0341 0.01652-0.0679 0.02187-0.10011 0.01568-0.17369-0.03747-0.58638-0.12358-1.2359 0.19005-0.68138 0.32879-0.91959 0.89312-0.9149 1.312 5e-3 0.5001 0.2747 0.65178 1.2041 0.66694 1.2383 0.01963 1.7732 0.53534 1.7863 1.7242 0.0124 1.1675-0.64114 2.4211-1.6412 3.1893l0.0219 1.0894c1e-3 0.13116-0.0879 0.2815-0.19609 0.33369l-0.67669 0.37162c-0.1086 0.0522-0.1975-0.01197-0.19889-0.1432l-0.0124-1.0716c-0.57983 0.22975-1.1671 0.28507-1.5425 0.14141-0.0708-0.02632-0.10118-0.1258-0.0731-0.23912l0.24522-0.98502c0.0196-0.07763 0.0626-0.15526 0.12116-0.20477 0.0205-0.01919 0.0421-0.03391 0.0637-0.04416 0.0389-0.01873 0.0768-0.02275 0.10913-0.01113 0.40434 0.12981 0.92147 0.06915 1.4189-0.17086 0.63179-0.3047 1.0544-0.919 1.0478-1.5293-5e-3 -0.55363-0.32057-0.78383-1.0853-0.78918-0.9734 0.0027-1.8808-0.18023-1.8958-1.5462-0.0124-1.1247 0.60134-2.2948 1.5724-3.0349l-0.0124-1.0997c-1e-3 -0.13518 0.0851-0.28373 0.19654-0.33726z" fill="#fefefe"/>
+  </g>
+ </g>
+</svg>
+</a>
+
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fas fa-search"></i></label>
+    <input data-search-input id="search-by" type="search" placeholder="Search...">
+    <span data-search-clear=""><i class="fas fa-times"></i></span>
+</div>
+
+<script type="text/javascript" src="https://labbots.github.io/bash-utility/js/lunr.min.js?1591961450"></script>
+<script type="text/javascript" src="https://labbots.github.io/bash-utility/js/auto-complete.js?1591961450"></script>
+<script type="text/javascript">
+    
+        var baseurl = "https:\/\/labbots.github.io\/bash-utility\/";
+    
+</script>
+<script type="text/javascript" src="https://labbots.github.io/bash-utility/js/search.js?1591961450"></script>
+
+    
+  </div>
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/basics/" title="Basics" class="dd-item
+        parent
+        
+        parent
+        ">
+        
+          <span class="menu-item"><b>1. </b>Basics
+            </span>
+      
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/basics/installation/" title="Installation" class="dd-item active">
+        <a href="https://labbots.github.io/bash-utility/basics/installation/">
+        Installation
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/basics/usage/" title="Usage" class="dd-item ">
+        <a href="https://labbots.github.io/bash-utility/basics/usage/">
+        Usage
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/functions/" title="Functions" class="dd-item
+        
+        
+        parent
+        ">
+        
+          <span class="menu-item"><b>2. </b>Functions
+            </span>
+      
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/functions/array/" title="Array" class="dd-item ">
+        <a href="https://labbots.github.io/bash-utility/functions/array/">
+        Array
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/functions/check/" title="Check" class="dd-item ">
+        <a href="https://labbots.github.io/bash-utility/functions/check/">
+        Check
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/functions/collection/" title="Collection" class="dd-item ">
+        <a href="https://labbots.github.io/bash-utility/functions/collection/">
+        Collection
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/functions/date/" title="Date" class="dd-item ">
+        <a href="https://labbots.github.io/bash-utility/functions/date/">
+        Date
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/functions/file/" title="File" class="dd-item ">
+        <a href="https://labbots.github.io/bash-utility/functions/file/">
+        File
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/functions/format/" title="Format" class="dd-item ">
+        <a href="https://labbots.github.io/bash-utility/functions/format/">
+        Format
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/functions/interaction/" title="Interaction" class="dd-item ">
+        <a href="https://labbots.github.io/bash-utility/functions/interaction/">
+        Interaction
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/functions/json/" title="Json" class="dd-item ">
+        <a href="https://labbots.github.io/bash-utility/functions/json/">
+        Json
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/functions/misc/" title="Miscellaneous" class="dd-item ">
+        <a href="https://labbots.github.io/bash-utility/functions/misc/">
+        Miscellaneous
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/functions/string/" title="String" class="dd-item ">
+        <a href="https://labbots.github.io/bash-utility/functions/string/">
+        String
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/functions/terminal/" title="Terminal" class="dd-item ">
+        <a href="https://labbots.github.io/bash-utility/functions/terminal/">
+        Terminal
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/functions/variable/" title="Variable" class="dd-item ">
+        <a href="https://labbots.github.io/bash-utility/functions/variable/">
+        Variable
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+        
+    </ul>
+
+    
+    
+      <section id="shortcuts">
+        <h3>More</h3>
+        <ul>
+          
+              <li>
+                  <a class="padding" href="https://github.com/labbots/bash-utility"><i class='fab fa-github'></i>&nbsp;Github repo</a>
+              </li>
+          
+        </ul>
+      </section>
+    
+
+    
+    <section id="footer">
+      <p align="center">
+    <a href="https://github.com/labbots/bash-utility/stargazers"><img src="https://img.shields.io/github/stars/labbots/bash-utility.svg?color=blueviolet&style=for-the-badge" alt="Stars"></a>
+    <a href="https://github.com/labbots/bash-utility/blob/master/LICENSE"><img src="https://img.shields.io/github/license/labbots/bash-utility.svg?style=for-the-badge" alt="License"></a>
+</p>
+<p align="center">Built with <i class="fas fa-heart"></i>&nbsp;from&nbsp;<a href="https://labbots.com/">Labbots</a></p>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                    
+          
+          
+            
+                
+                
+          
+          
+            
+
+              
+              
+          
+          
+            <a href='https://labbots.github.io/bash-utility/'>Bash Utility</a> > Basics > Installation
+          
+        
+              
+          
+        
+
+              
+          
+        
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#method-1---git-submodules">Method 1 - Git Submodules</a></li>
+        <li><a href="#method-2---git-clone">Method 2 - Git Clone</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
+        <div id="head-tags">
+        
+        </div>
+        
+        <div id="body-inner">
+          
+            <h1>
+              
+              Installation
+            </h1>
+          
+
+        
+
+
+<p>The script can be installed and sourced using following methods.</p>
+<h3 id="method-1---git-submodules">Method 1 - Git Submodules</h3>
+<p>If the library is used inside a git project then git submodules can be used to install the library to the project.
+Following command will initialize git submodule and download the library to <code>./vendor/bash-utility</code> folder.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">git submodule init
 git submodule add -b master https://github.com/labbots/bash-utility vendor/bash-utility
-</code></pre></div><p>To Update submodules to latest code execute the following command.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>git submodule update --rebase --remote
-</code></pre></div><h3 id=method-2---git-clone>Method 2 - Git Clone</h3><p>If you don&rsquo;t want to use git submodules, you can use <code>git clone</code> to download library and then move the files to desired location manually.</p><p>The below command will clone the repository to <code>vendor/bash-utility</code> folder in current working directory.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>git clone https://github.com/labbots/bash-utility.git ./vendor/bash-utility
-</code></pre></div><p>Once the submodule is added or updated, make sure to commit changes to your repository.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>git add .
-git commit -m <span style=color:#e6db74>&#39;Added/updated bash-utility library.&#39;</span>
-</code></pre></div><p><strong>Note:</strong> When cloning your repository, use <code>--recurse-submodules</code> flag to <code>git clone</code> command to install the git sub modules.</p><footer class=footline></footer></div></div><div id=navigation></div></section><div style=left:-1000px;overflow:scroll;position:absolute;top:-1000px;border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px><div style=border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px></div></div><script src=https://labbots.github.io/bash-utility/js/clipboard.min.js?1591960808></script><script src=https://labbots.github.io/bash-utility/js/perfect-scrollbar.min.js?1591960808></script><script src=https://labbots.github.io/bash-utility/js/perfect-scrollbar.jquery.min.js?1591960808></script><script src=https://labbots.github.io/bash-utility/js/jquery.sticky.js?1591960808></script><script src=https://labbots.github.io/bash-utility/js/featherlight.min.js?1591960808></script><script src=https://labbots.github.io/bash-utility/js/highlight.pack.js?1591960808></script><script>hljs.initHighlightingOnLoad();</script><script src=https://labbots.github.io/bash-utility/js/modernizr.custom-3.6.0.js?1591960808></script><script src=https://labbots.github.io/bash-utility/js/learn.js?1591960808></script><script src=https://labbots.github.io/bash-utility/js/hugo-learn.js?1591960808></script><link href=https://labbots.github.io/bash-utility/mermaid/mermaid.css?1591960808 rel=stylesheet><script src=https://labbots.github.io/bash-utility/mermaid/mermaid.js?1591960808></script><script>mermaid.initialize({startOnLoad:true});</script><script src=https://unpkg.com/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js></script><script>addBackToTop({diameter:56,backgroundColor:'rgb(255, 82, 82)',textColor:'#fff',})</script><script async src="https://www.googletagmanager.com/gtag/js?id=UA-75820294-2"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
-gtag('js',new Date());gtag('config','UA-75820294-2');</script></body></html>
+</code></pre></div><p>To Update submodules to latest code execute the following command.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">git submodule update --rebase --remote
+</code></pre></div><h3 id="method-2---git-clone">Method 2 - Git Clone</h3>
+<p>If you don&rsquo;t want to use git submodules, you can use <code>git clone</code> to download library and then move the files to desired location manually.</p>
+<p>The below command will clone the repository to <code>vendor/bash-utility</code> folder in current working directory.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">git clone https://github.com/labbots/bash-utility.git ./vendor/bash-utility
+</code></pre></div><p>Once the submodule is added or updated, make sure to commit changes to your repository.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">git add .
+git commit -m <span style="color:#e6db74">&#39;Added/updated bash-utility library.&#39;</span>
+</code></pre></div><p><strong>Note:</strong> When cloning your repository, use <code>--recurse-submodules</code> flag to <code>git clone</code> command to install the git sub modules.</p>
+
+
+<footer class="footline">
+	
+</footer>
+
+        
+        </div> 
+        
+
+      </div>
+
+    <div id="navigation">
+        
+        
+        
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+        
+        
+
+
+	 
+	 
+    </div>
+
+    </section>
+    
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="https://labbots.github.io/bash-utility/js/clipboard.min.js?1591961450"></script>
+    <script src="https://labbots.github.io/bash-utility/js/perfect-scrollbar.min.js?1591961450"></script>
+    <script src="https://labbots.github.io/bash-utility/js/perfect-scrollbar.jquery.min.js?1591961450"></script>
+    <script src="https://labbots.github.io/bash-utility/js/jquery.sticky.js?1591961450"></script>
+    <script src="https://labbots.github.io/bash-utility/js/featherlight.min.js?1591961450"></script>
+    <script src="https://labbots.github.io/bash-utility/js/highlight.pack.js?1591961450"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="https://labbots.github.io/bash-utility/js/modernizr.custom-3.6.0.js?1591961450"></script>
+    <script src="https://labbots.github.io/bash-utility/js/learn.js?1591961450"></script>
+    <script src="https://labbots.github.io/bash-utility/js/hugo-learn.js?1591961450"></script>
+
+    <link href="https://labbots.github.io/bash-utility/mermaid/mermaid.css?1591961450" rel="stylesheet" />
+    <script src="https://labbots.github.io/bash-utility/mermaid/mermaid.js?1591961450"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+    <script src="https://unpkg.com/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js"></script>
+<script>addBackToTop({
+    diameter: 56,
+    backgroundColor: 'rgb(255, 82, 82)',
+    textColor: '#fff',
+  })
+</script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-75820294-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-75820294-2');
+</script>
+
+  </body>
+</html>
+
