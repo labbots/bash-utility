@@ -1,0 +1,22 @@
+baseURL = "https://labbots.github.io/bash-utility/"
+languageCode = "en-us"
+title = "Bash Utility"
+theme = "hugo-theme-learn"
+# For search functionality
+[outputs]
+home = [ "HTML", "RSS", "JSON"]
+[params]
+  # Change default color scheme with a variant one. Can be "red", "blue", "green".
+  themeVariant = "blue"
+  disableNextPrev = true
+  showVisitedLinks = false
+[[menu.shortcuts]]
+name = "<i class='fab fa-github'></i> Github repo"
+identifier = "ds"
+url = "https://github.com/labbots/bash-utility"
+weight = 10
+[markup]
+  [markup.tableOfContents]
+    endLevel = 3
+    ordered = false
+    startLevel = 2
