@@ -2,6 +2,7 @@ baseURL = "https://labbots.github.io/bash-utility/"
 languageCode = "en-us"
 title = "Bash Utility"
 theme = "hugo-theme-learn"
+canonifyurls = true
 # For search functionality
 [outputs]
 home = [ "HTML", "RSS", "JSON"]
