@@ -6,9 +6,15 @@
 <a href="https://www.codacy.com/manual/labbots/bash-utility?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=labbots/bash-utility&amp;utm_campaign=Badge_Grade"><img src="https://img.shields.io/codacy/grade/99fbe8d389254b6ebb37899ce89658e3?style=for-the-badge"/></a>
 </p>
 <p align="center">
+<a href="https://github.com/labbots/bash-utility/actions?query=workflow%3A%22github+pages%22"><img alt="Gh-pages Status" src="https://img.shields.io/github/workflow/status/labbots/bash-utility/github%20pages/hugo-docs?label=Gh%20pages&style=for-the-badge"></a>
+<a href="https://labbots.github.io/bash-utility/"><img alt="Website" src="https://img.shields.io/website?down_color=red&style=for-the-badge&up_color=blue&url=https%3A%2F%2Flabbots.github.io%2Fbash-utility%2F"></a>
+</p>
+<p align="center">
 <img src="image/bash-utility.png" height="250"/>
 </p>
 Bash library which provides utility functions and helpers for functional programming in Bash.
+
+Detailed documentation is available at <https://labbots.github.io/bash-utility/>
 
 <!-- START generate_readme.sh generated TOC please keep comment here to allow auto update -->
 <!-- DO NOT EDIT THIS SECTION, INSTEAD RE-RUN generate_readme.sh TO UPDATE -->
