@@ -9,7 +9,7 @@ googleAnalytics= "UA-75820294-2"
     anonymizeIP = true
     disable = false
     respectDoNotTrack = true
-    useSessionStorage = true
+    useSessionStorage = false
 # For search functionality
 [outputs]
 home = [ "HTML", "RSS", "JSON"]
