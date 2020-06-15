@@ -10,8 +10,6 @@
 {{- $pc := .Site.Config.Privacy.GoogleAnalytics -}}
 {{ $url := urls.Parse .Site.BaseURL }}
 {{ $host := split $url.Host ":" }}
-{{ print $pc }}
-{{ print .Site.IsServer }}
 
 <script type="application/javascript">
   {{ template "__ga_js_set_doNotTrack" $ }}
