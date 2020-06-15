@@ -19,10 +19,15 @@ home = [ "HTML", "RSS", "JSON"]
   disableNextPrev = true
   showVisitedLinks = false
 [[menu.shortcuts]]
-name = "<i class='fab fa-github'></i>&nbsp;Github repo"
-identifier = "ds"
+name = "<i class='fab fa-github'></i> Bash Utility"
+identifier = "bash-utility-repo"
 url = "https://github.com/labbots/bash-utility"
-weight = 10
+weight = 1
+[[menu.shortcuts]]
+name = "<i class='fab fa-github'></i> Bash Oneliner"
+identifier = "bash-oneliner-repo"
+url = "https://github.com/labbots/bash-oneliners"
+weight = 9
 [markup]
   [markup.tableOfContents]
     endLevel = 3
