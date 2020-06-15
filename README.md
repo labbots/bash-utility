@@ -144,6 +144,13 @@ To Update submodules to latest code execute the following command.
 ```shell
 git submodule update --rebase --remote
 ```
+Once the submodule is added or updated, make sure to commit changes to your repository.
+
+```shell
+git add .
+git commit -m 'Added/updated bash-utility library.'
+```
+**Note:** When cloning your repository, use `--recurse-submodules` flag to `git clone` command to install the git sub modules.
 
 ### Method 2 - Git Clone
 If you don't want to use git submodules, you can use `git clone` to download library and then move the files to desired location manually.
@@ -153,13 +160,16 @@ The below command will clone the repository to `vendor/bash-utility` folder in c
 ```shell
 git clone https://github.com/labbots/bash-utility.git ./vendor/bash-utility
 ```
-Once the submodule is added or updated, make sure to commit changes to your repository.
+### Method 3 - Direct Download
+If you do not have git installed, you can download the archive of the latest version of the library. Extract the zip file to appropriate folder by following the below command.
 
 ```shell
-git add .
-git commit -m 'Added/updated bash-utility library.'
+wget https://github.com/labbots/bash-utility//archive/master.zip
+unzip -q master.zip -d tmp
+mkdir -p vendor/bash-utility
+mv tmp/bash-utility-master vendor/bash-utility
+rm tmp
 ```
-**Note:** When cloning your repository, use `--recurse-submodules` flag to `git clone` command to install the git sub modules.
 
 ## Usage
 Bash utility functions can be used by simply sourcing the library script file to your own script.
