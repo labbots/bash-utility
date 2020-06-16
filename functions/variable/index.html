@@ -12,21 +12,21 @@
     <title>Variable :: Bash Utility</title>
 
     
-    <link href="https://labbots.github.io/bash-utility/css/nucleus.css?1592262813" rel="stylesheet">
-    <link href="https://labbots.github.io/bash-utility/css/fontawesome-all.min.css?1592262813" rel="stylesheet">
-    <link href="https://labbots.github.io/bash-utility/css/hybrid.css?1592262813" rel="stylesheet">
-    <link href="https://labbots.github.io/bash-utility/css/featherlight.min.css?1592262813" rel="stylesheet">
-    <link href="https://labbots.github.io/bash-utility/css/perfect-scrollbar.min.css?1592262813" rel="stylesheet">
-    <link href="https://labbots.github.io/bash-utility/css/auto-complete.css?1592262813" rel="stylesheet">
-    <link href="https://labbots.github.io/bash-utility/css/atom-one-dark-reasonable.css?1592262813" rel="stylesheet">
-    <link href="https://labbots.github.io/bash-utility/css/theme.css?1592262813" rel="stylesheet">
-    <link href="https://labbots.github.io/bash-utility/css/hugo-theme.css?1592262813" rel="stylesheet">
+    <link href="https://labbots.github.io/bash-utility/css/nucleus.css?1592317053" rel="stylesheet">
+    <link href="https://labbots.github.io/bash-utility/css/fontawesome-all.min.css?1592317053" rel="stylesheet">
+    <link href="https://labbots.github.io/bash-utility/css/hybrid.css?1592317053" rel="stylesheet">
+    <link href="https://labbots.github.io/bash-utility/css/featherlight.min.css?1592317053" rel="stylesheet">
+    <link href="https://labbots.github.io/bash-utility/css/perfect-scrollbar.min.css?1592317053" rel="stylesheet">
+    <link href="https://labbots.github.io/bash-utility/css/auto-complete.css?1592317053" rel="stylesheet">
+    <link href="https://labbots.github.io/bash-utility/css/atom-one-dark-reasonable.css?1592317053" rel="stylesheet">
+    <link href="https://labbots.github.io/bash-utility/css/theme.css?1592317053" rel="stylesheet">
+    <link href="https://labbots.github.io/bash-utility/css/hugo-theme.css?1592317053" rel="stylesheet">
     
-    <link href="https://labbots.github.io/bash-utility/css/theme-blue.css?1592262813" rel="stylesheet">
+    <link href="https://labbots.github.io/bash-utility/css/theme-blue.css?1592317053" rel="stylesheet">
     
     
 
-    <script src="https://labbots.github.io/bash-utility/js/jquery-3.3.1.min.js?1592262813"></script>
+    <script src="https://labbots.github.io/bash-utility/js/jquery-3.3.1.min.js?1592317053"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -109,14 +109,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="https://labbots.github.io/bash-utility/js/lunr.min.js?1592262813"></script>
-<script type="text/javascript" src="https://labbots.github.io/bash-utility/js/auto-complete.js?1592262813"></script>
+<script type="text/javascript" src="https://labbots.github.io/bash-utility/js/lunr.min.js?1592317053"></script>
+<script type="text/javascript" src="https://labbots.github.io/bash-utility/js/auto-complete.js?1592317053"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/labbots.github.io\/bash-utility\/";
     
 </script>
-<script type="text/javascript" src="https://labbots.github.io/bash-utility/js/search.js?1592262813"></script>
+<script type="text/javascript" src="https://labbots.github.io/bash-utility/js/search.js?1592317053"></script>
 
     
   </div>
@@ -590,6 +590,7 @@
         <li><a href="#variableis_bool">variable::is_bool()</a></li>
         <li><a href="#variableis_true">variable::is_true()</a></li>
         <li><a href="#variableis_false">variable::is_false()</a></li>
+        <li><a href="#variableis_empty_or_null">variable::is_empty_or_null()</a></li>
       </ul>
     </li>
   </ul>
@@ -627,6 +628,7 @@
 <li><a href="#variableis_bool">variable::is_bool()</a></li>
 <li><a href="#variableis_true">variable::is_true()</a></li>
 <li><a href="#variableis_false">variable::is_false()</a></li>
+<li><a href="#variableis_empty_or_null">variable::is_empty_or_null()</a></li>
 </ul>
 <hr>
 <h3 id="variableis_array">variable::is_array()</h3>
@@ -740,6 +742,23 @@ variable::is_array <span style="color:#e6db74">&#34;arr&#34;</span>
 </ul>
 <h4 id="example-6">Example</h4>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">variable::is_false <span style="color:#e6db74">&#34;false&#34;</span>
+<span style="color:#75715e">#Output</span>
+<span style="color:#ae81ff">0</span>
+</code></pre></div><hr>
+<h3 id="variableis_empty_or_null">variable::is_empty_or_null()</h3>
+<p>Check if given variable is empty or null.</p>
+<h4 id="arguments-7">Arguments</h4>
+<ul>
+<li><strong>$1</strong> (mixed): Value of variable to check.</li>
+</ul>
+<h4 id="exit-codes-7">Exit codes</h4>
+<ul>
+<li><strong>0</strong>:  If input is empty or null.</li>
+<li><strong>1</strong>: If input is not empty.</li>
+</ul>
+<h4 id="example-7">Example</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">test<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;&#39;</span>
+variable::is_empty_or_null $test
 <span style="color:#75715e">#Output</span>
 <span style="color:#ae81ff">0</span>
 </code></pre></div><hr>
@@ -1055,19 +1074,19 @@ variable::is_array <span style="color:#e6db74">&#34;arr&#34;</span>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="https://labbots.github.io/bash-utility/js/clipboard.min.js?1592262813"></script>
-    <script src="https://labbots.github.io/bash-utility/js/perfect-scrollbar.min.js?1592262813"></script>
-    <script src="https://labbots.github.io/bash-utility/js/perfect-scrollbar.jquery.min.js?1592262813"></script>
-    <script src="https://labbots.github.io/bash-utility/js/jquery.sticky.js?1592262813"></script>
-    <script src="https://labbots.github.io/bash-utility/js/featherlight.min.js?1592262813"></script>
-    <script src="https://labbots.github.io/bash-utility/js/highlight.pack.js?1592262813"></script>
+    <script src="https://labbots.github.io/bash-utility/js/clipboard.min.js?1592317053"></script>
+    <script src="https://labbots.github.io/bash-utility/js/perfect-scrollbar.min.js?1592317053"></script>
+    <script src="https://labbots.github.io/bash-utility/js/perfect-scrollbar.jquery.min.js?1592317053"></script>
+    <script src="https://labbots.github.io/bash-utility/js/jquery.sticky.js?1592317053"></script>
+    <script src="https://labbots.github.io/bash-utility/js/featherlight.min.js?1592317053"></script>
+    <script src="https://labbots.github.io/bash-utility/js/highlight.pack.js?1592317053"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="https://labbots.github.io/bash-utility/js/modernizr.custom-3.6.0.js?1592262813"></script>
-    <script src="https://labbots.github.io/bash-utility/js/learn.js?1592262813"></script>
-    <script src="https://labbots.github.io/bash-utility/js/hugo-learn.js?1592262813"></script>
+    <script src="https://labbots.github.io/bash-utility/js/modernizr.custom-3.6.0.js?1592317053"></script>
+    <script src="https://labbots.github.io/bash-utility/js/learn.js?1592317053"></script>
+    <script src="https://labbots.github.io/bash-utility/js/hugo-learn.js?1592317053"></script>
 
-    <link href="https://labbots.github.io/bash-utility/mermaid/mermaid.css?1592262813" rel="stylesheet" />
-    <script src="https://labbots.github.io/bash-utility/mermaid/mermaid.js?1592262813"></script>
+    <link href="https://labbots.github.io/bash-utility/mermaid/mermaid.css?1592317053" rel="stylesheet" />
+    <script src="https://labbots.github.io/bash-utility/mermaid/mermaid.js?1592317053"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

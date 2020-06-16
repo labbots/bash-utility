@@ -90,7 +90,7 @@ Arguments  $1 (int): size in bytes.</description>
       <guid>https://labbots.github.io/bash-utility/functions/interaction/</guid>
       <description>Functions to enable interaction with the user.
 Table of Contents  interaction::prompt_yes_no() interaction::prompt_response()   interaction::prompt_yes_no() Prompt yes or no question to the user.
-Arguments  $1 (string): The question to be prompted to the user. $2 (string): default answer [yes/no] (optional).  Exit codes  0: If user responds with yes. 1: If user responds with no. 2: Function missing arguments.  Output on stdout  question to be prompted to the user.</description>
+Arguments  $1 (string): The question to be prompted to the user. $2 (string): default answer [yes/no] (optional).  Exit codes  0: If user responds with yes. 1: If user responds with no. 2: Function missing arguments.  Example interaction::prompt_yes_no &amp;#34;Are you sure to proceed&amp;#34; &amp;#34;yes&amp;#34; #Output Are you sure to proceed (y/n)?</description>
     </item>
     
     <item>
@@ -149,7 +149,7 @@ Exit codes  0: If script is run on terminal.</description>
       
       <guid>https://labbots.github.io/bash-utility/functions/variable/</guid>
       <description>Functions for handling variables.
-Table of Contents  variable::is_array() variable::is_numeric() variable::is_int() variable::is_float() variable::is_bool() variable::is_true() variable::is_false()   variable::is_array() Check if given variable is array. Pass the variable name instead of value of the variable.
+Table of Contents  variable::is_array() variable::is_numeric() variable::is_int() variable::is_float() variable::is_bool() variable::is_true() variable::is_false() variable::is_empty_or_null()   variable::is_array() Check if given variable is array. Pass the variable name instead of value of the variable.
 Arguments  $1 (string): name of the variable to check.  Exit codes  0: If input is array. 1: If input is not an array.  Example arr=(&amp;#34;a&amp;#34; &amp;#34;b&amp;#34; &amp;#34;c&amp;#34;) variable::is_array &amp;#34;arr&amp;#34; #Output 0  variable::is_numeric() Check if given variable is a number.</description>
     </item>
     
