@@ -12,6 +12,8 @@ Options:\n
   -s | --sh-dir <folderpath> - path to the bash script source folder to generate shdocs.\n
   -l | --toc-level <number> - Minimum level of header to print in Table of Contents.\n
   -d | --toc-depth <number> - Maximum depth of tree to print in Table of Contents.\n
+  -w | --webdoc - Flag to indicate generation of webdoc.\n
+  -p | --dest-dir <folderpath> - Path in which wedoc files must be generated.\n
   -h | --help - Display usage instructions.\n" "${0##*/}"
     exit 0
 }

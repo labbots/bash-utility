@@ -16,8 +16,6 @@
 # @exitcode 0  If user responds with yes.
 # @exitcode 1  If user responds with no.
 # @exitcode 2 Function missing arguments.
-#
-# @stdout question to be prompted to the user.
 interaction::prompt_yes_no() {
     [[ $# = 0 ]] && printf "%s: Missing arguments\n" "${FUNCNAME[0]}" && return 2
     declare def_arg response
@@ -71,7 +69,7 @@ interaction::prompt_yes_no() {
 # @exitcode 0  If user responds with answer.
 # @exitcode 2 Function missing arguments.
 #
-# @stdout question to be prompted to the user.
+# @stdout User entered answer to the question.
 interaction::prompt_response() {
     [[ $# = 0 ]] && printf "%s: Missing arguments\n" "${FUNCNAME[0]}" && return 2
 

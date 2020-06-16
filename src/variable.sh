@@ -126,3 +126,19 @@ variable::is_true() {
 variable::is_false() {
     [[ "${1}" = false || "${1}" -eq 1 ]] && return 0 || return 1
 }
+
+# @description Check if given variable is empty or null.
+#
+# @example
+#   test=''
+#   variable::is_empty_or_null $test
+#   #Output
+#   0
+#
+# @arg $1 mixed Value of variable to check.
+#
+# @exitcode 0  If input is empty or null.
+# @exitcode 1 If input is not empty.
+variable::is_empty_or_null() {
+  [[ -z "${1}" || "${1}" = "null" ]] && return 0 || return 1
+}

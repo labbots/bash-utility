@@ -23,6 +23,7 @@ Detailed documentation is available at <https://labbots.github.io/bash-utility/>
 - [Installation](#installation)
   - [Method 1 - Git Submodules](#method-1---git-submodules)
   - [Method 2 - Git Clone](#method-2---git-clone)
+  - [Method 3 - Direct Download](#method-3---direct-download)
 - [Usage](#usage)
 - [Array](#array)
   - [array::contains()](#arraycontains)
@@ -123,6 +124,7 @@ Detailed documentation is available at <https://labbots.github.io/bash-utility/>
   - [variable::is_bool()](#variableis_bool)
   - [variable::is_true()](#variableis_true)
   - [variable::is_false()](#variableis_false)
+  - [variable::is_empty_or_null()](#variableis_empty_or_null)
 - [Inspired By](#inspired-by)
 - [License](#license)
 
@@ -1843,10 +1845,6 @@ Prompt yes or no question to the user.
 - **1**:  If user responds with no.
 - **2**: Function missing arguments.
 
-#### Output on stdout
-
-- question to be prompted to the user.
-
 #### Example
 
 ```bash
@@ -1871,7 +1869,7 @@ Prompt question to the user.
 
 #### Output on stdout
 
-- question to be prompted to the user.
+- User entered answer to the question.
 
 #### Example
 
@@ -2446,6 +2444,28 @@ Check if given variable is false.
 
 ```bash
 variable::is_false "false"
+#Output
+0
+```
+
+### variable::is_empty_or_null()
+
+Check if given variable is empty or null.
+
+#### Arguments
+
+- **$1** (mixed): Value of variable to check.
+
+#### Exit codes
+
+- **0**:  If input is empty or null.
+- **1**: If input is not empty.
+
+#### Example
+
+```bash
+test=''
+variable::is_empty_or_null $test
 #Output
 0
 ```
