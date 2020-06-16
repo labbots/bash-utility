@@ -2,7 +2,7 @@
 title : Interaction 
 description : Functions to enable interaction with the user. 
 date : 2020-06-12T01:11:01+01:00
-lastmod : 2020-06-12T01:11:01+01:00
+lastmod : 2020-06-16T15:14:52+01:00
 ---
 <!-- START generate_readme.sh generated SHDOC please keep comment here to allow auto update -->
 
@@ -31,10 +31,6 @@ Prompt yes or no question to the user.
 - **1**:  If user responds with no.
 - **2**: Function missing arguments.
 
-#### Output on stdout
-
-- question to be prompted to the user.
-
 #### Example
 
 ```bash
@@ -61,7 +57,7 @@ Prompt question to the user.
 
 #### Output on stdout
 
-- question to be prompted to the user.
+- User entered answer to the question.
 
 #### Example
 

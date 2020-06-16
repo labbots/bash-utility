@@ -2,7 +2,7 @@
 title : File 
 description : Functions for handling files. 
 date : 2020-06-12T01:11:01+01:00
-lastmod : 2020-06-12T01:11:01+01:00
+lastmod : 2020-06-16T15:14:52+01:00
 ---
 <!-- START generate_readme.sh generated SHDOC please keep comment here to allow auto update -->
 

@@ -2,7 +2,7 @@
 title : Variable 
 description : Functions for handling variables. 
 date : 2020-06-12T01:11:01+01:00
-lastmod : 2020-06-12T01:11:01+01:00
+lastmod : 2020-06-16T15:14:52+01:00
 ---
 <!-- START generate_readme.sh generated SHDOC please keep comment here to allow auto update -->
 
@@ -18,6 +18,7 @@ Functions for handling variables.
 - [variable::is_bool()](#variableis_bool)
 - [variable::is_true()](#variableis_true)
 - [variable::is_false()](#variableis_false)
+- [variable::is_empty_or_null()](#variableis_empty_or_null)
 
 ---
 
@@ -178,6 +179,30 @@ Check if given variable is false.
 
 ```bash
 variable::is_false "false"
+#Output
+0
+```
+
+---
+
+### variable::is_empty_or_null()
+
+Check if given variable is empty or null.
+
+#### Arguments
+
+- **$1** (mixed): Value of variable to check.
+
+#### Exit codes
+
+- **0**:  If input is empty or null.
+- **1**: If input is not empty.
+
+#### Example
+
+```bash
+test=''
+variable::is_empty_or_null $test
 #Output
 0
 ```
