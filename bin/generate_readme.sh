@@ -285,17 +285,16 @@ _process_toc() {
 
 _generate_webdoc() {
     declare dest_dir filename file_basename dest_file_path shdoc_tmp_file is_new_file
-    declare title description start_shdoc end_shdoc
+    declare title description start_shdoc end_shdoc file_modified_date file_modified_date_epoc
+    declare webdoc_lastmod_date webdoc_lastmod_epoc
     file="$(realpath "${1}")"
     dest_dir="${2}"
-    shdoc_tmp_file=$(_setup_tempfile)
-    if [[ -s "${file}" ]]; then
-        awk -v style="webdoc" -v toc=1 -f "${SCRIPT_DIR}"/bashdoc.awk < "${file}" >> "${shdoc_tmp_file}"
 
-    fi
     filename="${file##*/}"
     file_basename="${filename%.*}"
     dest_file_path="${dest_dir}/${file_basename}.md"
+    file_modified_date="$(date -r ${file} +"%FT%T%:z")"
+    file_modified_date_epoc="$(date -r ${file} +"%s")"
 
     start_shdoc="<!-- START ${SCRIPT_FILE} generated SHDOC please keep comment here to allow auto update -->"
     end_shdoc="<!-- END ${SCRIPT_FILE} generated SHDOC please keep comment here to allow auto update -->"
@@ -305,43 +304,54 @@ _generate_webdoc() {
 ---
 title : <!-- file -->
 description : <!-- brief -->
-date : $(date +"%FT%T%:z")
-lastmod : $(date +"%FT%T%:z")
+date : ${file_modified_date}
+lastmod : ${file_modified_date}
 ---
 ${start_shdoc}
 ${end_shdoc}
 EOF
         is_new_file=true
-    fi
-
-    if grep --color=always -Pzl "(?s)${start_shdoc}.*\n.*${end_shdoc}" "${dest_file_path}" &> /dev/null; then
-        sed -i -ne "/${start_shdoc}/ {p; r ${shdoc_tmp_file}" -e ":a; n; /${end_shdoc}/ {p; b}; ba}; p" "${dest_file_path}"
-    fi
-
-    # Extract title and description from webdoc
-    title="$(sed -ne 's/-->//; s/^.*<!-- file=//p' "${dest_file_path}")"
-    description="$(sed -ne 's/-->//; s/^.*<!-- brief=//p' "${dest_file_path}")"
-    sed -i '/^.*<!-- file=/d' "${dest_file_path}"
-    sed -i '/^.*<!-- brief=/d' "${dest_file_path}"
-
-    # Replace Frontmatter content with values from the document
-    if [[ "${is_new_file}" = true ]]; then
-
-        sed -i -e "s/<!-- file -->/${title}/g" "${dest_file_path}"
-        sed -i -e "s/<!-- brief -->/${description}/g" "${dest_file_path}"
     else
-        sed -i -e "s/title : .*/title : ${title}/g" "${dest_file_path}"
-        sed -i -e "s/description : .*/description : ${description}/g" "${dest_file_path}"
-
+        is_new_file=false
+        webdoc_lastmod_date="$(sed -ne 's/-->//; s/^.*lastmod : //p' "${dest_file_path}")"
+        webdoc_lastmod_epoc="$(date -d "${webdoc_lastmod_date}" +"%s")"
     fi
 
-    # Update the last modified timestamp in front matter
-    sed -i -e "s/lastmod : .*/lastmod : $(date +"%FT%T%:z")/g" "${dest_file_path}"
+    if [[ "${is_new_file}" = true || "${file_modified_date_epoc}" -gt "${webdoc_lastmod_epoc}" ]]; then
 
-    rm "${shdoc_tmp_file}"
+        shdoc_tmp_file=$(_setup_tempfile)
+        if [[ -s "${file}" ]]; then
+            awk -v style="webdoc" -v toc=1 -f "${SCRIPT_DIR}"/bashdoc.awk < "${file}" >> "${shdoc_tmp_file}"
+        fi
 
-    echo -e "Updated bashdoc content to ${dest_file_path} successfully."
+        if grep --color=always -Pzl "(?s)${start_shdoc}.*\n.*${end_shdoc}" "${dest_file_path}" &> /dev/null; then
+            sed -i -ne "/${start_shdoc}/ {p; r ${shdoc_tmp_file}" -e ":a; n; /${end_shdoc}/ {p; b}; ba}; p" "${dest_file_path}"
+        fi
 
+        # Extract title and description from webdoc
+        title="$(sed -ne 's/-->//; s/^.*<!-- file=//p' "${dest_file_path}")"
+        description="$(sed -ne 's/-->//; s/^.*<!-- brief=//p' "${dest_file_path}")"
+        sed -i '/^.*<!-- file=/d' "${dest_file_path}"
+        sed -i '/^.*<!-- brief=/d' "${dest_file_path}"
+
+        # Replace Frontmatter content with values from the document
+        if [[ "${is_new_file}" = true ]]; then
+
+            sed -i -e "s/<!-- file -->/${title}/g" "${dest_file_path}"
+            sed -i -e "s/<!-- brief -->/${description}/g" "${dest_file_path}"
+        else
+            sed -i -e "s/title : .*/title : ${title}/g" "${dest_file_path}"
+            sed -i -e "s/description : .*/description : ${description}/g" "${dest_file_path}"
+
+        fi
+
+        # Update the last modified timestamp in front matter
+        sed -i -e "s/lastmod : .*/lastmod : ${file_modified_date}/g" "${dest_file_path}"
+
+        echo -e "Updated bashdoc content to ${dest_file_path} successfully."
+        rm "${shdoc_tmp_file}"
+
+    fi
 }
 _process_webdoc_files() {
     declare source_script_dir dest_dir

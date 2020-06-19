@@ -138,7 +138,7 @@ variable::is_false() {
 # @arg $1 mixed Value of variable to check.
 #
 # @exitcode 0  If input is empty or null.
-# @exitcode 1 If input is not empty.
+# @exitcode 1 If input is not empty or null.
 variable::is_empty_or_null() {
-  [[ -z "${1}" || "${1}" = "null" ]] && return 0 || return 1
+    [[ -z "${1}" || "${1}" = "null" ]] && return 0 || return 1
 }

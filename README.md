@@ -2459,7 +2459,7 @@ Check if given variable is empty or null.
 #### Exit codes
 
 - **0**:  If input is empty or null.
-- **1**: If input is not empty.
+- **1**: If input is not empty or null.
 
 #### Example
 
