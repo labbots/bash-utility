@@ -12,3 +12,5 @@ source src/format.sh
 source src/collection.sh
 source src/json.sh
 source src/terminal.sh
+source src/validation.sh
+
