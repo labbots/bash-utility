@@ -149,7 +149,7 @@ file::full_path() {
 #   #Output
 #   application/x-shellscript
 #
-# @arg $1 string relative or absolute path to file/direcotry.
+# @arg $1 string relative or absolute path to file/directory.
 #
 # @exitcode 0  If successful.
 # @exitcode 1  If file/directory does not exist.
@@ -172,4 +172,25 @@ file::mime_type() {
         return 1
     fi
     printf "%s" "${mime_type}"
+}
+
+# @description Search if a given pattern is found in file.
+#
+# @example
+#   file::contains_text "./file.sh" "^[ @[:alpha:]]*"
+#   file::contains_text "./file.sh" "@file"
+#   #Output
+#   0
+#
+# @arg $1 string relative or absolute path to file/directory.
+# @arg $2 string search key or regular expression.
+#
+# @exitcode 0  If given search parameter is found in file.
+# @exitcode 1  If search paramter not found in file.
+# @exitcode 2 Function missing arguments.
+file::contains_text() {
+    [[ $# -lt 2 ]] && printf "%s: Missing arguments\n" "${FUNCNAME[0]}" && return 1
+    declare -r file="$1"
+    declare -r text="$2"
+    grep -q "$text" "$file"
 }

@@ -27,6 +27,7 @@ string::trim() {
 # @description Split a string to array by a delimiter.
 #
 # @example
+#   array=( $(string::split "a,b,c" ",") )
 #   printf "%s" "$(string::split "Hello!World" "!")"
 #   #Output
 #   Hello
@@ -41,6 +42,7 @@ string::trim() {
 # @stdout Returns an array of strings created by splitting the string parameter by the delimiter.
 string::split() {
     [[ $# -lt 2 ]] && printf "%s: Missing arguments\n" "${FUNCNAME[0]}" && return 2
+    declare -a arr=()
     IFS=$'\n' read -d "" -ra arr <<< "${1//$2/$'\n'}"
     printf '%s\n' "${arr[@]}"
 }

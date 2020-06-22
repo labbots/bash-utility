@@ -74,11 +74,12 @@ _check_terminal_window_size() {
 #
 # @stdout Ansi stripped text.
 format::strip_ansi() {
-    declare tmp="${1}"
-    declare esc=$(printf "\x1b")
-    declare tpa=$(printf "\x28")
-    declare re="(.*)$esc[\[$tpa][0-9]*;*[mKB](.*)"
-    while [[ ${tmp} =~ $re ]]; do
+    declare tmp esc tpa re
+    tmp="${1}"
+    esc=$(printf "\x1b")
+    tpa=$(printf "\x28")
+    re="(.*)${esc}[\[${tpa}][0-9]*;*[mKB](.*)"
+    while [[ "${tmp}" =~ $re ]]; do
         tmp="${BASH_REMATCH[1]}${BASH_REMATCH[2]}"
     done
     printf "%s" "${tmp}"
@@ -100,9 +101,9 @@ format::text_center() {
     [[ $# = 0 ]] && printf "%s: Missing arguments\n" "${FUNCNAME[0]}" && return 1
 
     _check_terminal_window_size
-    declare input="${1}" symbol="${2:- }" filler out
-    declare no_ansi_Out=$(format::strip_ansi "$input")
-    declare -i str_len=${#no_ansi_Out}
+    declare input="${1}" symbol="${2:- }" filler out no_ansi_out
+    no_ansi_out=$(format::strip_ansi "$input")
+    declare -i str_len=${#no_ansi_out}
     declare -i filler_len="$(((COLUMNS - str_len) / 2))"
 
     [[ -n "${symbol}" ]] && symbol="${symbol:0:1}"
@@ -136,7 +137,7 @@ format::report() {
     declare input1="${1} " input2="${2}"
     input2="[ $input2 ]"
     to_print="$((COLUMNS * 60 / 100))"
-    y=$(($to_print - (${#input1} + ${#input2})))
+    y=$(( to_print - ( ${#input1} + ${#input2} ) ))
     hl="$(printf '%*s' $y '')"
     hlout=${hl// /${symbol}}
     out="${input1}${hlout}${input2}"
