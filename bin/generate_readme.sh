@@ -293,8 +293,8 @@ _generate_webdoc() {
     filename="${file##*/}"
     file_basename="${filename%.*}"
     dest_file_path="${dest_dir}/${file_basename}.md"
-    file_modified_date="$(date -r ${file} +"%FT%T%:z")"
-    file_modified_date_epoc="$(date -r ${file} +"%s")"
+    file_modified_date="$(date -r "${file}" +"%FT%T%:z")"
+    file_modified_date_epoc="$(date -r "${file}" +"%s")"
 
     start_shdoc="<!-- START ${SCRIPT_FILE} generated SHDOC please keep comment here to allow auto update -->"
     end_shdoc="<!-- END ${SCRIPT_FILE} generated SHDOC please keep comment here to allow auto update -->"
