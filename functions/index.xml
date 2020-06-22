@@ -99,9 +99,8 @@ Exit codes  0: If successful. 1: If failed to create temp file.  Output on stdou
       
       <guid>https://labbots.github.io/bash-utility/functions/format/</guid>
       <description>Functions to format provided input.
-Table of Contents  format::human_readable_seconds() format::bytes_to_human()   format::human_readable_seconds() Format seconds to human readable format.
-Arguments  $1 (int): number of seconds.  Exit codes  0: If successful. 2: Function missing arguments.  Output on stdout  formatted time string.  Example echo &amp;#34;$(format::human_readable_seconds &amp;#34;356786&amp;#34;)&amp;#34; #Output 4 days 3 hours 6 minute(s) and 26 seconds  format::bytes_to_human() Format bytes to human readable format.
-Arguments  $1 (int): size in bytes.</description>
+Table of Contents  format::human_readable_seconds() format::bytes_to_human() format::strip_ansi() format::text_center() format::report() format::trim_text_to_term()   format::human_readable_seconds() Format seconds to human readable format.
+Arguments  $1 (int): number of seconds.  Exit codes  0: If successful. 2: Function missing arguments.  Output on stdout  formatted time string.  Example echo &amp;#34;$(format::human_readable_seconds &amp;#34;356786&amp;#34;)&amp;#34; #Output 4 days 3 hours 6 minute(s) and 26 seconds  format::bytes_to_human() Format bytes to human readable format.</description>
     </item>
     
     <item>

@@ -12,21 +12,21 @@
     <title>Format :: Bash Utility</title>
 
     
-    <link href="https://labbots.github.io/bash-utility/css/nucleus.css?1592827982" rel="stylesheet">
-    <link href="https://labbots.github.io/bash-utility/css/fontawesome-all.min.css?1592827982" rel="stylesheet">
-    <link href="https://labbots.github.io/bash-utility/css/hybrid.css?1592827982" rel="stylesheet">
-    <link href="https://labbots.github.io/bash-utility/css/featherlight.min.css?1592827982" rel="stylesheet">
-    <link href="https://labbots.github.io/bash-utility/css/perfect-scrollbar.min.css?1592827982" rel="stylesheet">
-    <link href="https://labbots.github.io/bash-utility/css/auto-complete.css?1592827982" rel="stylesheet">
-    <link href="https://labbots.github.io/bash-utility/css/atom-one-dark-reasonable.css?1592827982" rel="stylesheet">
-    <link href="https://labbots.github.io/bash-utility/css/theme.css?1592827982" rel="stylesheet">
-    <link href="https://labbots.github.io/bash-utility/css/hugo-theme.css?1592827982" rel="stylesheet">
+    <link href="https://labbots.github.io/bash-utility/css/nucleus.css?1592834266" rel="stylesheet">
+    <link href="https://labbots.github.io/bash-utility/css/fontawesome-all.min.css?1592834266" rel="stylesheet">
+    <link href="https://labbots.github.io/bash-utility/css/hybrid.css?1592834266" rel="stylesheet">
+    <link href="https://labbots.github.io/bash-utility/css/featherlight.min.css?1592834266" rel="stylesheet">
+    <link href="https://labbots.github.io/bash-utility/css/perfect-scrollbar.min.css?1592834266" rel="stylesheet">
+    <link href="https://labbots.github.io/bash-utility/css/auto-complete.css?1592834266" rel="stylesheet">
+    <link href="https://labbots.github.io/bash-utility/css/atom-one-dark-reasonable.css?1592834266" rel="stylesheet">
+    <link href="https://labbots.github.io/bash-utility/css/theme.css?1592834266" rel="stylesheet">
+    <link href="https://labbots.github.io/bash-utility/css/hugo-theme.css?1592834266" rel="stylesheet">
     
-    <link href="https://labbots.github.io/bash-utility/css/theme-blue.css?1592827982" rel="stylesheet">
+    <link href="https://labbots.github.io/bash-utility/css/theme-blue.css?1592834266" rel="stylesheet">
     
     
 
-    <script src="https://labbots.github.io/bash-utility/js/jquery-3.3.1.min.js?1592827982"></script>
+    <script src="https://labbots.github.io/bash-utility/js/jquery-3.3.1.min.js?1592834266"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -109,14 +109,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="https://labbots.github.io/bash-utility/js/lunr.min.js?1592827982"></script>
-<script type="text/javascript" src="https://labbots.github.io/bash-utility/js/auto-complete.js?1592827982"></script>
+<script type="text/javascript" src="https://labbots.github.io/bash-utility/js/lunr.min.js?1592834266"></script>
+<script type="text/javascript" src="https://labbots.github.io/bash-utility/js/auto-complete.js?1592834266"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/labbots.github.io\/bash-utility\/";
     
 </script>
-<script type="text/javascript" src="https://labbots.github.io/bash-utility/js/search.js?1592827982"></script>
+<script type="text/javascript" src="https://labbots.github.io/bash-utility/js/search.js?1592834266"></script>
 
     
   </div>
@@ -627,6 +627,10 @@
         <li><a href="#table-of-contents">Table of Contents</a></li>
         <li><a href="#formathuman_readable_seconds">format::human_readable_seconds()</a></li>
         <li><a href="#formatbytes_to_human">format::bytes_to_human()</a></li>
+        <li><a href="#formatstrip_ansi">format::strip_ansi()</a></li>
+        <li><a href="#formattext_center">format::text_center()</a></li>
+        <li><a href="#formatreport">format::report()</a></li>
+        <li><a href="#formattrim_text_to_term">format::trim_text_to_term()</a></li>
       </ul>
     </li>
   </ul>
@@ -659,6 +663,10 @@
 <ul>
 <li><a href="#formathuman_readable_seconds">format::human_readable_seconds()</a></li>
 <li><a href="#formatbytes_to_human">format::bytes_to_human()</a></li>
+<li><a href="#formatstrip_ansi">format::strip_ansi()</a></li>
+<li><a href="#formattext_center">format::text_center()</a></li>
+<li><a href="#formatreport">format::report()</a></li>
+<li><a href="#formattrim_text_to_term">format::trim_text_to_term()</a></li>
 </ul>
 <hr>
 <h3 id="formathuman_readable_seconds">format::human_readable_seconds()</h3>
@@ -700,6 +708,86 @@
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">echo <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>format::bytes_to_human <span style="color:#e6db74">&#34;2250&#34;</span><span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
 <span style="color:#75715e">#Output</span>
 2.19 KB
+</code></pre></div><hr>
+<h3 id="formatstrip_ansi">format::strip_ansi()</h3>
+<p>Remove Ansi escape sequences from given text.</p>
+<h4 id="arguments-2">Arguments</h4>
+<ul>
+<li><strong>$1</strong> (string): Input text to be ansi stripped.</li>
+</ul>
+<h4 id="exit-codes-2">Exit codes</h4>
+<ul>
+<li><strong>0</strong>:  If successful.</li>
+</ul>
+<h4 id="output-on-stdout-2">Output on stdout</h4>
+<ul>
+<li>Ansi stripped text.</li>
+</ul>
+<h4 id="example-2">Example</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">format::strip_ansi <span style="color:#e6db74">&#34;\e[1m\e[91mThis is bold red text\e(B\e[m.\e[92mThis is green text.\e(B\e[m&#34;</span>
+<span style="color:#75715e">#Output</span>
+This is bold red text.This is green text.
+</code></pre></div><hr>
+<h3 id="formattext_center">format::text_center()</h3>
+<p>Prints the given text to centre of terminal.</p>
+<h4 id="arguments-3">Arguments</h4>
+<ul>
+<li><strong>$1</strong> (string): Text to be printed.</li>
+<li><strong>$2</strong> (string): Filler symbol to be added to prefix and suffix of the text (optional). Defaults to space as filler.</li>
+</ul>
+<h4 id="exit-codes-3">Exit codes</h4>
+<ul>
+<li><strong>0</strong>:  If successful.</li>
+<li><strong>2</strong>: Function missing arguments.</li>
+</ul>
+<h4 id="output-on-stdout-3">Output on stdout</h4>
+<ul>
+<li>formatted text.</li>
+</ul>
+<h4 id="example-3">Example</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">format::text_center <span style="color:#e6db74">&#34;This text is in centre of the terminal.&#34;</span> <span style="color:#e6db74">&#34;-&#34;</span>
+</code></pre></div><hr>
+<h3 id="formatreport">format::report()</h3>
+<p>Format String to print beautiful report.</p>
+<h4 id="arguments-4">Arguments</h4>
+<ul>
+<li><strong>$1</strong> (string): Text to be printed on the left.</li>
+<li><strong>$2</strong> (string): Text to be printed within the square brackets.</li>
+</ul>
+<h4 id="exit-codes-4">Exit codes</h4>
+<ul>
+<li><strong>0</strong>:  If successful.</li>
+<li><strong>2</strong>: Function missing arguments.</li>
+</ul>
+<h4 id="output-on-stdout-4">Output on stdout</h4>
+<ul>
+<li>formatted text.</li>
+</ul>
+<h4 id="example-4">Example</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">format::report <span style="color:#e6db74">&#34;Initialising mission state&#34;</span> <span style="color:#e6db74">&#34;Success&#34;</span>
+<span style="color:#75715e">#Output</span>
+Initialising mission state ....................................................................<span style="color:#f92672">[</span> Success <span style="color:#f92672">]</span>
+</code></pre></div><hr>
+<h3 id="formattrim_text_to_term">format::trim_text_to_term()</h3>
+<p>Trim given text to width of the terminal window.</p>
+<h4 id="arguments-5">Arguments</h4>
+<ul>
+<li><strong>$1</strong> (string): Text of first sentence.</li>
+<li><strong>$2</strong> (string): Text of second sentence (optional).</li>
+</ul>
+<h4 id="exit-codes-5">Exit codes</h4>
+<ul>
+<li><strong>0</strong>:  If successful.</li>
+<li><strong>2</strong>: Function missing arguments.</li>
+</ul>
+<h4 id="output-on-stdout-5">Output on stdout</h4>
+<ul>
+<li>trimmed text.</li>
+</ul>
+<h4 id="example-5">Example</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">format::trim_text_to_term <span style="color:#e6db74">&#34;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.&#34;</span> <span style="color:#e6db74">&#34;This is part of second sentence.&#34;</span>
+<span style="color:#75715e">#Output</span>
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed <span style="color:#66d9ef">do</span> eiusmod..This is part of second sentence.
 </code></pre></div><hr>
 <!-- raw HTML omitted -->
 
@@ -1048,19 +1136,19 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="https://labbots.github.io/bash-utility/js/clipboard.min.js?1592827982"></script>
-    <script src="https://labbots.github.io/bash-utility/js/perfect-scrollbar.min.js?1592827982"></script>
-    <script src="https://labbots.github.io/bash-utility/js/perfect-scrollbar.jquery.min.js?1592827982"></script>
-    <script src="https://labbots.github.io/bash-utility/js/jquery.sticky.js?1592827982"></script>
-    <script src="https://labbots.github.io/bash-utility/js/featherlight.min.js?1592827982"></script>
-    <script src="https://labbots.github.io/bash-utility/js/highlight.pack.js?1592827982"></script>
+    <script src="https://labbots.github.io/bash-utility/js/clipboard.min.js?1592834266"></script>
+    <script src="https://labbots.github.io/bash-utility/js/perfect-scrollbar.min.js?1592834266"></script>
+    <script src="https://labbots.github.io/bash-utility/js/perfect-scrollbar.jquery.min.js?1592834266"></script>
+    <script src="https://labbots.github.io/bash-utility/js/jquery.sticky.js?1592834266"></script>
+    <script src="https://labbots.github.io/bash-utility/js/featherlight.min.js?1592834266"></script>
+    <script src="https://labbots.github.io/bash-utility/js/highlight.pack.js?1592834266"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="https://labbots.github.io/bash-utility/js/modernizr.custom-3.6.0.js?1592827982"></script>
-    <script src="https://labbots.github.io/bash-utility/js/learn.js?1592827982"></script>
-    <script src="https://labbots.github.io/bash-utility/js/hugo-learn.js?1592827982"></script>
+    <script src="https://labbots.github.io/bash-utility/js/modernizr.custom-3.6.0.js?1592834266"></script>
+    <script src="https://labbots.github.io/bash-utility/js/learn.js?1592834266"></script>
+    <script src="https://labbots.github.io/bash-utility/js/hugo-learn.js?1592834266"></script>
 
-    <link href="https://labbots.github.io/bash-utility/mermaid/mermaid.css?1592827982" rel="stylesheet" />
-    <script src="https://labbots.github.io/bash-utility/mermaid/mermaid.js?1592827982"></script>
+    <link href="https://labbots.github.io/bash-utility/mermaid/mermaid.css?1592834266" rel="stylesheet" />
+    <script src="https://labbots.github.io/bash-utility/mermaid/mermaid.js?1592834266"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>
