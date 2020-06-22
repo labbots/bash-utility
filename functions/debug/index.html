@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="Hugo 0.72.0" />
-    <meta name="description" content="">
+    <meta name="description" content="Functions to facilitate debugging scripts.">
 
 
     <link rel="icon" href="https://labbots.github.io/bash-utility/images/favicon.png" type="image/png">
 
-    <title>Tags :: Bash Utility</title>
+    <title>Debug :: Bash Utility</title>
 
     
     <link href="https://labbots.github.io/bash-utility/css/nucleus.css?1592827982" rel="stylesheet">
@@ -61,7 +61,7 @@
     <script src="https://unpkg.com/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js"></script>
 
   </head>
-  <body class="" data-url="/tags/">
+  <body class="" data-url="/functions/debug/">
     <nav id="sidebar" class="">
 
 
@@ -211,7 +211,7 @@
   
     
     <li data-nav-id="/functions/" title="Functions" class="dd-item
-        
+        parent
         
         parent
         ">
@@ -321,7 +321,7 @@
  
   
     
-      <li data-nav-id="/functions/debug/" title="Debug" class="dd-item ">
+      <li data-nav-id="/functions/debug/" title="Debug" class="dd-item active">
         <a href="https://labbots.github.io/bash-utility/functions/debug/">
         Debug
         
@@ -594,14 +594,23 @@
           
           
             
+                
+                
+          
+          
+            
 
               
               
           
           
-            <a href='https://labbots.github.io/bash-utility/'>Bash Utility</a> > Tags
+            <a href='https://labbots.github.io/bash-utility/'>Bash Utility</a> > Functions > Debug
           
         
+              
+          
+        
+
               
           
         
@@ -611,7 +620,17 @@
                 
                     <div class="progress">
     <div class="wrapper">
-
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#table-of-contents">Table of Contents</a></li>
+        <li><a href="#debugprint_array">debug::print_array()</a></li>
+        <li><a href="#debugprint_ansi">debug::print_ansi()</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
     </div>
 </div>
 
@@ -627,22 +646,70 @@
           
             <h1>
               
-              Tags
+              Debug
             </h1>
           
 
         
 
 
-
-
-
+<!-- raw HTML omitted -->
+<p>Functions to facilitate debugging scripts.</p>
+<h3 id="table-of-contents">Table of Contents</h3>
 <ul>
-	
+<li><a href="#debugprint_array">debug::print_array()</a></li>
+<li><a href="#debugprint_ansi">debug::print_ansi()</a></li>
 </ul>
+<hr>
+<h3 id="debugprint_array">debug::print_array()</h3>
+<p>Prints the content of array as key value pair for easier debugging.
+Pass the variable name of the array instead of value of the variable.</p>
+<h4 id="arguments">Arguments</h4>
+<ul>
+<li><strong>$1</strong> (string): variable name of the array.</li>
+</ul>
+<h4 id="output-on-stdout">Output on stdout</h4>
+<ul>
+<li>Formatted key value of array.</li>
+</ul>
+<h4 id="example">Example</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">array<span style="color:#f92672">=(</span>foo bar baz<span style="color:#f92672">)</span>
+printf <span style="color:#e6db74">&#34;Array\n&#34;</span>
+printarr <span style="color:#e6db74">&#34;array&#34;</span>
+declare -A assoc_array
+assoc_array<span style="color:#f92672">=([</span>foo<span style="color:#f92672">]=</span>bar <span style="color:#f92672">[</span>baz<span style="color:#f92672">]=</span>foobar<span style="color:#f92672">)</span>
+printf <span style="color:#e6db74">&#34;Assoc Array\n&#34;</span>
+printarr <span style="color:#e6db74">&#34;assoc_array&#34;</span>
+<span style="color:#75715e">#Output</span>
+Array
+0 <span style="color:#f92672">=</span> foo
+1 <span style="color:#f92672">=</span> bar
+2 <span style="color:#f92672">=</span> baz
+Assoc Array
+baz <span style="color:#f92672">=</span> foobar
+foo <span style="color:#f92672">=</span> bar
+</code></pre></div><hr>
+<h3 id="debugprint_ansi">debug::print_ansi()</h3>
+<p>Function to print ansi escape sequence as is.
+This function helps debug ansi escape sequence in text by displaying the escape codes.</p>
+<h4 id="arguments-1">Arguments</h4>
+<ul>
+<li><strong>$1</strong> (string): input with ansi escape sequence.</li>
+</ul>
+<h4 id="output-on-stdout-1">Output on stdout</h4>
+<ul>
+<li>Ansi escape sequence printed in output as is.</li>
+</ul>
+<h4 id="example-1">Example</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">txt<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>tput bold<span style="color:#66d9ef">)$(</span>tput setaf 9<span style="color:#66d9ef">)</span><span style="color:#e6db74">This is bold red text</span><span style="color:#66d9ef">$(</span>tput sgr0<span style="color:#66d9ef">)</span><span style="color:#e6db74">.</span><span style="color:#66d9ef">$(</span>tput setaf 10<span style="color:#66d9ef">)</span><span style="color:#e6db74">This is green text</span><span style="color:#66d9ef">$(</span>tput sgr0<span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
+debug::print_ansi <span style="color:#e6db74">&#34;</span>$txt<span style="color:#e6db74">&#34;</span>
+<span style="color:#75715e">#Output</span>
+<span style="color:#ae81ff">\e</span><span style="color:#f92672">[</span>1m<span style="color:#ae81ff">\e</span><span style="color:#f92672">[</span>91mThis is bold red text<span style="color:#ae81ff">\e</span><span style="color:#f92672">(</span>B<span style="color:#ae81ff">\e</span><span style="color:#f92672">[</span>m.<span style="color:#ae81ff">\e</span><span style="color:#f92672">[</span>92mThis is green text<span style="color:#ae81ff">\e</span><span style="color:#f92672">(</span>B<span style="color:#ae81ff">\e</span><span style="color:#f92672">[</span>m
+</code></pre></div><hr>
+<!-- raw HTML omitted -->
 
 
-<footer class=" footline" >
+<footer class="footline">
 	
 </footer>
 
@@ -728,6 +795,7 @@
             
                 
                     
+                    
                 
                 
 
@@ -740,6 +808,7 @@
             
             
                 
+                    
                     
                 
                 
@@ -756,6 +825,9 @@
             
             
                 
+                    
+                        
+                        
                     
                 
                 
@@ -1066,3 +1138,4 @@ var doNotTrack = (dnt == "1" || dnt == "yes");
 
   </body>
 </html>
+

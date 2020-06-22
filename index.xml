@@ -12,6 +12,17 @@
     
     
     <item>
+      <title>Debug</title>
+      <link>https://labbots.github.io/bash-utility/functions/debug/</link>
+      <pubDate>Mon, 22 Jun 2020 13:10:41 +0100</pubDate>
+      
+      <guid>https://labbots.github.io/bash-utility/functions/debug/</guid>
+      <description>Functions to facilitate debugging scripts.
+Table of Contents  debug::print_array() debug::print_ansi()   debug::print_array() Prints the content of array as key value pair for easier debugging. Pass the variable name of the array instead of value of the variable.
+Arguments  $1 (string): variable name of the array.  Output on stdout  Formatted key value of array.  Example array=(foo bar baz) printf &amp;#34;Array\n&amp;#34; printarr &amp;#34;array&amp;#34; declare -A assoc_array assoc_array=([foo]=bar [baz]=foobar) printf &amp;#34;Assoc Array\n&amp;#34; printarr &amp;#34;assoc_array&amp;#34; #Output Array 0 = foo 1 = bar 2 = baz Assoc Array baz = foobar foo = bar  debug::print_ansi() Function to print ansi escape sequence as is.</description>
+    </item>
+    
+    <item>
       <title>Validation</title>
       <link>https://labbots.github.io/bash-utility/functions/validation/</link>
       <pubDate>Sat, 20 Jun 2020 13:05:12 +0100</pubDate>

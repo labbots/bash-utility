@@ -18,7 +18,14 @@
 	"title": "Functions",
 	"tags": [],
 	"description": "",
-	"content": "Function Documenation  Validation   Array   Check   Collection   Date   File   Format   Interaction   Json   Miscellaneous   String   Terminal   Variable   "
+	"content": "Function Documenation  Debug   Validation   Array   Check   Collection   Date   File   Format   Interaction   Json   Miscellaneous   String   Terminal   Variable   "
+},
+{
+	"uri": "https://labbots.github.io/bash-utility/functions/debug/",
+	"title": "Debug",
+	"tags": [],
+	"description": "Functions to facilitate debugging scripts.",
+	"content": "Functions to facilitate debugging scripts.\nTable of Contents  debug::print_array() debug::print_ansi()   debug::print_array() Prints the content of array as key value pair for easier debugging. Pass the variable name of the array instead of value of the variable.\nArguments  $1 (string): variable name of the array.  Output on stdout  Formatted key value of array.  Example array=(foo bar baz) printf \u0026#34;Array\\n\u0026#34; printarr \u0026#34;array\u0026#34; declare -A assoc_array assoc_array=([foo]=bar [baz]=foobar) printf \u0026#34;Assoc Array\\n\u0026#34; printarr \u0026#34;assoc_array\u0026#34; #Output Array 0 = foo 1 = bar 2 = baz Assoc Array baz = foobar foo = bar  debug::print_ansi() Function to print ansi escape sequence as is. This function helps debug ansi escape sequence in text by displaying the escape codes.\nArguments  $1 (string): input with ansi escape sequence.  Output on stdout  Ansi escape sequence printed in output as is.  Example txt=\u0026#34;$(tput bold)$(tput setaf 9)This is bold red text$(tput sgr0).$(tput setaf 10)This is green text$(tput sgr0)\u0026#34; debug::print_ansi \u0026#34;$txt\u0026#34; #Output \\e[1m\\e[91mThis is bold red text\\e(B\\e[m.\\e[92mThis is green text\\e(B\\e[m  "
 },
 {
 	"uri": "https://labbots.github.io/bash-utility/functions/validation/",
