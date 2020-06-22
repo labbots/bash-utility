@@ -80,6 +80,9 @@ Detailed documentation is available at <https://labbots.github.io/bash-utility/>
   - [date::sub_minutes()](#datesub_minutes)
   - [date::sub_seconds()](#datesub_seconds)
   - [date::format()](#dateformat)
+- [Debug](#debug)
+  - [debug::print_array()](#debugprint_array)
+  - [debug::print_ansi()](#debugprint_ansi)
 - [File](#file)
   - [file::make_temp_file()](#filemake_temp_file)
   - [file::name()](#filename)
@@ -1595,6 +1598,65 @@ If format string is not specified then it defaults to "yyyy-mm-dd hh:mm:ss" form
 echo echo "$(date::format "1594143480")"
 #Output
 2020-07-07 18:38:00
+```
+
+## Debug
+
+Functions to facilitate debugging scripts.
+
+### debug::print_array()
+
+Prints the content of array as key value pair for easier debugging.
+Pass the variable name of the array instead of value of the variable.
+
+#### Arguments
+
+- **$1** (string): variable name of the array.
+
+#### Output on stdout
+
+- Formatted key value of array.
+
+#### Example
+
+```bash
+array=(foo bar baz)
+printf "Array\n"
+printarr "array"
+declare -A assoc_array
+assoc_array=([foo]=bar [baz]=foobar)
+printf "Assoc Array\n"
+printarr "assoc_array"
+#Output
+Array
+0 = foo
+1 = bar
+2 = baz
+Assoc Array
+baz = foobar
+foo = bar
+```
+
+### debug::print_ansi()
+
+Function to print ansi escape sequence as is.
+This function helps debug ansi escape sequence in text by displaying the escape codes.
+
+#### Arguments
+
+- **$1** (string): input with ansi escape sequence.
+
+#### Output on stdout
+
+- Ansi escape sequence printed in output as is.
+
+#### Example
+
+```bash
+txt="$(tput bold)$(tput setaf 9)This is bold red text$(tput sgr0).$(tput setaf 10)This is green text$(tput sgr0)"
+debug::print_ansi "$txt"
+#Output
+\e[1m\e[91mThis is bold red text\e(B\e[m.\e[92mThis is green text\e(B\e[m
 ```
 
 ## File
