@@ -2,7 +2,7 @@
 title : Format 
 description : Functions to format provided input. 
 date : 2020-06-12T01:11:01+01:00
-lastmod : 2020-06-22T14:55:46+01:00
+lastmod : 2020-06-22T18:09:49+01:00
 ---
 <!-- START generate_readme.sh generated SHDOC please keep comment here to allow auto update -->
 

@@ -2,7 +2,7 @@
 title : String 
 description : Functions for string operations and manipulations. 
 date : 2020-06-12T01:11:01+01:00
-lastmod : 2020-06-12T00:47:06+01:00
+lastmod : 2020-06-22T15:07:45+01:00
 ---
 <!-- START generate_readme.sh generated SHDOC please keep comment here to allow auto update -->
 
@@ -72,6 +72,7 @@ Split a string to array by a delimiter.
 #### Example
 
 ```bash
+array=( $(string::split "a,b,c" ",") )
 printf "%s" "$(string::split "Hello!World" "!")"
 #Output
 Hello
