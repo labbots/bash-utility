@@ -365,6 +365,22 @@ _process_webdoc_files() {
         done
 }
 
+_count_library_functions() {
+    declare source_script_dir
+    source_script_dir="${1}"
+
+    find "${source_script_dir}" -name '*.sh' -print0 | sort -z |
+        {
+            declare -i function_count=0 count=0
+            while IFS= read -r -d '' line; do
+                count=0
+                count=$(grep -c '^[[:alpha:]]*::[[:alnum:]_]*()' "${line}")
+                function_count=$((function_count + count))
+            done
+            printf "Total library functions: %s \n" "${function_count}"
+
+        }
+}
 main() {
     # export PS4='+(${BASH_SOURCE}:${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
     # set -x
@@ -378,6 +394,7 @@ main() {
     if [[ -n ${WEBDOC} ]]; then
         _process_webdoc_files "${SOURCE_SCRIPT_DIR}" "${WEBDOC_DEST_DIR}"
     fi
+    _count_library_functions "${SOURCE_SCRIPT_DIR}"
 }
 
 main "${@}"

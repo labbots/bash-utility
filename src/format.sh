@@ -3,6 +3,22 @@
 # @file Format
 # @brief Functions to format provided input.
 
+# @internal
+# @description Initialisation script when the code is sourced.
+#
+# @noargs
+__init(){
+_check_terminal_window_size
+}
+
+# @internal
+# @description Checks the terminal window size, if necessary, updates the values of LINES and COLUMNS.
+#
+# @noargs
+_check_terminal_window_size() {
+    shopt -s checkwinsize && (: && :)
+    trap 'shopt -s checkwinsize; (:;:)' SIGWINCH
+}
 # @description Format seconds to human readable format.
 #
 # @example
@@ -52,15 +68,6 @@ format::bytes_to_human() {
     printf "%s\n" "${b}${d} ${S[${s}]}"
 }
 
-# @internal
-# @description Checks the terminal window size, if necessary, updates the values of LINES and COLUMNS.
-#
-# @noargs
-_check_terminal_window_size() {
-    shopt -s checkwinsize && (: && :)
-    trap 'shopt -s checkwinsize; (:;:)' SIGWINCH
-}
-
 # @description Remove Ansi escape sequences from given text.
 #
 # @example
@@ -100,7 +107,6 @@ format::strip_ansi() {
 format::text_center() {
     [[ $# = 0 ]] && printf "%s: Missing arguments\n" "${FUNCNAME[0]}" && return 1
 
-    _check_terminal_window_size
     declare input="${1}" symbol="${2:- }" filler out no_ansi_out
     no_ansi_out=$(format::strip_ansi "$input")
     declare -i str_len=${#no_ansi_out}
@@ -132,7 +138,7 @@ format::text_center() {
 # @stdout formatted text.
 format::report() {
     [[ $# -lt 2 ]] && printf "%s: Missing arguments\n" "${FUNCNAME[0]}" && return 1
-    _check_terminal_window_size
+
     declare symbol="." to_print y hl hlout out
     declare input1="${1} " input2="${2}"
     input2="[ $input2 ]"
@@ -160,7 +166,7 @@ format::report() {
 # @stdout trimmed text.
 format::trim_text_to_term() {
     [[ $# = 0 ]] && printf "%s: Missing arguments\n" "${FUNCNAME[0]}" && return 1
-    _check_terminal_window_size
+
     declare to_print out input1="$1" input2="$2"
     if [[ $# = 1 ]]; then
         to_print="$((COLUMNS * 93 / 100))"
@@ -173,3 +179,5 @@ format::trim_text_to_term() {
     fi
     printf "%s" "$out"
 }
+
+__init

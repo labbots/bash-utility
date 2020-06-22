@@ -91,6 +91,7 @@ Detailed documentation is available at <https://labbots.github.io/bash-utility/>
   - [file::dirname()](#filedirname)
   - [file::full_path()](#filefull_path)
   - [file::mime_type()](#filemime_type)
+  - [file::contains_text()](#filecontains_text)
 - [Format](#format)
   - [format::human_readable_seconds()](#formathuman_readable_seconds)
   - [format::bytes_to_human()](#formatbytes_to_human)
@@ -1824,7 +1825,7 @@ Get mime type of provided input.
 
 #### Arguments
 
-- **$1** (string): relative or absolute path to file/direcotry.
+- **$1** (string): relative or absolute path to file/directory.
 
 #### Exit codes
 
@@ -1843,6 +1844,30 @@ Get mime type of provided input.
 file::mime_type "../src/file.sh"
 #Output
 application/x-shellscript
+```
+
+### file::contains_text()
+
+Search if a given pattern is found in file.
+
+#### Arguments
+
+- **$1** (string): relative or absolute path to file/directory.
+- **$2** (string): search key or regular expression.
+
+#### Exit codes
+
+- **0**:  If given search parameter is found in file.
+- **1**:  If search paramter not found in file.
+- **2**: Function missing arguments.
+
+#### Example
+
+```bash
+file::contains_text "./file.sh" "^[ @[:alpha:]]*"
+file::contains_text "./file.sh" "@file"
+#Output
+0
 ```
 
 ## Format
@@ -2229,6 +2254,7 @@ Split a string to array by a delimiter.
 #### Example
 
 ```bash
+array=( $(string::split "a,b,c" ",") )
 printf "%s" "$(string::split "Hello!World" "!")"
 #Output
 Hello
