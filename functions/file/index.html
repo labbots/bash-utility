@@ -12,21 +12,21 @@
     <title>File :: Bash Utility</title>
 
     
-    <link href="https://labbots.github.io/bash-utility/css/nucleus.css?1592834266" rel="stylesheet">
-    <link href="https://labbots.github.io/bash-utility/css/fontawesome-all.min.css?1592834266" rel="stylesheet">
-    <link href="https://labbots.github.io/bash-utility/css/hybrid.css?1592834266" rel="stylesheet">
-    <link href="https://labbots.github.io/bash-utility/css/featherlight.min.css?1592834266" rel="stylesheet">
-    <link href="https://labbots.github.io/bash-utility/css/perfect-scrollbar.min.css?1592834266" rel="stylesheet">
-    <link href="https://labbots.github.io/bash-utility/css/auto-complete.css?1592834266" rel="stylesheet">
-    <link href="https://labbots.github.io/bash-utility/css/atom-one-dark-reasonable.css?1592834266" rel="stylesheet">
-    <link href="https://labbots.github.io/bash-utility/css/theme.css?1592834266" rel="stylesheet">
-    <link href="https://labbots.github.io/bash-utility/css/hugo-theme.css?1592834266" rel="stylesheet">
+    <link href="https://labbots.github.io/bash-utility/css/nucleus.css?1592845915" rel="stylesheet">
+    <link href="https://labbots.github.io/bash-utility/css/fontawesome-all.min.css?1592845915" rel="stylesheet">
+    <link href="https://labbots.github.io/bash-utility/css/hybrid.css?1592845915" rel="stylesheet">
+    <link href="https://labbots.github.io/bash-utility/css/featherlight.min.css?1592845915" rel="stylesheet">
+    <link href="https://labbots.github.io/bash-utility/css/perfect-scrollbar.min.css?1592845915" rel="stylesheet">
+    <link href="https://labbots.github.io/bash-utility/css/auto-complete.css?1592845915" rel="stylesheet">
+    <link href="https://labbots.github.io/bash-utility/css/atom-one-dark-reasonable.css?1592845915" rel="stylesheet">
+    <link href="https://labbots.github.io/bash-utility/css/theme.css?1592845915" rel="stylesheet">
+    <link href="https://labbots.github.io/bash-utility/css/hugo-theme.css?1592845915" rel="stylesheet">
     
-    <link href="https://labbots.github.io/bash-utility/css/theme-blue.css?1592834266" rel="stylesheet">
+    <link href="https://labbots.github.io/bash-utility/css/theme-blue.css?1592845915" rel="stylesheet">
     
     
 
-    <script src="https://labbots.github.io/bash-utility/js/jquery-3.3.1.min.js?1592834266"></script>
+    <script src="https://labbots.github.io/bash-utility/js/jquery-3.3.1.min.js?1592845915"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -109,14 +109,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="https://labbots.github.io/bash-utility/js/lunr.min.js?1592834266"></script>
-<script type="text/javascript" src="https://labbots.github.io/bash-utility/js/auto-complete.js?1592834266"></script>
+<script type="text/javascript" src="https://labbots.github.io/bash-utility/js/lunr.min.js?1592845915"></script>
+<script type="text/javascript" src="https://labbots.github.io/bash-utility/js/auto-complete.js?1592845915"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/labbots.github.io\/bash-utility\/";
     
 </script>
-<script type="text/javascript" src="https://labbots.github.io/bash-utility/js/search.js?1592834266"></script>
+<script type="text/javascript" src="https://labbots.github.io/bash-utility/js/search.js?1592845915"></script>
 
     
   </div>
@@ -632,6 +632,7 @@
         <li><a href="#filedirname">file::dirname()</a></li>
         <li><a href="#filefull_path">file::full_path()</a></li>
         <li><a href="#filemime_type">file::mime_type()</a></li>
+        <li><a href="#filecontains_text">file::contains_text()</a></li>
       </ul>
     </li>
   </ul>
@@ -669,6 +670,7 @@
 <li><a href="#filedirname">file::dirname()</a></li>
 <li><a href="#filefull_path">file::full_path()</a></li>
 <li><a href="#filemime_type">file::mime_type()</a></li>
+<li><a href="#filecontains_text">file::contains_text()</a></li>
 </ul>
 <hr>
 <h3 id="filemake_temp_file">file::make_temp_file()</h3>
@@ -795,7 +797,7 @@ md
 <p>Get mime type of provided input.</p>
 <h4 id="arguments-5">Arguments</h4>
 <ul>
-<li><strong>$1</strong> (string): relative or absolute path to file/direcotry.</li>
+<li><strong>$1</strong> (string): relative or absolute path to file/directory.</li>
 </ul>
 <h4 id="exit-codes-6">Exit codes</h4>
 <ul>
@@ -812,6 +814,25 @@ md
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">file::mime_type <span style="color:#e6db74">&#34;../src/file.sh&#34;</span>
 <span style="color:#75715e">#Output</span>
 application/x-shellscript
+</code></pre></div><hr>
+<h3 id="filecontains_text">file::contains_text()</h3>
+<p>Search if a given pattern is found in file.</p>
+<h4 id="arguments-6">Arguments</h4>
+<ul>
+<li><strong>$1</strong> (string): relative or absolute path to file/directory.</li>
+<li><strong>$2</strong> (string): search key or regular expression.</li>
+</ul>
+<h4 id="exit-codes-7">Exit codes</h4>
+<ul>
+<li><strong>0</strong>:  If given search parameter is found in file.</li>
+<li><strong>1</strong>:  If search paramter not found in file.</li>
+<li><strong>2</strong>: Function missing arguments.</li>
+</ul>
+<h4 id="example-7">Example</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">file::contains_text <span style="color:#e6db74">&#34;./file.sh&#34;</span> <span style="color:#e6db74">&#34;^[ @[:alpha:]]*&#34;</span>
+file::contains_text <span style="color:#e6db74">&#34;./file.sh&#34;</span> <span style="color:#e6db74">&#34;@file&#34;</span>
+<span style="color:#75715e">#Output</span>
+<span style="color:#ae81ff">0</span>
 </code></pre></div><hr>
 <!-- raw HTML omitted -->
 
@@ -1160,19 +1181,19 @@ application/x-shellscript
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="https://labbots.github.io/bash-utility/js/clipboard.min.js?1592834266"></script>
-    <script src="https://labbots.github.io/bash-utility/js/perfect-scrollbar.min.js?1592834266"></script>
-    <script src="https://labbots.github.io/bash-utility/js/perfect-scrollbar.jquery.min.js?1592834266"></script>
-    <script src="https://labbots.github.io/bash-utility/js/jquery.sticky.js?1592834266"></script>
-    <script src="https://labbots.github.io/bash-utility/js/featherlight.min.js?1592834266"></script>
-    <script src="https://labbots.github.io/bash-utility/js/highlight.pack.js?1592834266"></script>
+    <script src="https://labbots.github.io/bash-utility/js/clipboard.min.js?1592845915"></script>
+    <script src="https://labbots.github.io/bash-utility/js/perfect-scrollbar.min.js?1592845915"></script>
+    <script src="https://labbots.github.io/bash-utility/js/perfect-scrollbar.jquery.min.js?1592845915"></script>
+    <script src="https://labbots.github.io/bash-utility/js/jquery.sticky.js?1592845915"></script>
+    <script src="https://labbots.github.io/bash-utility/js/featherlight.min.js?1592845915"></script>
+    <script src="https://labbots.github.io/bash-utility/js/highlight.pack.js?1592845915"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="https://labbots.github.io/bash-utility/js/modernizr.custom-3.6.0.js?1592834266"></script>
-    <script src="https://labbots.github.io/bash-utility/js/learn.js?1592834266"></script>
-    <script src="https://labbots.github.io/bash-utility/js/hugo-learn.js?1592834266"></script>
+    <script src="https://labbots.github.io/bash-utility/js/modernizr.custom-3.6.0.js?1592845915"></script>
+    <script src="https://labbots.github.io/bash-utility/js/learn.js?1592845915"></script>
+    <script src="https://labbots.github.io/bash-utility/js/hugo-learn.js?1592845915"></script>
 
-    <link href="https://labbots.github.io/bash-utility/mermaid/mermaid.css?1592834266" rel="stylesheet" />
-    <script src="https://labbots.github.io/bash-utility/mermaid/mermaid.js?1592834266"></script>
+    <link href="https://labbots.github.io/bash-utility/mermaid/mermaid.css?1592845915" rel="stylesheet" />
+    <script src="https://labbots.github.io/bash-utility/mermaid/mermaid.js?1592845915"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

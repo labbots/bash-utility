@@ -87,7 +87,7 @@ Exit codes  0: If successful. 1: If unable to generate timestamp.  Output on std
       
       <guid>https://labbots.github.io/bash-utility/functions/file/</guid>
       <description>Functions for handling files.
-Table of Contents  file::make_temp_file() file::name() file::basename() file::extension() file::dirname() file::full_path() file::mime_type()   file::make_temp_file() Create temporary file. Function creates temporary file with random name. The temporary file will be deleted when script finishes.
+Table of Contents  file::make_temp_file() file::name() file::basename() file::extension() file::dirname() file::full_path() file::mime_type() file::contains_text()   file::make_temp_file() Create temporary file. Function creates temporary file with random name. The temporary file will be deleted when script finishes.
 Function has no arguments.
 Exit codes  0: If successful. 1: If failed to create temp file.  Output on stdout  file name of temporary file created.  Example echo &amp;#34;$(file::make_temp_file)&amp;#34; #Output tmp.</description>
     </item>
