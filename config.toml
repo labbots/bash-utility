@@ -18,6 +18,7 @@ home = [ "HTML", "RSS", "JSON"]
   themeVariant = "blue"
   disableNextPrev = true
   showVisitedLinks = false
+  ordersectionsby = "title"
 [[menu.shortcuts]]
 name = "<i class='fab fa-github'></i> Bash Utility"
 identifier = "bash-utility-repo"
