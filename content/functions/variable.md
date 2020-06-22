@@ -2,7 +2,7 @@
 title : Variable 
 description : Functions for handling variables. 
 date : 2020-06-12T01:11:01+01:00
-lastmod : 2020-06-16T15:14:52+01:00
+lastmod : 2020-06-19T18:15:50+01:00
 ---
 <!-- START generate_readme.sh generated SHDOC please keep comment here to allow auto update -->
 
@@ -196,7 +196,7 @@ Check if given variable is empty or null.
 #### Exit codes
 
 - **0**:  If input is empty or null.
-- **1**: If input is not empty.
+- **1**: If input is not empty or null.
 
 #### Example
 
