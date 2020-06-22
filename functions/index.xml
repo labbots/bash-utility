@@ -12,6 +12,17 @@
     
     
     <item>
+      <title>Validation</title>
+      <link>https://labbots.github.io/bash-utility/functions/validation/</link>
+      <pubDate>Sat, 20 Jun 2020 13:05:12 +0100</pubDate>
+      
+      <guid>https://labbots.github.io/bash-utility/functions/validation/</guid>
+      <description>Functions to perform validation on given data.
+Table of Contents  validation::email() validation::ipv4() validation::ipv6() validation::alpha() validation::alpha_num() validation::alpha_dash()   validation::email() Validate whether a given input is a valid email address or not.
+Arguments  $1 (string): input email address to validate.  Exit codes  0: If provided input is an email address. 1: If provided input is not an email address. 2: Function missing arguments.  Example test=&amp;#39;test@gmail.com&amp;#39; validation::email &amp;#34;${test}&amp;#34; echo $?</description>
+    </item>
+    
+    <item>
       <title>Array</title>
       <link>https://labbots.github.io/bash-utility/functions/array/</link>
       <pubDate>Fri, 12 Jun 2020 01:11:01 +0100</pubDate>

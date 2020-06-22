@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="Hugo 0.72.0" />
-    <meta name="description" content="Functions for handling files.">
+    <meta name="description" content="Functions to perform validation on given data.">
 
 
     <link rel="icon" href="https://labbots.github.io/bash-utility/images/favicon.png" type="image/png">
 
-    <title>File :: Bash Utility</title>
+    <title>Validation :: Bash Utility</title>
 
     
     <link href="https://labbots.github.io/bash-utility/css/nucleus.css?1592820206" rel="stylesheet">
@@ -61,7 +61,7 @@
     <script src="https://unpkg.com/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js"></script>
 
   </head>
-  <body class="" data-url="/functions/file/">
+  <body class="" data-url="/functions/validation/">
     <nav id="sidebar" class="">
 
 
@@ -237,7 +237,7 @@
  
   
     
-      <li data-nav-id="/functions/validation/" title="Validation" class="dd-item ">
+      <li data-nav-id="/functions/validation/" title="Validation" class="dd-item active">
         <a href="https://labbots.github.io/bash-utility/functions/validation/">
         Validation
         
@@ -342,7 +342,7 @@
  
   
     
-      <li data-nav-id="/functions/file/" title="File" class="dd-item active">
+      <li data-nav-id="/functions/file/" title="File" class="dd-item ">
         <a href="https://labbots.github.io/bash-utility/functions/file/">
         File
         
@@ -583,7 +583,7 @@
               
           
           
-            <a href='https://labbots.github.io/bash-utility/'>Bash Utility</a> > Functions > File
+            <a href='https://labbots.github.io/bash-utility/'>Bash Utility</a> > Functions > Validation
           
         
               
@@ -604,13 +604,12 @@
     <li>
       <ul>
         <li><a href="#table-of-contents">Table of Contents</a></li>
-        <li><a href="#filemake_temp_file">file::make_temp_file()</a></li>
-        <li><a href="#filename">file::name()</a></li>
-        <li><a href="#filebasename">file::basename()</a></li>
-        <li><a href="#fileextension">file::extension()</a></li>
-        <li><a href="#filedirname">file::dirname()</a></li>
-        <li><a href="#filefull_path">file::full_path()</a></li>
-        <li><a href="#filemime_type">file::mime_type()</a></li>
+        <li><a href="#validationemail">validation::email()</a></li>
+        <li><a href="#validationipv4">validation::ipv4()</a></li>
+        <li><a href="#validationipv6">validation::ipv6()</a></li>
+        <li><a href="#validationalpha">validation::alpha()</a></li>
+        <li><a href="#validationalpha_num">validation::alpha_num()</a></li>
+        <li><a href="#validationalpha_dash">validation::alpha_dash()</a></li>
       </ul>
     </li>
   </ul>
@@ -630,7 +629,7 @@
           
             <h1>
               
-              File
+              Validation
             </h1>
           
 
@@ -638,159 +637,168 @@
 
 
 <!-- raw HTML omitted -->
-<p>Functions for handling files.</p>
+<p>Functions to perform validation on given data.</p>
 <h3 id="table-of-contents">Table of Contents</h3>
 <ul>
-<li><a href="#filemake_temp_file">file::make_temp_file()</a></li>
-<li><a href="#filename">file::name()</a></li>
-<li><a href="#filebasename">file::basename()</a></li>
-<li><a href="#fileextension">file::extension()</a></li>
-<li><a href="#filedirname">file::dirname()</a></li>
-<li><a href="#filefull_path">file::full_path()</a></li>
-<li><a href="#filemime_type">file::mime_type()</a></li>
+<li><a href="#validationemail">validation::email()</a></li>
+<li><a href="#validationipv4">validation::ipv4()</a></li>
+<li><a href="#validationipv6">validation::ipv6()</a></li>
+<li><a href="#validationalpha">validation::alpha()</a></li>
+<li><a href="#validationalpha_num">validation::alpha_num()</a></li>
+<li><a href="#validationalpha_dash">validation::alpha_dash()</a></li>
 </ul>
 <hr>
-<h3 id="filemake_temp_file">file::make_temp_file()</h3>
-<p>Create temporary file.
-Function creates temporary file with random name. The temporary file will be deleted when script finishes.</p>
-<p><em>Function has no arguments.</em></p>
-<h4 id="exit-codes">Exit codes</h4>
-<ul>
-<li><strong>0</strong>:  If successful.</li>
-<li><strong>1</strong>: If failed to create temp file.</li>
-</ul>
-<h4 id="output-on-stdout">Output on stdout</h4>
-<ul>
-<li>file name of temporary file created.</li>
-</ul>
-<h4 id="example">Example</h4>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">echo <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>file::make_temp_file<span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
-<span style="color:#75715e">#Output</span>
-tmp.vgftzy
-</code></pre></div><hr>
-<h3 id="filename">file::name()</h3>
-<p>Get only the filename from string path.</p>
+<h3 id="validationemail">validation::email()</h3>
+<p>Validate whether a given input is a valid email address or not.</p>
 <h4 id="arguments">Arguments</h4>
 <ul>
-<li><strong>$1</strong> (string): path.</li>
+<li><strong>$1</strong> (string): input email address to validate.</li>
+</ul>
+<h4 id="exit-codes">Exit codes</h4>
+<ul>
+<li><strong>0</strong>:  If provided input is an email address.</li>
+<li><strong>1</strong>:  If provided input is not an email address.</li>
+<li><strong>2</strong>: Function missing arguments.</li>
+</ul>
+<h4 id="example">Example</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">test<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;test@gmail.com&#39;</span>
+validation::email <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>test<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+echo $?
+<span style="color:#75715e">#Output</span>
+<span style="color:#ae81ff">0</span>
+</code></pre></div><hr>
+<h3 id="validationipv4">validation::ipv4()</h3>
+<p>Validate whether a given input is a valid IP V4 address.</p>
+<h4 id="arguments-1">Arguments</h4>
+<ul>
+<li><strong>$1</strong> (string): input IPv4 address.</li>
 </ul>
 <h4 id="exit-codes-1">Exit codes</h4>
 <ul>
-<li><strong>0</strong>:  If successful.</li>
+<li><strong>0</strong>:  If provided input is a valid IPv4.</li>
+<li><strong>1</strong>:  If provided input is not a valid IPv4.</li>
 <li><strong>2</strong>: Function missing arguments.</li>
 </ul>
-<h4 id="output-on-stdout-1">Output on stdout</h4>
-<ul>
-<li>name of the file with extension.</li>
-</ul>
 <h4 id="example-1">Example</h4>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">echo <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>file::name <span style="color:#e6db74">&#34;/path/to/test.md&#34;</span><span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ips<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;
+</span><span style="color:#e6db74">     4.2.2.2
+</span><span style="color:#e6db74">     a.b.c.d
+</span><span style="color:#e6db74">     192.168.1.1
+</span><span style="color:#e6db74">     0.0.0.0
+</span><span style="color:#e6db74">     255.255.255.255
+</span><span style="color:#e6db74">     255.255.255.256
+</span><span style="color:#e6db74">     192.168.0.1
+</span><span style="color:#e6db74">     192.168.0
+</span><span style="color:#e6db74">     1234.123.123.123
+</span><span style="color:#e6db74">     0.192.168.1
+</span><span style="color:#e6db74">     &#39;</span>
+<span style="color:#66d9ef">for</span> ip in $ips; <span style="color:#66d9ef">do</span>
+   <span style="color:#66d9ef">if</span> validation::ipv4 $ip; <span style="color:#66d9ef">then</span> stat<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;good&#39;</span>; <span style="color:#66d9ef">else</span> stat<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;bad&#39;</span>; <span style="color:#66d9ef">fi</span>
+   printf <span style="color:#e6db74">&#34;%-20s: %s\n&#34;</span> <span style="color:#e6db74">&#34;</span>$ip<span style="color:#e6db74">&#34;</span> <span style="color:#e6db74">&#34;</span>$stat<span style="color:#e6db74">&#34;</span>
+<span style="color:#66d9ef">done</span>
 <span style="color:#75715e">#Output</span>
-test.md
+4.2.2.2             : good
+a.b.c.d             : bad
+192.168.1.1         : good
+0.0.0.0             : good
+255.255.255.255     : good
+255.255.255.256     : bad
+192.168.0.1         : good
+192.168.0           : bad
+1234.123.123.123    : bad
+0.192.168.1         : good
 </code></pre></div><hr>
-<h3 id="filebasename">file::basename()</h3>
-<p>Get the basename of file from file name.</p>
-<h4 id="arguments-1">Arguments</h4>
+<h3 id="validationipv6">validation::ipv6()</h3>
+<p>Validate whether a given input is a valid IP V6 address.</p>
+<h4 id="arguments-2">Arguments</h4>
 <ul>
-<li><strong>$1</strong> (string): path.</li>
+<li><strong>$1</strong> (string): input IPv6 address.</li>
 </ul>
 <h4 id="exit-codes-2">Exit codes</h4>
 <ul>
-<li><strong>0</strong>:  If successful.</li>
+<li><strong>0</strong>:  If provided input is a valid IPv6.</li>
+<li><strong>1</strong>:  If provided input is not a valid IPv6.</li>
 <li><strong>2</strong>: Function missing arguments.</li>
 </ul>
-<h4 id="output-on-stdout-2">Output on stdout</h4>
-<ul>
-<li>basename of the file.</li>
-</ul>
 <h4 id="example-2">Example</h4>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">echo <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>file::basename <span style="color:#e6db74">&#34;/path/to/test.md&#34;</span><span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ips<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;
+</span><span style="color:#e6db74">     2001:db8:85a3:8d3:1319:8a2e:370:7348
+</span><span style="color:#e6db74">     fe80::1ff:fe23:4567:890a
+</span><span style="color:#e6db74">     fe80::1ff:fe23:4567:890a%eth2
+</span><span style="color:#e6db74">     2001:0db8:85a3:0000:0000:8a2e:0370:7334:foo:bar
+</span><span style="color:#e6db74">     fezy::1ff:fe23:4567:890a
+</span><span style="color:#e6db74">     ::
+</span><span style="color:#e6db74">     2001:db8::
+</span><span style="color:#e6db74">     &#39;</span>
+<span style="color:#66d9ef">for</span> ip in $ips; <span style="color:#66d9ef">do</span>
+  <span style="color:#66d9ef">if</span> validation::ipv6 $ip; <span style="color:#66d9ef">then</span> stat<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;good&#39;</span>; <span style="color:#66d9ef">else</span> stat<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;bad&#39;</span>; <span style="color:#66d9ef">fi</span>
+  printf <span style="color:#e6db74">&#34;%-50s= %s\n&#34;</span> <span style="color:#e6db74">&#34;</span>$ip<span style="color:#e6db74">&#34;</span> <span style="color:#e6db74">&#34;</span>$stat<span style="color:#e6db74">&#34;</span>
+<span style="color:#66d9ef">done</span>
 <span style="color:#75715e">#Output</span>
-test
+2001:db8:85a3:8d3:1319:8a2e:370:7348              <span style="color:#f92672">=</span> good
+fe80::1ff:fe23:4567:890a                          <span style="color:#f92672">=</span> good
+fe80::1ff:fe23:4567:890a%eth2                     <span style="color:#f92672">=</span> good
+2001:0db8:85a3:0000:0000:8a2e:0370:7334:foo:bar   <span style="color:#f92672">=</span> bad
+fezy::1ff:fe23:4567:890a                          <span style="color:#f92672">=</span> bad
+::                                                <span style="color:#f92672">=</span> good
+2001:db8::                                        <span style="color:#f92672">=</span> good
 </code></pre></div><hr>
-<h3 id="fileextension">file::extension()</h3>
-<p>Get the extension of file from file name.</p>
-<h4 id="arguments-2">Arguments</h4>
+<h3 id="validationalpha">validation::alpha()</h3>
+<p>Validate if given variable is entirely alphabetic characters.</p>
+<h4 id="arguments-3">Arguments</h4>
 <ul>
-<li><strong>$1</strong> (string): path.</li>
+<li><strong>$1</strong> (string): Value of variable to validate.</li>
 </ul>
 <h4 id="exit-codes-3">Exit codes</h4>
 <ul>
-<li><strong>0</strong>:  If successful.</li>
-<li><strong>1</strong>: If no extension is found in the filename.</li>
+<li><strong>0</strong>:  If input is only alpha characters.</li>
+<li><strong>1</strong>: If input contains any non alpha characters.</li>
 <li><strong>2</strong>: Function missing arguments.</li>
 </ul>
-<h4 id="output-on-stdout-3">Output on stdout</h4>
-<ul>
-<li>extension of the file.</li>
-</ul>
 <h4 id="example-3">Example</h4>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">echo <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>file::extension <span style="color:#e6db74">&#34;/path/to/test.md&#34;</span><span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">test<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;abcABC&#39;</span>
+validation::alpha <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>test<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+echo $?
 <span style="color:#75715e">#Output</span>
-md
+<span style="color:#ae81ff">0</span>
 </code></pre></div><hr>
-<h3 id="filedirname">file::dirname()</h3>
-<p>Get directory name from file path.</p>
-<h4 id="arguments-3">Arguments</h4>
+<h3 id="validationalpha_num">validation::alpha_num()</h3>
+<p>Check if given variable contains only alpha-numeric characters.</p>
+<h4 id="arguments-4">Arguments</h4>
 <ul>
-<li><strong>$1</strong> (string): path.</li>
+<li><strong>$1</strong> (string): Value of variable to validate.</li>
 </ul>
 <h4 id="exit-codes-4">Exit codes</h4>
 <ul>
-<li><strong>0</strong>:  If successful.</li>
+<li><strong>0</strong>:  If input is an alpha-numeric.</li>
+<li><strong>1</strong>: If input is not an alpha-numeric.</li>
 <li><strong>2</strong>: Function missing arguments.</li>
 </ul>
-<h4 id="output-on-stdout-4">Output on stdout</h4>
-<ul>
-<li>directory path.</li>
-</ul>
 <h4 id="example-4">Example</h4>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">echo <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>file::dirname <span style="color:#e6db74">&#34;/path/to/test.md&#34;</span><span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">test<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;abc123&#39;</span>
+validation::alpha_num <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>test<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+echo $?
 <span style="color:#75715e">#Output</span>
-/path/to
+<span style="color:#ae81ff">0</span>
 </code></pre></div><hr>
-<h3 id="filefull_path">file::full_path()</h3>
-<p>Get absolute path of file or directory.</p>
-<h4 id="arguments-4">Arguments</h4>
+<h3 id="validationalpha_dash">validation::alpha_dash()</h3>
+<p>Validate if given variable contains only alpha-numeric characters, as well as dashes and underscores.</p>
+<h4 id="arguments-5">Arguments</h4>
 <ul>
-<li><strong>$1</strong> (string): relative or absolute path to file/direcotry.</li>
+<li><strong>$1</strong> (string): Value of variable to validate.</li>
 </ul>
 <h4 id="exit-codes-5">Exit codes</h4>
 <ul>
-<li><strong>0</strong>:  If successful.</li>
-<li><strong>1</strong>:  If file/directory does not exist.</li>
+<li><strong>0</strong>:  If input is valid.</li>
+<li><strong>1</strong>: If input the input is not valid.</li>
 <li><strong>2</strong>: Function missing arguments.</li>
-</ul>
-<h4 id="output-on-stdout-5">Output on stdout</h4>
-<ul>
-<li>Absolute path to file/directory.</li>
 </ul>
 <h4 id="example-5">Example</h4>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">file::full_path <span style="color:#e6db74">&#34;../path/to/file.md&#34;</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">test<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;abc-ABC_cD&#39;</span>
+validation::alpha_dash <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>test<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+echo $?
 <span style="color:#75715e">#Output</span>
-/home/labbots/docs/path/to/file.md
-</code></pre></div><hr>
-<h3 id="filemime_type">file::mime_type()</h3>
-<p>Get mime type of provided input.</p>
-<h4 id="arguments-5">Arguments</h4>
-<ul>
-<li><strong>$1</strong> (string): relative or absolute path to file/direcotry.</li>
-</ul>
-<h4 id="exit-codes-6">Exit codes</h4>
-<ul>
-<li><strong>0</strong>:  If successful.</li>
-<li><strong>1</strong>:  If file/directory does not exist.</li>
-<li><strong>2</strong>: Function missing arguments.</li>
-<li><strong>3</strong>: If file or mimetype command not found in system.</li>
-</ul>
-<h4 id="output-on-stdout-6">Output on stdout</h4>
-<ul>
-<li>mime type of file/directory.</li>
-</ul>
-<h4 id="example-6">Example</h4>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">file::mime_type <span style="color:#e6db74">&#34;../src/file.sh&#34;</span>
-<span style="color:#75715e">#Output</span>
-application/x-shellscript
+<span style="color:#ae81ff">0</span>
 </code></pre></div><hr>
 <!-- raw HTML omitted -->
 
@@ -895,6 +903,23 @@ application/x-shellscript
             
                 
                     
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
                         
                         
                     
@@ -977,26 +1002,6 @@ application/x-shellscript
             
             
                 
-                    
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                        
-                        
                     
                 
                 
