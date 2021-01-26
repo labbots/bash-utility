@@ -7,7 +7,10 @@
 </p>
 <p align="center">
 <a href="https://github.com/labbots/bash-utility/actions?query=workflow%3A%22github+pages%22"><img alt="Gh-pages Status" src="https://img.shields.io/github/workflow/status/labbots/bash-utility/github%20pages/hugo-docs?label=Gh%20pages&style=for-the-badge"></a>
-<a href="https://labbots.github.io/bash-utility/"><img alt="Website" src="https://img.shields.io/website?down_color=red&style=for-the-badge&up_color=blue&url=https%3A%2F%2Flabbots.github.io%2Fbash-utility%2F"></a>
+<a href="https://labbots.github.io/bash-utility/"><img alt="Website" src="https://img.shields.io/website?down_color=red&style=for-the-badge&up_color=success&url=https%3A%2F%2Flabbots.github.io%2Fbash-utility%2F"></a>
+</p>
+<p align="center">
+<img alt="Gh-pages Status" src="https://img.shields.io/static/v1?label=Library%20Functions&message=107&color=blue&style=for-the-badge">
 </p>
 <p align="center">
 <img src="image/bash-utility.png" height="250"/>
