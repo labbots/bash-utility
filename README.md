@@ -191,7 +191,7 @@ git clone https://github.com/labbots/bash-utility.git ./vendor/bash-utility
 If you do not have git installed, you can download the archive of the latest version of the library. Extract the zip file to appropriate folder by following the below command.
 
 ```shell
-wget https://github.com/labbots/bash-utility//archive/master.zip
+wget https://github.com/labbots/bash-utility/archive/master.zip
 unzip -q master.zip -d tmp
 mkdir -p vendor/bash-utility
 mv tmp/bash-utility-master vendor/bash-utility
