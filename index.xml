@@ -12,6 +12,18 @@
     
     
     <item>
+      <title>Operating System</title>
+      <link>https://labbots.github.io/bash-utility/functions/os/</link>
+      <pubDate>Tue, 26 Jan 2021 12:34:48 +0000</pubDate>
+      
+      <guid>https://labbots.github.io/bash-utility/functions/os/</guid>
+      <description>Functions to detect Operating system and version.
+Table of Contents  os::detect_os() os::detect_linux_distro() os::detect_linux_version() os::detect_mac_version()   os::detect_os() Identify the OS the function is run on.
+Function has no arguments.
+Exit codes  0: If OS is successfully detected. 1: If unable to detect OS.  Output on stdout  Operating system name (linux, mac or windows).  Example os::detect_os #Output linux  os::detect_linux_distro() Identify the distribution flavour of linux.</description>
+    </item>
+    
+    <item>
       <title>Debug</title>
       <link>https://labbots.github.io/bash-utility/functions/debug/</link>
       <pubDate>Mon, 22 Jun 2020 13:10:41 +0100</pubDate>
@@ -29,7 +41,7 @@ Arguments  $1 (string): variable name of the array.  Output on stdout  Formatted
       
       <guid>https://labbots.github.io/bash-utility/functions/validation/</guid>
       <description>Functions to perform validation on given data.
-Table of Contents  validation::email() validation::ipv4() validation::ipv6() validation::alpha() validation::alpha_num() validation::alpha_dash()   validation::email() Validate whether a given input is a valid email address or not.
+Table of Contents  validation::email() validation::ipv4() validation::ipv6() validation::alpha() validation::alpha_num() validation::alpha_dash() validation::version_comparison()   validation::email() Validate whether a given input is a valid email address or not.
 Arguments  $1 (string): input email address to validate.  Exit codes  0: If provided input is an email address. 1: If provided input is not an email address. 2: Function missing arguments.  Example test=&amp;#39;test@gmail.com&amp;#39; validation::email &amp;#34;${test}&amp;#34; echo $?</description>
     </item>
     

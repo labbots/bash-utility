@@ -12,21 +12,21 @@
     <title>Validation :: Bash Utility</title>
 
     
-    <link href="https://labbots.github.io/bash-utility/css/nucleus.css?1592845915" rel="stylesheet">
-    <link href="https://labbots.github.io/bash-utility/css/fontawesome-all.min.css?1592845915" rel="stylesheet">
-    <link href="https://labbots.github.io/bash-utility/css/hybrid.css?1592845915" rel="stylesheet">
-    <link href="https://labbots.github.io/bash-utility/css/featherlight.min.css?1592845915" rel="stylesheet">
-    <link href="https://labbots.github.io/bash-utility/css/perfect-scrollbar.min.css?1592845915" rel="stylesheet">
-    <link href="https://labbots.github.io/bash-utility/css/auto-complete.css?1592845915" rel="stylesheet">
-    <link href="https://labbots.github.io/bash-utility/css/atom-one-dark-reasonable.css?1592845915" rel="stylesheet">
-    <link href="https://labbots.github.io/bash-utility/css/theme.css?1592845915" rel="stylesheet">
-    <link href="https://labbots.github.io/bash-utility/css/hugo-theme.css?1592845915" rel="stylesheet">
+    <link href="https://labbots.github.io/bash-utility/css/nucleus.css?1611665698" rel="stylesheet">
+    <link href="https://labbots.github.io/bash-utility/css/fontawesome-all.min.css?1611665698" rel="stylesheet">
+    <link href="https://labbots.github.io/bash-utility/css/hybrid.css?1611665698" rel="stylesheet">
+    <link href="https://labbots.github.io/bash-utility/css/featherlight.min.css?1611665698" rel="stylesheet">
+    <link href="https://labbots.github.io/bash-utility/css/perfect-scrollbar.min.css?1611665698" rel="stylesheet">
+    <link href="https://labbots.github.io/bash-utility/css/auto-complete.css?1611665698" rel="stylesheet">
+    <link href="https://labbots.github.io/bash-utility/css/atom-one-dark-reasonable.css?1611665698" rel="stylesheet">
+    <link href="https://labbots.github.io/bash-utility/css/theme.css?1611665698" rel="stylesheet">
+    <link href="https://labbots.github.io/bash-utility/css/hugo-theme.css?1611665698" rel="stylesheet">
     
-    <link href="https://labbots.github.io/bash-utility/css/theme-blue.css?1592845915" rel="stylesheet">
+    <link href="https://labbots.github.io/bash-utility/css/theme-blue.css?1611665698" rel="stylesheet">
     
     
 
-    <script src="https://labbots.github.io/bash-utility/js/jquery-3.3.1.min.js?1592845915"></script>
+    <script src="https://labbots.github.io/bash-utility/js/jquery-3.3.1.min.js?1611665698"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -109,14 +109,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="https://labbots.github.io/bash-utility/js/lunr.min.js?1592845915"></script>
-<script type="text/javascript" src="https://labbots.github.io/bash-utility/js/auto-complete.js?1592845915"></script>
+<script type="text/javascript" src="https://labbots.github.io/bash-utility/js/lunr.min.js?1611665698"></script>
+<script type="text/javascript" src="https://labbots.github.io/bash-utility/js/auto-complete.js?1611665698"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/labbots.github.io\/bash-utility\/";
     
 </script>
-<script type="text/javascript" src="https://labbots.github.io/bash-utility/js/search.js?1592845915"></script>
+<script type="text/javascript" src="https://labbots.github.io/bash-utility/js/search.js?1611665698"></script>
 
     
   </div>
@@ -447,6 +447,27 @@
  
   
     
+      <li data-nav-id="/functions/os/" title="Operating System" class="dd-item ">
+        <a href="https://labbots.github.io/bash-utility/functions/os/">
+        Operating System
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
       <li data-nav-id="/functions/string/" title="String" class="dd-item ">
         <a href="https://labbots.github.io/bash-utility/functions/string/">
         String
@@ -631,6 +652,7 @@
         <li><a href="#validationalpha">validation::alpha()</a></li>
         <li><a href="#validationalpha_num">validation::alpha_num()</a></li>
         <li><a href="#validationalpha_dash">validation::alpha_dash()</a></li>
+        <li><a href="#validationversion_comparison">validation::version_comparison()</a></li>
       </ul>
     </li>
   </ul>
@@ -667,6 +689,7 @@
 <li><a href="#validationalpha">validation::alpha()</a></li>
 <li><a href="#validationalpha_num">validation::alpha_num()</a></li>
 <li><a href="#validationalpha_dash">validation::alpha_dash()</a></li>
+<li><a href="#validationversion_comparison">validation::version_comparison()</a></li>
 </ul>
 <hr>
 <h3 id="validationemail">validation::email()</h3>
@@ -821,6 +844,27 @@ echo $?
 <span style="color:#75715e">#Output</span>
 <span style="color:#ae81ff">0</span>
 </code></pre></div><hr>
+<h3 id="validationversion_comparison">validation::version_comparison()</h3>
+<p>Compares version numbers and provides return based on whether the value in equal, less than or greater.</p>
+<h4 id="arguments-6">Arguments</h4>
+<ul>
+<li><strong>$1</strong> (string): Version number to check (eg: 1.0.1)</li>
+</ul>
+<h4 id="exit-codes-6">Exit codes</h4>
+<ul>
+<li><strong>0</strong>: version number is equal.</li>
+<li><strong>1</strong>: $1 version number is greater than $2.</li>
+<li><strong>2</strong>: $1 version number is less than $2.</li>
+<li><strong>3</strong>: Function is missing required arguments.</li>
+<li><strong>4</strong>: Provided input argument is in invalid format.</li>
+</ul>
+<h4 id="example-6">Example</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">test<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;abc-ABC_cD&#39;</span>
+validation::version_comparison <span style="color:#e6db74">&#34;12.0.1&#34;</span> <span style="color:#e6db74">&#34;12.0.1&#34;</span>
+echo $?
+<span style="color:#75715e">#Output</span>
+<span style="color:#ae81ff">0</span>
+</code></pre></div><hr>
 <!-- raw HTML omitted -->
 
 
@@ -926,6 +970,22 @@ echo $?
                     
                         
                         
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
                     
                 
                 
@@ -1168,19 +1228,19 @@ echo $?
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="https://labbots.github.io/bash-utility/js/clipboard.min.js?1592845915"></script>
-    <script src="https://labbots.github.io/bash-utility/js/perfect-scrollbar.min.js?1592845915"></script>
-    <script src="https://labbots.github.io/bash-utility/js/perfect-scrollbar.jquery.min.js?1592845915"></script>
-    <script src="https://labbots.github.io/bash-utility/js/jquery.sticky.js?1592845915"></script>
-    <script src="https://labbots.github.io/bash-utility/js/featherlight.min.js?1592845915"></script>
-    <script src="https://labbots.github.io/bash-utility/js/highlight.pack.js?1592845915"></script>
+    <script src="https://labbots.github.io/bash-utility/js/clipboard.min.js?1611665698"></script>
+    <script src="https://labbots.github.io/bash-utility/js/perfect-scrollbar.min.js?1611665698"></script>
+    <script src="https://labbots.github.io/bash-utility/js/perfect-scrollbar.jquery.min.js?1611665698"></script>
+    <script src="https://labbots.github.io/bash-utility/js/jquery.sticky.js?1611665698"></script>
+    <script src="https://labbots.github.io/bash-utility/js/featherlight.min.js?1611665698"></script>
+    <script src="https://labbots.github.io/bash-utility/js/highlight.pack.js?1611665698"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="https://labbots.github.io/bash-utility/js/modernizr.custom-3.6.0.js?1592845915"></script>
-    <script src="https://labbots.github.io/bash-utility/js/learn.js?1592845915"></script>
-    <script src="https://labbots.github.io/bash-utility/js/hugo-learn.js?1592845915"></script>
+    <script src="https://labbots.github.io/bash-utility/js/modernizr.custom-3.6.0.js?1611665698"></script>
+    <script src="https://labbots.github.io/bash-utility/js/learn.js?1611665698"></script>
+    <script src="https://labbots.github.io/bash-utility/js/hugo-learn.js?1611665698"></script>
 
-    <link href="https://labbots.github.io/bash-utility/mermaid/mermaid.css?1592845915" rel="stylesheet" />
-    <script src="https://labbots.github.io/bash-utility/mermaid/mermaid.js?1592845915"></script>
+    <link href="https://labbots.github.io/bash-utility/mermaid/mermaid.css?1611665698" rel="stylesheet" />
+    <script src="https://labbots.github.io/bash-utility/mermaid/mermaid.js?1611665698"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>
