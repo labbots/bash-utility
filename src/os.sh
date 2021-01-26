@@ -9,7 +9,6 @@
 #
 # @example
 #   os::detect_os
-#
 #   #Output
 #   linux
 #
@@ -45,7 +44,6 @@ os::detect_os() {
 #
 # @example
 #   os::detect_linux_distro
-#
 #   #Output
 #   ubuntu
 # @exitcode 0  If Linux distro is successfully detected.
@@ -87,7 +85,6 @@ os::detect_linux_distro() {
 #
 # @example
 #   os::detect_linux_version
-#
 #   #Output
 #   20.04
 #
@@ -121,7 +118,6 @@ os::detect_linux_version() {
 #
 # @example
 #   os::detect_linux_version
-#
 #   #Output
 #   10.15.7
 # @exitcode 0  If MacOS version is successfully detected.

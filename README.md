@@ -2233,6 +2233,8 @@ Identify the OS the function is run on.
 
 ```bash
 os::detect_os
+#Output
+linux
 ```
 
 ### os::detect_linux_distro()
@@ -2254,6 +2256,8 @@ Identify the distribution flavour of linux.
 
 ```bash
 os::detect_linux_distro
+#Output
+ubuntu
 ```
 
 ### os::detect_linux_version()
@@ -2275,6 +2279,8 @@ Identify the Linux version.
 
 ```bash
 os::detect_linux_version
+#Output
+20.04
 ```
 
 ### os::detect_mac_version()
@@ -2296,6 +2302,8 @@ Identify the MacOS version.
 
 ```bash
 os::detect_linux_version
+#Output
+10.15.7
 ```
 
 ## String
