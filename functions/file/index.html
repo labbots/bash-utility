@@ -12,21 +12,21 @@
     <title>File :: Bash Utility</title>
 
     
-    <link href="https://labbots.github.io/bash-utility/css/nucleus.css?1611665698" rel="stylesheet">
-    <link href="https://labbots.github.io/bash-utility/css/fontawesome-all.min.css?1611665698" rel="stylesheet">
-    <link href="https://labbots.github.io/bash-utility/css/hybrid.css?1611665698" rel="stylesheet">
-    <link href="https://labbots.github.io/bash-utility/css/featherlight.min.css?1611665698" rel="stylesheet">
-    <link href="https://labbots.github.io/bash-utility/css/perfect-scrollbar.min.css?1611665698" rel="stylesheet">
-    <link href="https://labbots.github.io/bash-utility/css/auto-complete.css?1611665698" rel="stylesheet">
-    <link href="https://labbots.github.io/bash-utility/css/atom-one-dark-reasonable.css?1611665698" rel="stylesheet">
-    <link href="https://labbots.github.io/bash-utility/css/theme.css?1611665698" rel="stylesheet">
-    <link href="https://labbots.github.io/bash-utility/css/hugo-theme.css?1611665698" rel="stylesheet">
+    <link href="https://labbots.github.io/bash-utility/css/nucleus.css?1611666338" rel="stylesheet">
+    <link href="https://labbots.github.io/bash-utility/css/fontawesome-all.min.css?1611666338" rel="stylesheet">
+    <link href="https://labbots.github.io/bash-utility/css/hybrid.css?1611666338" rel="stylesheet">
+    <link href="https://labbots.github.io/bash-utility/css/featherlight.min.css?1611666338" rel="stylesheet">
+    <link href="https://labbots.github.io/bash-utility/css/perfect-scrollbar.min.css?1611666338" rel="stylesheet">
+    <link href="https://labbots.github.io/bash-utility/css/auto-complete.css?1611666338" rel="stylesheet">
+    <link href="https://labbots.github.io/bash-utility/css/atom-one-dark-reasonable.css?1611666338" rel="stylesheet">
+    <link href="https://labbots.github.io/bash-utility/css/theme.css?1611666338" rel="stylesheet">
+    <link href="https://labbots.github.io/bash-utility/css/hugo-theme.css?1611666338" rel="stylesheet">
     
-    <link href="https://labbots.github.io/bash-utility/css/theme-blue.css?1611665698" rel="stylesheet">
+    <link href="https://labbots.github.io/bash-utility/css/theme-blue.css?1611666338" rel="stylesheet">
     
     
 
-    <script src="https://labbots.github.io/bash-utility/js/jquery-3.3.1.min.js?1611665698"></script>
+    <script src="https://labbots.github.io/bash-utility/js/jquery-3.3.1.min.js?1611666338"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -109,14 +109,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="https://labbots.github.io/bash-utility/js/lunr.min.js?1611665698"></script>
-<script type="text/javascript" src="https://labbots.github.io/bash-utility/js/auto-complete.js?1611665698"></script>
+<script type="text/javascript" src="https://labbots.github.io/bash-utility/js/lunr.min.js?1611666338"></script>
+<script type="text/javascript" src="https://labbots.github.io/bash-utility/js/auto-complete.js?1611666338"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/labbots.github.io\/bash-utility\/";
     
 </script>
-<script type="text/javascript" src="https://labbots.github.io/bash-utility/js/search.js?1611665698"></script>
+<script type="text/javascript" src="https://labbots.github.io/bash-utility/js/search.js?1611666338"></script>
 
     
   </div>
@@ -647,6 +647,7 @@
       <ul>
         <li><a href="#table-of-contents">Table of Contents</a></li>
         <li><a href="#filemake_temp_file">file::make_temp_file()</a></li>
+        <li><a href="#filemake_temp_dir">file::make_temp_dir()</a></li>
         <li><a href="#filename">file::name()</a></li>
         <li><a href="#filebasename">file::basename()</a></li>
         <li><a href="#fileextension">file::extension()</a></li>
@@ -685,6 +686,7 @@
 <h3 id="table-of-contents">Table of Contents</h3>
 <ul>
 <li><a href="#filemake_temp_file">file::make_temp_file()</a></li>
+<li><a href="#filemake_temp_dir">file::make_temp_dir()</a></li>
 <li><a href="#filename">file::name()</a></li>
 <li><a href="#filebasename">file::basename()</a></li>
 <li><a href="#fileextension">file::extension()</a></li>
@@ -712,28 +714,31 @@ Function creates temporary file with random name. The temporary file will be del
 <span style="color:#75715e">#Output</span>
 tmp.vgftzy
 </code></pre></div><hr>
-<h3 id="filename">file::name()</h3>
-<p>Get only the filename from string path.</p>
+<h3 id="filemake_temp_dir">file::make_temp_dir()</h3>
+<p>Create temporary directory.
+Function creates temporary directory with random name. The temporary directory will be deleted when script finishes.</p>
 <h4 id="arguments">Arguments</h4>
 <ul>
-<li><strong>$1</strong> (string): path.</li>
+<li><strong>$1</strong> (string): Temporary directory prefix</li>
+<li>$2  string Flag to auto remove directory on exit trap (true)</li>
 </ul>
 <h4 id="exit-codes-1">Exit codes</h4>
 <ul>
 <li><strong>0</strong>:  If successful.</li>
-<li><strong>2</strong>: Function missing arguments.</li>
+<li><strong>1</strong>: If failed to create temp directory.</li>
+<li><strong>2</strong>: Missing arguments.</li>
 </ul>
 <h4 id="output-on-stdout-1">Output on stdout</h4>
 <ul>
-<li>name of the file with extension.</li>
+<li>directory name of temporary directory created.</li>
 </ul>
 <h4 id="example-1">Example</h4>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">echo <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>file::name <span style="color:#e6db74">&#34;/path/to/test.md&#34;</span><span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">echo <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>utility::make_temp_dir<span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
 <span style="color:#75715e">#Output</span>
-test.md
+tmp.rtfsxy
 </code></pre></div><hr>
-<h3 id="filebasename">file::basename()</h3>
-<p>Get the basename of file from file name.</p>
+<h3 id="filename">file::name()</h3>
+<p>Get only the filename from string path.</p>
 <h4 id="arguments-1">Arguments</h4>
 <ul>
 <li><strong>$1</strong> (string): path.</li>
@@ -745,15 +750,15 @@ test.md
 </ul>
 <h4 id="output-on-stdout-2">Output on stdout</h4>
 <ul>
-<li>basename of the file.</li>
+<li>name of the file with extension.</li>
 </ul>
 <h4 id="example-2">Example</h4>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">echo <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>file::basename <span style="color:#e6db74">&#34;/path/to/test.md&#34;</span><span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">echo <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>file::name <span style="color:#e6db74">&#34;/path/to/test.md&#34;</span><span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
 <span style="color:#75715e">#Output</span>
-test
+test.md
 </code></pre></div><hr>
-<h3 id="fileextension">file::extension()</h3>
-<p>Get the extension of file from file name.</p>
+<h3 id="filebasename">file::basename()</h3>
+<p>Get the basename of file from file name.</p>
 <h4 id="arguments-2">Arguments</h4>
 <ul>
 <li><strong>$1</strong> (string): path.</li>
@@ -761,20 +766,19 @@ test
 <h4 id="exit-codes-3">Exit codes</h4>
 <ul>
 <li><strong>0</strong>:  If successful.</li>
-<li><strong>1</strong>: If no extension is found in the filename.</li>
 <li><strong>2</strong>: Function missing arguments.</li>
 </ul>
 <h4 id="output-on-stdout-3">Output on stdout</h4>
 <ul>
-<li>extension of the file.</li>
+<li>basename of the file.</li>
 </ul>
 <h4 id="example-3">Example</h4>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">echo <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>file::extension <span style="color:#e6db74">&#34;/path/to/test.md&#34;</span><span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">echo <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>file::basename <span style="color:#e6db74">&#34;/path/to/test.md&#34;</span><span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
 <span style="color:#75715e">#Output</span>
-md
+test
 </code></pre></div><hr>
-<h3 id="filedirname">file::dirname()</h3>
-<p>Get directory name from file path.</p>
+<h3 id="fileextension">file::extension()</h3>
+<p>Get the extension of file from file name.</p>
 <h4 id="arguments-3">Arguments</h4>
 <ul>
 <li><strong>$1</strong> (string): path.</li>
@@ -782,74 +786,95 @@ md
 <h4 id="exit-codes-4">Exit codes</h4>
 <ul>
 <li><strong>0</strong>:  If successful.</li>
+<li><strong>1</strong>: If no extension is found in the filename.</li>
 <li><strong>2</strong>: Function missing arguments.</li>
 </ul>
 <h4 id="output-on-stdout-4">Output on stdout</h4>
 <ul>
-<li>directory path.</li>
+<li>extension of the file.</li>
 </ul>
 <h4 id="example-4">Example</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">echo <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>file::extension <span style="color:#e6db74">&#34;/path/to/test.md&#34;</span><span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
+<span style="color:#75715e">#Output</span>
+md
+</code></pre></div><hr>
+<h3 id="filedirname">file::dirname()</h3>
+<p>Get directory name from file path.</p>
+<h4 id="arguments-4">Arguments</h4>
+<ul>
+<li><strong>$1</strong> (string): path.</li>
+</ul>
+<h4 id="exit-codes-5">Exit codes</h4>
+<ul>
+<li><strong>0</strong>:  If successful.</li>
+<li><strong>2</strong>: Function missing arguments.</li>
+</ul>
+<h4 id="output-on-stdout-5">Output on stdout</h4>
+<ul>
+<li>directory path.</li>
+</ul>
+<h4 id="example-5">Example</h4>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">echo <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>file::dirname <span style="color:#e6db74">&#34;/path/to/test.md&#34;</span><span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
 <span style="color:#75715e">#Output</span>
 /path/to
 </code></pre></div><hr>
 <h3 id="filefull_path">file::full_path()</h3>
 <p>Get absolute path of file or directory.</p>
-<h4 id="arguments-4">Arguments</h4>
-<ul>
-<li><strong>$1</strong> (string): relative or absolute path to file/direcotry.</li>
-</ul>
-<h4 id="exit-codes-5">Exit codes</h4>
-<ul>
-<li><strong>0</strong>:  If successful.</li>
-<li><strong>1</strong>:  If file/directory does not exist.</li>
-<li><strong>2</strong>: Function missing arguments.</li>
-</ul>
-<h4 id="output-on-stdout-5">Output on stdout</h4>
-<ul>
-<li>Absolute path to file/directory.</li>
-</ul>
-<h4 id="example-5">Example</h4>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">file::full_path <span style="color:#e6db74">&#34;../path/to/file.md&#34;</span>
-<span style="color:#75715e">#Output</span>
-/home/labbots/docs/path/to/file.md
-</code></pre></div><hr>
-<h3 id="filemime_type">file::mime_type()</h3>
-<p>Get mime type of provided input.</p>
 <h4 id="arguments-5">Arguments</h4>
 <ul>
-<li><strong>$1</strong> (string): relative or absolute path to file/directory.</li>
+<li><strong>$1</strong> (string): relative or absolute path to file/direcotry.</li>
 </ul>
 <h4 id="exit-codes-6">Exit codes</h4>
 <ul>
 <li><strong>0</strong>:  If successful.</li>
 <li><strong>1</strong>:  If file/directory does not exist.</li>
 <li><strong>2</strong>: Function missing arguments.</li>
-<li><strong>3</strong>: If file or mimetype command not found in system.</li>
 </ul>
 <h4 id="output-on-stdout-6">Output on stdout</h4>
 <ul>
-<li>mime type of file/directory.</li>
+<li>Absolute path to file/directory.</li>
 </ul>
 <h4 id="example-6">Example</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">file::full_path <span style="color:#e6db74">&#34;../path/to/file.md&#34;</span>
+<span style="color:#75715e">#Output</span>
+/home/labbots/docs/path/to/file.md
+</code></pre></div><hr>
+<h3 id="filemime_type">file::mime_type()</h3>
+<p>Get mime type of provided input.</p>
+<h4 id="arguments-6">Arguments</h4>
+<ul>
+<li><strong>$1</strong> (string): relative or absolute path to file/directory.</li>
+</ul>
+<h4 id="exit-codes-7">Exit codes</h4>
+<ul>
+<li><strong>0</strong>:  If successful.</li>
+<li><strong>1</strong>:  If file/directory does not exist.</li>
+<li><strong>2</strong>: Function missing arguments.</li>
+<li><strong>3</strong>: If file or mimetype command not found in system.</li>
+</ul>
+<h4 id="output-on-stdout-7">Output on stdout</h4>
+<ul>
+<li>mime type of file/directory.</li>
+</ul>
+<h4 id="example-7">Example</h4>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">file::mime_type <span style="color:#e6db74">&#34;../src/file.sh&#34;</span>
 <span style="color:#75715e">#Output</span>
 application/x-shellscript
 </code></pre></div><hr>
 <h3 id="filecontains_text">file::contains_text()</h3>
 <p>Search if a given pattern is found in file.</p>
-<h4 id="arguments-6">Arguments</h4>
+<h4 id="arguments-7">Arguments</h4>
 <ul>
 <li><strong>$1</strong> (string): relative or absolute path to file/directory.</li>
 <li><strong>$2</strong> (string): search key or regular expression.</li>
 </ul>
-<h4 id="exit-codes-7">Exit codes</h4>
+<h4 id="exit-codes-8">Exit codes</h4>
 <ul>
 <li><strong>0</strong>:  If given search parameter is found in file.</li>
 <li><strong>1</strong>:  If search paramter not found in file.</li>
 <li><strong>2</strong>: Function missing arguments.</li>
 </ul>
-<h4 id="example-7">Example</h4>
+<h4 id="example-8">Example</h4>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">file::contains_text <span style="color:#e6db74">&#34;./file.sh&#34;</span> <span style="color:#e6db74">&#34;^[ @[:alpha:]]*&#34;</span>
 file::contains_text <span style="color:#e6db74">&#34;./file.sh&#34;</span> <span style="color:#e6db74">&#34;@file&#34;</span>
 <span style="color:#75715e">#Output</span>
@@ -1218,19 +1243,19 @@ file::contains_text <span style="color:#e6db74">&#34;./file.sh&#34;</span> <span
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="https://labbots.github.io/bash-utility/js/clipboard.min.js?1611665698"></script>
-    <script src="https://labbots.github.io/bash-utility/js/perfect-scrollbar.min.js?1611665698"></script>
-    <script src="https://labbots.github.io/bash-utility/js/perfect-scrollbar.jquery.min.js?1611665698"></script>
-    <script src="https://labbots.github.io/bash-utility/js/jquery.sticky.js?1611665698"></script>
-    <script src="https://labbots.github.io/bash-utility/js/featherlight.min.js?1611665698"></script>
-    <script src="https://labbots.github.io/bash-utility/js/highlight.pack.js?1611665698"></script>
+    <script src="https://labbots.github.io/bash-utility/js/clipboard.min.js?1611666339"></script>
+    <script src="https://labbots.github.io/bash-utility/js/perfect-scrollbar.min.js?1611666339"></script>
+    <script src="https://labbots.github.io/bash-utility/js/perfect-scrollbar.jquery.min.js?1611666339"></script>
+    <script src="https://labbots.github.io/bash-utility/js/jquery.sticky.js?1611666339"></script>
+    <script src="https://labbots.github.io/bash-utility/js/featherlight.min.js?1611666339"></script>
+    <script src="https://labbots.github.io/bash-utility/js/highlight.pack.js?1611666339"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="https://labbots.github.io/bash-utility/js/modernizr.custom-3.6.0.js?1611665698"></script>
-    <script src="https://labbots.github.io/bash-utility/js/learn.js?1611665698"></script>
-    <script src="https://labbots.github.io/bash-utility/js/hugo-learn.js?1611665698"></script>
+    <script src="https://labbots.github.io/bash-utility/js/modernizr.custom-3.6.0.js?1611666339"></script>
+    <script src="https://labbots.github.io/bash-utility/js/learn.js?1611666339"></script>
+    <script src="https://labbots.github.io/bash-utility/js/hugo-learn.js?1611666339"></script>
 
-    <link href="https://labbots.github.io/bash-utility/mermaid/mermaid.css?1611665698" rel="stylesheet" />
-    <script src="https://labbots.github.io/bash-utility/mermaid/mermaid.js?1611665698"></script>
+    <link href="https://labbots.github.io/bash-utility/mermaid/mermaid.css?1611666339" rel="stylesheet" />
+    <script src="https://labbots.github.io/bash-utility/mermaid/mermaid.js?1611666339"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>
