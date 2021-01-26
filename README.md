@@ -109,6 +109,11 @@ Detailed documentation is available at <https://labbots.github.io/bash-utility/>
   - [misc::get_pid()](#miscget_pid)
   - [misc::get_uid()](#miscget_uid)
   - [misc::generate_uuid()](#miscgenerate_uuid)
+- [Operating System](#operating-system)
+  - [os::detect_os()](#osdetect_os)
+  - [os::detect_linux_distro()](#osdetect_linux_distro)
+  - [os::detect_linux_version()](#osdetect_linux_version)
+  - [os::detect_mac_version()](#osdetect_mac_version)
 - [String](#string)
   - [string::trim()](#stringtrim)
   - [string::split()](#stringsplit)
@@ -131,6 +136,7 @@ Detailed documentation is available at <https://labbots.github.io/bash-utility/>
   - [validation::alpha()](#validationalpha)
   - [validation::alpha_num()](#validationalpha_num)
   - [validation::alpha_dash()](#validationalpha_dash)
+  - [validation::version_comparison()](#validationversion_comparison)
 - [Variable](#variable)
   - [variable::is_array()](#variableis_array)
   - [variable::is_numeric()](#variableis_numeric)
@@ -2204,6 +2210,94 @@ misc::generate_uuid
 65bc64d1-d355-4ffc-a9d9-dc4f3954c34c
 ```
 
+## Operating System
+
+Functions to detect Operating system and version.
+
+### os::detect_os()
+
+Identify the OS the function is run on.
+
+*Function has no arguments.*
+
+#### Exit codes
+
+- **0**:  If OS is successfully detected.
+- **1**: If unable to detect OS.
+
+#### Output on stdout
+
+- Operating system name (linux, mac or windows).
+
+#### Example
+
+```bash
+os::detect_os
+```
+
+### os::detect_linux_distro()
+
+Identify the distribution flavour of linux.
+
+*Function has no arguments.*
+
+#### Exit codes
+
+- **0**:  If Linux distro is successfully detected.
+- **1**: If unable to detect OS distro.
+
+#### Output on stdout
+
+- Linux OS distribution name (ubuntu, debian, suse, etc.,).
+
+#### Example
+
+```bash
+os::detect_linux_distro
+```
+
+### os::detect_linux_version()
+
+Identify the Linux version.
+
+*Function has no arguments.*
+
+#### Exit codes
+
+- **0**:  If Linux version is successfully detected.
+- **1**: If unable to detect Linux version.
+
+#### Output on stdout
+
+- Linux OS version number (18.04, 20.04, etc.,).
+
+#### Example
+
+```bash
+os::detect_linux_version
+```
+
+### os::detect_mac_version()
+
+Identify the MacOS version.
+
+*Function has no arguments.*
+
+#### Exit codes
+
+- **0**:  If MacOS version is successfully detected.
+- **1**: If unable to detect MacOS version.
+
+#### Output on stdout
+
+- MacOS version number (10.15.6, etc.,)
+
+#### Example
+
+```bash
+os::detect_linux_version
+```
+
 ## String
 
 Functions for string operations and manipulations.
@@ -2675,6 +2769,32 @@ Validate if given variable contains only alpha-numeric characters, as well as da
 ```bash
 test='abc-ABC_cD'
 validation::alpha_dash "${test}"
+echo $?
+#Output
+0
+```
+
+### validation::version_comparison()
+
+Compares version numbers and provides return based on whether the value in equal, less than or greater.
+
+#### Arguments
+
+- **$1** (string): Version number to check (eg: 1.0.1)
+
+#### Exit codes
+
+- **0**: version number is equal.
+- **1**: $1 version number is greater than $2.
+- **2**: $1 version number is less than $2.
+- **3**: Function is missing required arguments.
+- **4**: Provided input argument is in invalid format.
+
+#### Example
+
+```bash
+test='abc-ABC_cD'
+validation::version_comparison "12.0.1" "12.0.1"
 echo $?
 #Output
 0

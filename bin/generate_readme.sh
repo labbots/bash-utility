@@ -33,7 +33,7 @@ _setup_arguments() {
     SCRIPT_DIR="$(cd -P "$(dirname "$source")" > /dev/null 2>&1 && pwd)"
     SOURCE_MARKDOWN="${SCRIPT_DIR}/../README.md"
     SOURCE_SCRIPT_DIR="${SCRIPT_DIR}/../src"
-    WEBDOC_DEST_DIR="${SCRIPT_DIR}/../docs"
+    WEBDOC_DEST_DIR="${SCRIPT_DIR}/../hugo-docs/content/functions"
 
     SHORTOPTS="whp:f:m:d:s:-:"
 

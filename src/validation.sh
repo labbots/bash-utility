@@ -191,3 +191,53 @@ validation::alpha_dash() {
     fi
     return 1
 }
+
+# @description Compares version numbers and provides return based on whether the value in equal, less than or greater.
+#
+# @arg $1 string Version number to check (eg: 1.0.1)
+# $arg $2 string Version number to check (eg: 1.0.1)
+#
+# @example
+#   test='abc-ABC_cD'
+#   validation::version_comparison "12.0.1" "12.0.1"
+#   echo $?
+#   #Output
+#   0
+#
+# @exitcode 0 version number is equal.
+# @exitcode 1 $1 version number is greater than $2.
+# @exitcode 2 $1 version number is less than $2.
+# @exitcode 3 Function is missing required arguments.
+# @exitcode 4 Provided input argument is in invalid format.
+validation::version_comparison() {
+    [[ $# -lt 2 ]] && printf "%s: Missing arguments\n" "${FUNCNAME[0]}" && return 3
+
+    declare regex="^[.0-9]*$"
+    ! [[ $1 =~ $regex ]] && printf "Invalid argument: %s \n" "${1}" && return 4
+    ! [[ $2 =~ $regex ]] && printf "Invalid argument invalid: %s \n" "${2}" && return 4
+
+    if [[ "$1" == "$2" ]]; then
+        return 0
+    fi
+    declare IFS=.
+    declare -a ver1 ver2
+    read -r -a ver1 <<<"${1}"
+    read -r -a ver2 <<<"${2}"
+    # fill empty fields in ver1 with zeros
+    for ((i = ${#ver1[@]}; i < ${#ver2[@]}; i++)); do
+        ver1[i]=0
+    done
+    for ((i = 0; i < ${#ver1[@]}; i++)); do
+        if [[ -z ${ver2[i]} ]]; then
+            # fill empty fields in ver2 with zeros
+            ver2[i]=0
+        fi
+        if ((10#${ver1[i]} > 10#${ver2[i]})); then
+            return 1
+        fi
+        if ((10#${ver1[i]} < 10#${ver2[i]})); then
+            return 2
+        fi
+    done
+    return 0
+}
