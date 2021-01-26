@@ -2,7 +2,7 @@
 title : Validation 
 description : Functions to perform validation on given data. 
 date : 2020-06-20T13:05:12+01:00
-lastmod : 2020-06-22T10:58:49+01:00
+lastmod : 2021-01-26T12:27:04+00:00
 ---
 <!-- START generate_readme.sh generated SHDOC please keep comment here to allow auto update -->
 
@@ -17,6 +17,7 @@ Functions to perform validation on given data.
 - [validation::alpha()](#validationalpha)
 - [validation::alpha_num()](#validationalpha_num)
 - [validation::alpha_dash()](#validationalpha_dash)
+- [validation::version_comparison()](#validationversion_comparison)
 
 ---
 
@@ -207,6 +208,34 @@ Validate if given variable contains only alpha-numeric characters, as well as da
 ```bash
 test='abc-ABC_cD'
 validation::alpha_dash "${test}"
+echo $?
+#Output
+0
+```
+
+---
+
+### validation::version_comparison()
+
+Compares version numbers and provides return based on whether the value in equal, less than or greater.
+
+#### Arguments
+
+- **$1** (string): Version number to check (eg: 1.0.1)
+
+#### Exit codes
+
+- **0**: version number is equal.
+- **1**: $1 version number is greater than $2.
+- **2**: $1 version number is less than $2.
+- **3**: Function is missing required arguments.
+- **4**: Provided input argument is in invalid format.
+
+#### Example
+
+```bash
+test='abc-ABC_cD'
+validation::version_comparison "12.0.1" "12.0.1"
 echo $?
 #Output
 0
