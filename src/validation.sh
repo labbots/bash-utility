@@ -64,6 +64,7 @@ validation::ipv4() {
     [[ $# = 0 ]] && printf "%s: Missing arguments\n" "${FUNCNAME[0]}" && return 2
     declare ip="${1}"
     declare IFS=.
+    # shellcheck disable=SC2206
     declare -a a=($ip)
     [[ "${ip}" =~ ^[0-9]+(\.[0-9]+){3}$ ]] || return 1
     # Test values of quads

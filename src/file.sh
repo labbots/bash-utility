@@ -24,6 +24,32 @@ file::make_temp_file() {
     printf "%s" "${temp_file}"
 }
 
+# @description Create temporary directory.
+# Function creates temporary directory with random name. The temporary directory will be deleted when script finishes.
+#
+# @example
+#   echo "$(utility::make_temp_dir)"
+#   #Output
+#   tmp.rtfsxy
+#
+# @arg $1 string Temporary directory prefix
+# @arg $2  string Flag to auto remove directory on exit trap (true)
+#
+# @exitcode 0  If successful.
+# @exitcode 1 If failed to create temp directory.
+# @exitcode 2 Missing arguments.
+#
+# @stdout directory name of temporary directory created.
+file::make_temp_dir() {
+    [[ $# = 0 ]] && printf "%s: Missing arguments\n" "${FUNCNAME[0]}" && return 2
+    declare temp_dir prefix="${1}" trap_rm="${2}"
+    temp_dir=$(mktemp -d 2>/dev/null || mktemp -d -t "${prefix}")
+    if [[ -n "${trap_rm}" ]]; then
+        trap 'rm -rf "${temp_dir}"' EXIT
+    fi
+    printf "%s" "${temp_dir}"
+}
+
 # @description Get only the filename from string path.
 #
 # @example
