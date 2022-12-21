@@ -39,8 +39,8 @@ array::contains() {
 # @description Remove duplicate items from the array.
 #
 # @example
-#   array=("a" "b" "a" "c")
-#   printf "%s" "$(array::dedupe ${array[@]})"
+#   arr=("a" "b" "a" "c")
+#   array::dedupe "${arr[@]}"
 #   #Output
 #   a
 #   b
@@ -48,19 +48,23 @@ array::contains() {
 #
 # @arg $1 array Array to be deduped.
 #
-# @exitcode 0  If successful.
+# @exitcode 0 If successful.
 # @exitcode 2 Function missing arguments.
 #
 # @stdout Deduplicated array.
 array::dedupe() {
     (( $# == 0 )) && { _print_missing; return; }
-    local -A arr_tmp
-    local -a arr_unique
-    for i in "$@"; do
-        { [[ -z ${i} || ${arr_tmp[${i}]} ]]; } && continue
-        arr_unique+=("${i}") && arr_tmp[${i}]=x
+
+    local -A found
+    local -a unique
+
+    local elem
+    for elem in "$@"; do
+        [[ -z ${elem} || ${found[${elem}]} ]] && continue
+        unique+=("${elem}") && found[${elem}]=1
     done
-    printf '%s\n' "${arr_unique[@]}"
+
+    printf "%s\n" "${unique[@]}"
 }
 
 # @description Check if a given array is empty.
