@@ -24,7 +24,7 @@ _print_missing() {
 # @exitcode 2 Function missing arguments.
 array::contains() {
     (( $# < 2 )) && { _print_missing; return; }
-    declare query="${1:-}"
+    local query="${1:-}"
     shift
 
     for element in "${@}"; do
@@ -52,8 +52,8 @@ array::contains() {
 # @stdout Deduplicated array.
 array::dedupe() {
     (( $# == 0 )) && { _print_missing; return; }
-    declare -A arr_tmp
-    declare -a arr_unique
+    local -A arr_tmp
+    local -a arr_unique
     for i in "$@"; do
         { [[ -z ${i} || ${arr_tmp[${i}]} ]]; } && continue
         arr_unique+=("${i}") && arr_tmp[${i}]=x
@@ -72,7 +72,7 @@ array::dedupe() {
 # @exitcode 0 If the given array is empty.
 # @exitcode 2 If the given array is not empty.
 array::is_empty() {
-    declare -a array
+    local -a array
     local array=("$@")
     if [ ${#array[@]} -eq 0 ]; then
         return 0
@@ -100,7 +100,7 @@ array::is_empty() {
 # @stdout String containing a string representation of all the array elements in the same order,with the glue string between each element.
 array::join() {
     (( $# < 2 )) && { _print_missing; return; }
-    declare delimiter="${1}"
+    local delimiter="${1}"
     shift
     printf "%s" "${1}"
     shift
@@ -123,10 +123,10 @@ array::join() {
 # @stdout The reversed array.
 array::reverse() {
     (( $# == 0 )) && { _print_missing; return; }
-    declare min=0
-    declare -a array
+    local min=0
+    local -a array
     array=("$@")
-    declare max=$((${#array[@]} - 1))
+    local max=$((${#array[@]} - 1))
 
     while [[ $min -lt $max ]]; do
         # Swap current first and last elements
@@ -156,7 +156,7 @@ array::reverse() {
 # @stdout Random item out of the array.
 array::random_element() {
     (( $# == 0 )) && { _print_missing; return; }
-    declare -a array
+    local -a array
     local array=("$@")
     printf '%s\n' "${array[RANDOM % $#]}"
 }
@@ -182,12 +182,12 @@ array::random_element() {
 # @stdout sorted array.
 array::sort() {
     (( $# == 0 )) && { _print_missing; return; }
-    declare -a array=("$@")
-    declare -a sorted
-    declare noglobtate
+    local -a array=("$@")
+    local -a sorted
+    local noglobtate
     noglobtate="$(shopt -po noglob)"
     set -o noglob
-    declare IFS=$'\n'
+    local IFS=$'\n'
     sorted=($(sort <<< "${array[*]}"))
     unset IFS
     eval "${noglobtate}"
@@ -215,12 +215,12 @@ array::sort() {
 # @stdout reverse sorted array.
 array::rsort() {
     (( $# == 0 )) && { _print_missing; return; }
-    declare -a array=("$@")
-    declare -a sorted
-    declare noglobtate
+    local -a array=("$@")
+    local -a sorted
+    local noglobtate
     noglobtate="$(shopt -po noglob)"
     set -o noglob
-    declare IFS=$'\n'
+    local IFS=$'\n'
     sorted=($(sort -r<<< "${array[*]}"))
     unset IFS
     eval "${noglobtate}"
@@ -246,8 +246,8 @@ array::rsort() {
 # @stdout bubble sorted array.
 array::bsort() {
     (( $# == 0 )) && { _print_missing; return; }
-    declare tmp
-    declare arr=("$@")
+    local tmp
+    local arr=("$@")
     for ((i = 0; i <= $((${#arr[@]} - 2)); ++i)); do
         for ((j = ((i + 1)); j <= ((${#arr[@]} - 1)); ++j)); do
             if [[ ${arr[i]} -gt ${arr[j]} ]]; then
@@ -282,8 +282,8 @@ array::bsort() {
 # @stdout Merged array.
 array::merge() {
     (( $# != 2 )) && { _print_missing; return; }
-    declare -a arr1=("${!1}")
-    declare -a arr2=("${!2}")
-    declare out=("${arr1[@]}" "${arr2[@]}")
+    local -a arr1=("${!1}")
+    local -a arr2=("${!2}")
+    local out=("${arr1[@]}" "${arr2[@]}")
     printf "%s\n" "${out[@]}"
 }
