@@ -117,34 +117,33 @@ array::join() {
 # @description Return an array with elements in reverse order.
 #
 # @example
-#   array=(1 2 3 4 5)
-#   printf "%s" "$(array::reverse "${array[@]}")"
+#   arr=(1 2 3 4 5)
+#   array::reverse "${arr[@]}"
 #   #Output
-#   5 4 3 2 1
+#   5
+#   4
+#   3
+#   2
+#   1
 #
 # @arg $1 array The input array.
 #
-# @exitcode 0  If successful.
+# @exitcode 0 If successful.
 # @exitcode 2 Function missing arguments.
 #
 # @stdout The reversed array.
 array::reverse() {
     (( $# == 0 )) && { _print_missing; return; }
-    local min=0
-    local -a array
-    array=("$@")
-    local max=$((${#array[@]} - 1))
 
-    while [[ $min -lt $max ]]; do
-        # Swap current first and last elements
-        x="${array[$min]}"
-        array[$min]="${array[$max]}"
-        array[$max]="$x"
-
-        # Move closer
-        ((min++, max--))
+    local -a arr=("$@")
+    local elem head tail
+    for (( head=0, tail=${#arr[@]} - 1; head < tail; head++, tail-- )); do
+        elem="${arr[$head]}"
+        arr[$head]="${arr[$tail]}"
+        arr[$tail]="$elem"
     done
-    printf '%s\n' "${array[@]}"
+
+    printf "%s\n" "${arr[@]}"
 }
 
 # @description Returns a random item from the array.
