@@ -11,24 +11,26 @@ _print_missing() {
 # @description Check if item exists in the given array.
 #
 # @example
-#   array=("a" "b" "c")
-#   array::contains "c" ${array[@]}
+#   arr=("a" "b" "c")
+#   array::contains "c" "${arr[@]}"" && echo "yes" || echo "no"
 #   #Output
-#   0
+#   yes
 #
 # @arg $1 mixed Item to search (needle).
-# @arg $2 array array to be searched (haystack).
+# @arg $2 array Array to be searched (haystack).
 #
-# @exitcode 0  If successful.
+# @exitcode 0 If successful.
 # @exitcode 1 If no match found in the array.
 # @exitcode 2 Function missing arguments.
 array::contains() {
     (( $# < 2 )) && { _print_missing; return; }
-    local query="${1:-}"
+
+    local needle="${1:-}"
     shift
 
-    for element in "${@}"; do
-        [[ "${element}" == "${query}" ]] && return 0
+    local elem
+    for elem in "${@}"; do
+        [[ "${elem}" == "${needle}" ]] && return 0
     done
 
     return 1
