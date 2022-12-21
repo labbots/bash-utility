@@ -87,28 +87,31 @@ array::is_empty() {
 # @description Join array elements with a string.
 #
 # @example
-#   array=("a" "b" "c" "d")
-#   printf "%s" "$(array::join "," "${array[@]}")"
+#   arr=("a" "b" "c" "d")
+#   array::join "," "${arr[@]}"
 #   #Output
 #   a,b,c,d
-#   printf "%s" "$(array::join "" "${array[@]}")"
+#   array::join "" "${arr[@]}"
 #   #Output
 #   abcd
 #
 # @arg $1 string String to join the array elements (glue).
-# @arg $2 array array to be joined with glue string.
+# @arg $2 array Array to be joined with glue string.
 #
-# @exitcode 0  If successful.
+# @exitcode 0 If successful.
 # @exitcode 2 Function missing arguments.
 #
-# @stdout String containing a string representation of all the array elements in the same order,with the glue string between each element.
+# @stdout String containing a string representation of all the array elements in the same order with the glue string between each element.
 array::join() {
     (( $# < 2 )) && { _print_missing; return; }
-    local delimiter="${1}"
+
+    local glue="${1}"
     shift
+
     printf "%s" "${1}"
     shift
-    printf "%s" "${@/#/${delimiter}}"
+    printf "%s" "${@/#/${glue}}"
+    printf "\n"
 }
 
 # @description Return an array with elements in reverse order.
