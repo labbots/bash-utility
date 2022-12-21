@@ -170,8 +170,8 @@ array::random_element() {
 # @description Sort an array from lowest to highest.
 #
 # @example
-#   sarr=("a c" "a" "d" 2 1 "4 5")
-#   array::array_sort "${sarr[@]}"
+#   arr=("a c" "a" "d" 2 1 "4 5")
+#   array::sort "${arr[@]}"
 #   #Output
 #   1
 #   2
@@ -182,21 +182,24 @@ array::random_element() {
 #
 # @arg $1 array The input array.
 #
-# @exitcode 0  If successful.
+# @exitcode 0 If successful.
 # @exitcode 2 Function missing arguments.
 #
-# @stdout sorted array.
+# @stdout Sorted array.
 array::sort() {
     (( $# == 0 )) && { _print_missing; return; }
-    local -a array=("$@")
-    local -a sorted
-    local noglobtate
-    noglobtate="$(shopt -po noglob)"
+
+    local -a arr=("$@") sorted
+
+    local noglobtate="$(shopt -po noglob)"
     set -o noglob
+
     local IFS=$'\n'
-    sorted=($(sort <<< "${array[*]}"))
+    sorted=($(sort <<< "${arr[*]}"))
     unset IFS
+
     eval "${noglobtate}"
+
     printf "%s\n" "${sorted[@]}"
 }
 
