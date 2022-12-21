@@ -3,6 +3,11 @@
 # @file Array
 # @brief Functions for array operations and manipulations.
 
+_print_missing() {
+    printf "%s: Missing arguments\n" "${FUNCNAME[1]}"
+    return 2
+}
+
 # @description Check if item exists in the given array.
 #
 # @example
@@ -18,7 +23,7 @@
 # @exitcode 1 If no match found in the array.
 # @exitcode 2 Function missing arguments.
 array::contains() {
-    [[ $# -lt 2 ]] && printf "%s: Missing arguments\n" "${FUNCNAME[0]}" && return 2
+    [[ $# -lt 2 ]] && { _print_missing; return; }
     declare query="${1:-}"
     shift
 
@@ -46,7 +51,7 @@ array::contains() {
 #
 # @stdout Deduplicated array.
 array::dedupe() {
-    [[ $# = 0 ]] && printf "%s: Missing arguments\n" "${FUNCNAME[0]}" && return 2
+    [[ $# = 0 ]] && { _print_missing; return; }
     declare -A arr_tmp
     declare -a arr_unique
     for i in "$@"; do
@@ -94,7 +99,7 @@ array::is_empty() {
 #
 # @stdout String containing a string representation of all the array elements in the same order,with the glue string between each element.
 array::join() {
-    [[ $# -lt 2 ]] && printf "%s: Missing arguments\n" "${FUNCNAME[0]}" && return 2
+    [[ $# -lt 2 ]] && { _print_missing; return; }
     declare delimiter="${1}"
     shift
     printf "%s" "${1}"
@@ -117,7 +122,7 @@ array::join() {
 #
 # @stdout The reversed array.
 array::reverse() {
-    [[ $# = 0 ]] && printf "%s: Missing arguments\n" "${FUNCNAME[0]}" && return 2
+    [[ $# = 0 ]] && { _print_missing; return; }
     declare min=0
     declare -a array
     array=("$@")
@@ -150,7 +155,7 @@ array::reverse() {
 #
 # @stdout Random item out of the array.
 array::random_element() {
-    [[ $# = 0 ]] && printf "%s: Missing arguments\n" "${FUNCNAME[0]}" && return 2
+    [[ $# = 0 ]] && { _print_missing; return; }
     declare -a array
     local array=("$@")
     printf '%s\n' "${array[RANDOM % $#]}"
@@ -176,7 +181,7 @@ array::random_element() {
 #
 # @stdout sorted array.
 array::sort() {
-    [[ $# = 0 ]] && printf "%s: Missing arguments\n" "${FUNCNAME[0]}" && return 2
+    [[ $# = 0 ]] && { _print_missing; return; }
     declare -a array=("$@")
     declare -a sorted
     declare noglobtate
@@ -209,7 +214,7 @@ array::sort() {
 #
 # @stdout reverse sorted array.
 array::rsort() {
-    [[ $# = 0 ]] && printf "%s: Missing arguments\n" "${FUNCNAME[0]}" && return 2
+    [[ $# = 0 ]] && { _print_missing; return; }
     declare -a array=("$@")
     declare -a sorted
     declare noglobtate
@@ -240,7 +245,7 @@ array::rsort() {
 #
 # @stdout bubble sorted array.
 array::bsort() {
-    [[ $# = 0 ]] && printf "%s: Missing arguments\n" "${FUNCNAME[0]}" && return 2
+    [[ $# = 0 ]] && { _print_missing; return; }
     declare tmp
     declare arr=("$@")
     for ((i = 0; i <= $((${#arr[@]} - 2)); ++i)); do
@@ -276,7 +281,7 @@ array::bsort() {
 #
 # @stdout Merged array.
 array::merge() {
-    [[ $# -ne 2 ]] && printf "%s: Missing arguments\n" "${FUNCNAME[0]}" && return 2
+    [[ $# -ne 2 ]] && { _print_missing; return; }
     declare -a arr1=("${!1}")
     declare -a arr2=("${!2}")
     declare out=("${arr1[@]}" "${arr2[@]}")
