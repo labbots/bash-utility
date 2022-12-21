@@ -277,7 +277,8 @@ array::bsort() {
 }
 
 # @description Merge two arrays.
-# Pass the variable name of the array instead of value of the variable.
+# Pass the variable name of the array instead of the value of the variable.
+#
 # @example
 #   a=("a" "c")
 #   b=("d" "c")
@@ -288,17 +289,18 @@ array::bsort() {
 #   d
 #   c
 #
-# @arg $1 string variable name of first array.
-# @arg $2 string variable name of second array.
+# @arg $1 string Variable name of the first array.
+# @arg $2 string Variable name of the second array.
 #
-# @exitcode 0  If successful.
+# @exitcode 0 If successful.
 # @exitcode 2 Function missing arguments.
 #
 # @stdout Merged array.
 array::merge() {
     (( $# != 2 )) && { _print_missing; return; }
-    local -a arr1=("${!1}")
-    local -a arr2=("${!2}")
+
+    local -a arr1=("${!1}") arr2=("${!2}")
     local out=("${arr1[@]}" "${arr2[@]}")
+
     printf "%s\n" "${out[@]}"
 }
