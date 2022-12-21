@@ -206,8 +206,8 @@ array::sort() {
 # @description Sort an array in reverse order (highest to lowest).
 #
 # @example
-#   sarr=("a c" "a" "d" 2 1 "4 5")
-#   array::array_sort "${sarr[@]}"
+#   array=("a c" "a" "d" 2 1 "4 5")
+#   array::rsort "${array[@]}"
 #   #Output
 #   d
 #   a c
@@ -218,21 +218,24 @@ array::sort() {
 #
 # @arg $1 array The input array.
 #
-# @exitcode 0  If successful.
+# @exitcode 0 If successful.
 # @exitcode 2 Function missing arguments.
 #
-# @stdout reverse sorted array.
+# @stdout Reverse-sorted array.
 array::rsort() {
     (( $# == 0 )) && { _print_missing; return; }
-    local -a array=("$@")
-    local -a sorted
-    local noglobtate
-    noglobtate="$(shopt -po noglob)"
+
+    local -a arr=("$@") sorted
+
+    local noglobtate="$(shopt -po noglob)"
     set -o noglob
+
     local IFS=$'\n'
-    sorted=($(sort -r<<< "${array[*]}"))
+    sorted=($(sort -r <<< "${arr[*]}"))
     unset IFS
+
     eval "${noglobtate}"
+
     printf "%s\n" "${sorted[@]}"
 }
 
