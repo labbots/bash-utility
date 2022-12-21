@@ -240,10 +240,11 @@ array::rsort() {
 }
 
 # @description Bubble sort an integer array from lowest to highest.
-# This sort does not work on string array.
+# This sort does not work on string arrays.
+#
 # @example
-#   iarr=(4 5 1 3)
-#   array::bsort "${iarr[@]}"
+#   arr=(4 5 1 3)
+#   array::bsort "${arr[@]}"
 #   #Output
 #   1
 #   3
@@ -252,24 +253,26 @@ array::rsort() {
 #
 # @arg $1 array The input array.
 #
-# @exitcode 0  If successful.
+# @exitcode 0 If successful.
 # @exitcode 2 Function missing arguments.
 #
-# @stdout bubble sorted array.
+# @stdout Bubble-sorted array.
 array::bsort() {
     (( $# == 0 )) && { _print_missing; return; }
-    local tmp
-    local arr=("$@")
-    for ((i = 0; i <= $((${#arr[@]} - 2)); ++i)); do
-        for ((j = ((i + 1)); j <= ((${#arr[@]} - 1)); ++j)); do
-            if [[ ${arr[i]} -gt ${arr[j]} ]]; then
-                # echo $i $j ${arr[i]} ${arr[j]}
-                tmp=${arr[i]}
+
+    local -a arr=("$@")
+
+    local elem i j
+    for (( i = 0; i <= ${#arr[@]} - 2; ++i )); do
+        for (( j = i + 1; j <= ${#arr[@]} - 1; ++j )); do
+            if (( ${arr[i]} > ${arr[j]} )); then
+                elem=${arr[i]}
                 arr[i]=${arr[j]}
-                arr[j]=$tmp
+                arr[j]=$elem
             fi
         done
     done
+
     printf "%s\n" "${arr[@]}"
 }
 
