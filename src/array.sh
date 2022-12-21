@@ -70,22 +70,20 @@ array::dedupe() {
 # @description Check if a given array is empty.
 #
 # @example
-#   array=("a" "b" "c" "d")
-#   array::is_empty "${array[@]}"
+#   arr=("a" "b" "c" "d")
+#   array::is_empty "${arr[@]}" && echo "yes" || echo "no"
+#   #Output
+#   no
 #
 # @arg $1 array Array to be checked.
 #
 # @exitcode 0 If the given array is empty.
-# @exitcode 2 If the given array is not empty.
+# @exitcode 1 If the given array is not empty.
 array::is_empty() {
-    local -a array
-    local array=("$@")
-    if [ ${#array[@]} -eq 0 ]; then
-        return 0
-    else
-        return 1
-    fi
+    local -a arr=("$@")
+    (( ${#arr[@]} == 0 )) && return 0 || return 1
 }
+
 # @description Join array elements with a string.
 #
 # @example
