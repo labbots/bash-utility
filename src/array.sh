@@ -149,22 +149,22 @@ array::reverse() {
 # @description Returns a random item from the array.
 #
 # @example
-#   array=("a" "b" "c" "d")
-#   printf "%s\n" "$(array::random_element "${array[@]}")"
+#   arr=("a" "b" "c" "d")
+#   array::random_element "${arr[@]}"
 #   #Output
 #   c
 #
 # @arg $1 array The input array.
 #
-# @exitcode 0  If successful.
+# @exitcode 0 If successful.
 # @exitcode 2 Function missing arguments.
 #
 # @stdout Random item out of the array.
 array::random_element() {
     (( $# == 0 )) && { _print_missing; return; }
-    local -a array
-    local array=("$@")
-    printf '%s\n' "${array[RANDOM % $#]}"
+
+    local -a arr=("$@")
+    printf "%s\n" "${arr[RANDOM % $#]}"
 }
 
 # @description Sort an array from lowest to highest.
